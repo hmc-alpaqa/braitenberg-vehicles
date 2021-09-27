@@ -18,8 +18,8 @@ class Robot1 {
 
         for (i = 0; i < this.motors.length; i++) {
             let motor = this.motors[i];
-            let fx = Math.cos(this.gyro.θ) * motor.getForce();
-            let fy = Math.sin(this.gyro.θ) * motor.getForce();
+            let fx = Math.cos(-this.gyro.θ) * motor.getForce();
+            let fy = Math.sin(-this.gyro.θ) * motor.getForce();
 
             // let mass be 1 so that force = acceleration
             this.gyro.a.x += fx;
@@ -42,8 +42,9 @@ class Robot1 {
         for (i = 0; i < this.motors.length; i++) {
             let motor = this.motors[i];
             let dist = Math.sqrt(Math.pow(motor.offset.x, 2), Math.pow(motor.offset.y, 2));
-            let theta = Math.atan(motor.offset.y / motor.offset.x);
-            let τ = motor.getForce() * dist * Math.sin(theta); // τ = F r sin(θ)
+            let theta = Math.atan(-motor.offset.y / Math.abs(motor.offset.x)); // angle of elevation of the motor from the x-axis
+            // we multiply by -1 so the torque is in the theta-direction we want to rotate
+            let τ = -1 * motor.getForce() * dist * Math.sin(theta); // τ = F r sin(θ)
 
             this.gyro.α += τ * dt; // let moment of inertia be 1 so torque = angular accel
         }
