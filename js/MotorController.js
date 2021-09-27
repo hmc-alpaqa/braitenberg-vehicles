@@ -1,8 +1,7 @@
 class MotorController {
-    constructor(gyro, xOffset, yOffset) {
+    constructor(gyro, offset) {
         this.gyro = gyro;
-        this.xOffset = xOffset
-        this.yOffset = yOffset
+        this.offset = offset;
         this.sensors = []
     }
 

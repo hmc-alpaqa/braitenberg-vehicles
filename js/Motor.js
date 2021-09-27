@@ -1,8 +1,7 @@
 class Motor {
-    constructor(gyro, xOffset, yOffset) {
+    constructor(gyro, offset) {
         this.gyro = gyro;
-        this.xOffset = xOffset;
-        this.yOffset = yOffset;
+        this.offset = offset;
 
         this.motorController = null;
     }
@@ -17,12 +16,10 @@ class Motor {
     }
 
     getX() {
-        return this.gyro.x + this.xOffset;
+        return this.gyro.r.x + this.offset.x;
     }
 
     getY() {
-        return this.gyro.y + this.yOffset;
+        return this.gyro.r.y + this.offset.y;
     }
-
-
 }

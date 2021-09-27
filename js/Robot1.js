@@ -8,23 +8,23 @@ class Robot1 {
     }
 
     move(dt) {
-        this.gyro.vx = 0;
-        this.gyro.vy = 0;
+        this.gyro.a.x = 0;
+        this.gyro.a.y = 0;
 
         for (i = 0; i < this.motors.length; i++) {
             let motor = this.motors[i];
-            let fx = Math.cos(this.gyro.theta) * motor.getForce();
-            let fy = Math.sin(this.gyro.theta) * motor.getForce();
+            let fx = Math.cos(this.gyro.θ) * motor.getForce();
+            let fy = Math.sin(this.gyro.θ) * motor.getForce();
 
             // let mass be 1 so that force = acceleration
-            this.gyro.ax += fx;
-            this.gyro.ay += fy;
+            this.gyro.a.x += fx;
+            this.gyro.a.y += fy;
         }
-        this.gyro.vx += dt * this.gyro.ax;
-        this.gyro.vy += dt * this.gyro.ay;
+        this.gyro.v.x += dt * this.gyro.a.x;
+        this.gyro.v.y += dt * this.gyro.a.y;
 
-        this.gyro.x += dt * this.gyro.vx;
-        this.gyro.y += dt * this.gyro.vy;
+        this.gyro.r.x += dt * this.gyro.v.x;
+        this.gyro.r.y += dt * this.gyro.v.y;
     }
 
     rotate(dt) {

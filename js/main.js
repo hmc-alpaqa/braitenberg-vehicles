@@ -6,9 +6,9 @@ function setup() {
     // robot object contains gyro, sensors, controlers, motors
     u = new Universe();
     g = new Gyro(u);
-    sensors = [new Sensor(g, 5, 0)]
-    motorcontrollers = [(new MotorController(g, 0, 0)).addSensor(sensors[0])]
-    motors = [(new Motor(g, -5, 0)).setMotorController(motorcontrollers[0])]
+    sensors = [new Sensor(g, new Vector(5, 10))]
+    motorcontrollers = [(new MotorController(g, new Vector(0, 0))).addSensor(sensors[0])]
+    motors = [(new Motor(g, new Vector(-5, -5))).setMotorController(motorcontrollers[0])]
 
     r = new Robot1(g, sensors, motorcontrollers, motors);
 

@@ -1,14 +1,14 @@
 class Gyro {
     constructor(universe) {
         this.universe = universe;
-        this.x = 100;
-        this.y = 110;
-        this.theta = 0;
+        this.r = new Vector(70, 110); // position
+        this.θ = 0; // angle of positioning relative to the x-axis
 
-        this.vx = 0;
-        this.vy = 0;
+        this.v = new Vector(0, 0);
+        this.a = new Vector(0, 0);
 
-        this.ax = 0;
-        this.ay = 0;
+        // you can use greek characters in js lol
+        this.ω = 0; // angular velocity
+        this.α = 0; // angular acceleration
     }
 }
