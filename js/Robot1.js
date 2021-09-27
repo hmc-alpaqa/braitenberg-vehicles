@@ -7,6 +7,11 @@ class Robot1 {
         this.motors = motors;
     }
 
+    step(dt) {
+        this.move(dt);
+        this.rotate(dt);
+    }
+
     move(dt) {
         this.gyro.a.x = 0;
         this.gyro.a.y = 0;
@@ -32,6 +37,18 @@ class Robot1 {
         // get the position of each motor
         // find the vector of the motor
         // find the torque of the motor
-        
+        this.gyro.α = 0
+
+        for (i = 0; i < this.motors.length; i++) {
+            let motor = this.motors[i];
+            let dist = Math.sqrt(Math.pow(motor.offset.x, 2), Math.pow(motor.offset.y, 2));
+            let theta = Math.atan(motor.offset.y / motor.offset.x);
+            let τ = motor.getForce() * dist * Math.sin(theta); // τ = F r sin(θ)
+
+            this.gyro.α += τ * dt; // let moment of inertia be 1 so torque = angular accel
+        }
+
+        this.gyro.ω += this.gyro.α * dt;
+        this.gyro.θ += this.gyro.ω * dt;
     }
 }

@@ -3,7 +3,7 @@ class Motor {
         this.gyro = gyro;
         this.offset = offset;
 
-        this.motorController = null;
+        this.motorController = null; // TODO: default argument of null, but optionally passed arg
     }
 
     setMotorController(motorController) {
