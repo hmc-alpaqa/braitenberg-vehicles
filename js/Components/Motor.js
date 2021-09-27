@@ -1,7 +1,6 @@
-class Motor {
+class Motor extends Component {
     constructor(gyro, offset) {
-        this.gyro = gyro;
-        this.offset = offset;
+        super(gyro, offset);
 
         this.motorController = null; // TODO: default argument of null, but optionally passed arg
     }
@@ -15,11 +14,4 @@ class Motor {
         return this.motorController.calculateOutput();
     }
 
-    getX() {
-        return this.gyro.r.x + this.offset.x;
-    }
-
-    getY() {
-        return this.gyro.r.y + this.offset.y;
-    }
 }

@@ -1,7 +1,6 @@
-class MotorController {
+class MotorController extends Component {
     constructor(gyro, offset) {
-        this.gyro = gyro;
-        this.offset = offset;
+        super(gyro, offset);
         this.sensors = []
     }
 

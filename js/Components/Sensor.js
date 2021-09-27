@@ -1,11 +1,10 @@
-class Sensor {
+class Sensor extends Component {
     constructor(gyro, offset) {
+        super(gyro, offset);
         // sensor averages intensity of stimuli across field of view
         this.width = 4;
         this.length = 4;
 
-        this.offset = offset
-        this.gyro = gyro;
         this.theta = 0; // orientation of sensor
     }
 
