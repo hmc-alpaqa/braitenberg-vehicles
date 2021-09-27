@@ -35,8 +35,8 @@ class Renderer {
         for (i = 0; i < this.robot.motors.length; i++) {
             fill(0, 0, 225);
             square(
-                this.robot.motors[i].getX() * PIXEL_SIZE - SENSOR_SIZE / 2,
-                this.robot.motors[i].getY() * PIXEL_SIZE - SENSOR_SIZE / 2,
+                this.robot.motors[i].getR().x * PIXEL_SIZE - SENSOR_SIZE / 2,
+                this.robot.motors[i].getR().y * PIXEL_SIZE - SENSOR_SIZE / 2,
                 SENSOR_SIZE);
         }
     }
