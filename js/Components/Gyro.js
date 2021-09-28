@@ -1,7 +1,7 @@
 class Gyro {
-    constructor(universe) {
+    constructor(universe, x, y) {
         this.universe = universe;
-        this.r = new Vector(70, 110); // position
+        this.r = new Vector(x, y); // position
         this.θ = 0; // angle of positioning relative to the x-axis
 
         this.v = new Vector(0, 0);

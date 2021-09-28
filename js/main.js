@@ -5,12 +5,22 @@ function setup() {
     // each sensor, controler, motor takes the gyro as a parameter to construct
     // robot object contains gyro, sensors, controlers, motors
     u = new Universe();
-    g = new Gyro(u);
-    sensors = [new Sensor(g, new Vector(5, 10))]
-    motorcontrollers = [(new MotorController(g, new Vector(0, 0))).addSensor(sensors[0])]
-    motors = [(new Motor(g, new Vector(-5, -5))).setMotorController(motorcontrollers[0])]
+    g = new Gyro(u, 70, 110);
+    addingRobot = true;
+    // sensors = [new Sensor(g, new Vector(5, 10))]
+    // motorcontrollers = [(new MotorController(g, new Vector(0, 0))).addSensor(sensors[0])]
+    // motors = [(new Motor(g, new Vector(-5, -5))).setMotorController(motorcontrollers[0])]
 
-    r = new Robot1(g, sensors, motorcontrollers, motors);
+    let r = new Robot1(g);
+    let s = new Sensor(g, new Vector(5, 10));
+    let mC = new MotorController(g, new Vector(0, 0)).addSensor(s);
+    let m = new Motor(g, new Vector(-5, -5)).setMotorController(mC);
+
+    r.addSensor(s);
+    r.addMotorController(mC);
+    r.addMotor(m);
+
+    u.addRobot(r);
 
     pg = createGraphics(MAP_SIZE, MAP_SIZE);
     pg.background(220);
@@ -23,7 +33,7 @@ function setup() {
 
         }
     }
-    renderer = new Renderer(r);
+    renderers = [new Renderer(r)];
 }
 
 function draw() {
@@ -33,8 +43,31 @@ function draw() {
     // console.log(u.stimuli)
 
     image(pg, 0, 0, MAP_SIZE, MAP_SIZE);
+    for (let renderer of renderers) {
+        renderer.renderRobot();
+    }
+    for (let robot of u.robots){
+        robot.step(1/FPS);
+    }
+}
 
-    renderer.renderAll()
-    r.step(1 / FPS);
+
+
+function mouseClicked() {
+    if (addingRobot) {
+        let gyro = new Gyro(u, mouseX, mouseY);
+        let robot = new Robot1(gyro);
+        let sensor = new Sensor(gyro, new Vector(5, 10));
+        let motorController = new MotorController(gyro, new Vector(0, 0)).addSensor(sensor);
+        let motor = new Motor(gyro, new Vector(5, 5)).setMotorController(motorController);
+
+        robot.addSensor(sensor);
+        robot.addMotorController(motorController);
+        robot.addMotor(motor);
+
+        renderers.push(new Renderer(robot));
+        u.addRobot(robot);
+        console.log(u.robots);
+    }
 }
 
