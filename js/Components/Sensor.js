@@ -1,12 +1,10 @@
-class Sensor {
-    constructor(gyro, xOffset, yOffset) {
+class Sensor extends Component {
+    constructor(gyro, offset) {
+        super(gyro, offset);
         // sensor averages intensity of stimuli across field of view
         this.width = 4;
         this.length = 4;
 
-        this.xOffset = xOffset
-        this.yOffset = yOffset
-        this.gyro = gyro;
         this.theta = 0; // orientation of sensor
     }
 
@@ -28,11 +26,11 @@ class Sensor {
     }
 
     getX() {
-        return this.gyro.x + this.xOffset
+        return this.gyro.r.x + this.offset.x
     }
 
     getY() {
-        return this.gyro.y + this.yOffset
+        return this.gyro.r.y + this.offset.y
     }
 
 }

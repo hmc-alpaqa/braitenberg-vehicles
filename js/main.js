@@ -1,16 +1,27 @@
 function setup() {
     createCanvas(MAP_SIZE, MAP_SIZE);
     frameRate(FPS)
+    rectMode(CENTER)
     // gyro object contains x, y location and orientation
     // each sensor, controler, motor takes the gyro as a parameter to construct
     // robot object contains gyro, sensors, controlers, motors
     u = new Universe();
-    g = new Gyro(u);
-    sensors = [new Sensor(g, 5, 0)]
-    motorcontrollers = [(new MotorController(g, 0, 0)).addSensor(sensors[0])]
-    motors = [(new Motor(g, -5, 0)).setMotorController(motorcontrollers[0])]
+    g = new Gyro(u, 70, 110);
+    addingRobot = false;
+    // sensors = [new Sensor(g, new Vector(5, 10))]
+    // motorcontrollers = [(new MotorController(g, new Vector(0, 0))).addSensor(sensors[0])]
+    // motors = [(new Motor(g, new Vector(-5, -5))).setMotorController(motorcontrollers[0])]
 
-    r = new Robot1(g, sensors, motorcontrollers, motors);
+    let r = new Robot1(g);
+    let s = new Sensor(g, new Vector(5, 10));
+    let mC = new MotorController(g, new Vector(0, 0)).addSensor(s);
+    let m = new Motor(g, new Vector(-5, -5)).setMotorController(mC);
+
+    r.addSensor(s);
+    r.addMotorController(mC);
+    r.addMotor(m);
+
+    u.addRobot(r);
 
     pg = createGraphics(MAP_SIZE, MAP_SIZE);
     pg.background(220);
@@ -23,7 +34,7 @@ function setup() {
 
         }
     }
-
+    renderers = [new Renderer(r)];
 }
 
 function draw() {
@@ -33,51 +44,32 @@ function draw() {
     // console.log(u.stimuli)
 
     image(pg, 0, 0, MAP_SIZE, MAP_SIZE);
-
-    renderRobot(r);
-    renderText(r);
-    r.move(1 / FPS);
-
-    
-}
-
-function renderRobot(robot) {
-    // noStroke()
-    fill(225, 225, 225);
-    // render the body of the robot so that it is positioned at the center of the gyro
-    square(
-        robot.gyro.x * PIXEL_SIZE - ROBOT_SIZE / 2, // the - ROBOT_SIZE / 2 is to center the robot in the center of the gyro rather than draw the upper left corner at the center of the gyro
-        robot.gyro.y * PIXEL_SIZE - ROBOT_SIZE / 2,
-        ROBOT_SIZE
-    );
-    renderSensors(robot);
-    renderMotors(robot);
-}
-
-function renderSensors(robot) {
-    for (i = 0; i < robot.sensors.length; i++) {
-        fill(0, 225, 0);
-        square(
-            robot.sensors[i].getX() * PIXEL_SIZE - SENSOR_SIZE / 2,
-            robot.sensors[i].getY() * PIXEL_SIZE - SENSOR_SIZE / 2,
-            SENSOR_SIZE);
+    for (let renderer of renderers) {
+        renderer.renderRobot();
+    }
+    for (let robot of u.robots){
+        robot.step(1/FPS);
     }
 }
 
-function renderMotors(robot) {
-    for (i = 0; i < robot.motors.length; i++) {
-        fill(0, 0, 225);
-        square(
-            robot.motors[i].getX() * PIXEL_SIZE - SENSOR_SIZE / 2,
-            robot.motors[i].getY() * PIXEL_SIZE - SENSOR_SIZE / 2,
-            SENSOR_SIZE);
+
+
+function mouseClicked() {
+    if (addingRobot) {
+        console.log(mouseX, mouseY)
+        let gyro = new Gyro(u, mouseX, mouseY);
+        let robot = new Robot1(gyro);
+        let sensor = new Sensor(gyro, new Vector(5, 10));
+        let motorController = new MotorController(gyro, new Vector(0, 0)).addSensor(sensor);
+        let motor = new Motor(gyro, new Vector(5, 5)).setMotorController(motorController);
+
+        robot.addSensor(sensor);
+        robot.addMotorController(motorController);
+        robot.addMotor(motor);
+
+        renderers.push(new Renderer(robot));
+        u.addRobot(robot);
+        console.log(robot.gyro.r);
     }
 }
 
-function renderText(robot) {
-    text('x: ' + robot.gyro.x.toFixed(2), 10, 10)
-    text('y: ' + robot.gyro.y.toFixed(2), 10, 30)
-    text('vx: ' + robot.gyro.vx.toFixed(2), 80, 10)
-    text('vy: ' + robot.gyro.vy.toFixed(2), 80, 30)
-
-}
