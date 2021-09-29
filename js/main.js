@@ -58,7 +58,7 @@ function draw() {
 function mouseClicked() {
     if (addingRobot) {
         console.log(mouseX, mouseY)
-        let gyro = new Gyro(u, mouseX, mouseY);
+        let gyro = new Gyro(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
         let robot = new Robot1(gyro);
         let sensor = new Sensor(gyro, new Vector(5, 10));
         let motorController = new MotorController(gyro, new Vector(0, 0)).addSensor(sensor);
