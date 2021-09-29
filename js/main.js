@@ -1,14 +1,16 @@
 function setup() {
     createCanvas(MAP_SIZE, MAP_SIZE);
-    frameRate(FPS)
+    frameRate(FPS);
+    rectMode(CENTER);
+    angleMode(RADIANS);
     // gyro object contains x, y location and orientation
     // each sensor, controler, motor takes the gyro as a parameter to construct
     // robot object contains gyro, sensors, controlers, motors
     u = new Universe();
     g = new Gyro(u);
-    sensors = [new Sensor(g, new Vector(5, 10))]
+    sensors = [new Sensor(g, new Vector(10, -5))]
     motorcontrollers = [(new MotorController(g, new Vector(0, 0))).addSensor(sensors[0])]
-    motors = [(new Motor(g, new Vector(-5, -5))).setMotorController(motorcontrollers[0])]
+    motors = [(new Motor(g, new Vector(-5, 5))).setMotorController(motorcontrollers[0])]
 
     r = new Robot1(g, sensors, motorcontrollers, motors);
 
