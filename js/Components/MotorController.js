@@ -11,8 +11,8 @@ class MotorController extends Component {
 
     calculateOutput() {
         let sum = 0
-        for (i = 0; i < sensors.length; i++) {
-            sum += 100 * this.sensors[i].getValue();
+        for (let sensor of this.sensors) {
+            sum += 100 * sensor.getValue();
         }
         return Math.max(sum, 0) // the motors should never produce negative force
     }
