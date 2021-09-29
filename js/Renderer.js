@@ -12,11 +12,7 @@ class Renderer {
         // noStroke()
         fill(225, 225, 225);
         // render the body of the robot so that it is positioned at the center of the gyro
-        square(
-            this.robot.gyro.r.x * PIXEL_SIZE - ROBOT_SIZE / 2, // the - ROBOT_SIZE / 2 is to center the robot in the center of the gyro rather than draw the upper left corner at the center of the gyro
-            this.robot.gyro.r.y * PIXEL_SIZE - ROBOT_SIZE / 2,
-            ROBOT_SIZE
-        );
+        rect(this.robot.gyro.r.x, this.robot.gyro.r.y, ROBOT_SIZE, ROBOT_SIZE);
         this.renderSensors();
         this.renderMotors();
     }
@@ -24,20 +20,14 @@ class Renderer {
     renderSensors() {
         for (i = 0; i < this.robot.sensors.length; i++) {
             fill(0, 225, 0);
-            square(
-                this.robot.sensors[i].getX() * PIXEL_SIZE - SENSOR_SIZE / 2,
-                this.robot.sensors[i].getY() * PIXEL_SIZE - SENSOR_SIZE / 2,
-                SENSOR_SIZE);
+            rect(this.robot.sensors[i].getX(), this.robot.sensors[i].getY(), SENSOR_SIZE, SENSOR_SIZE);
         }
     }
 
     renderMotors() {
         for (i = 0; i < this.robot.motors.length; i++) {
             fill(0, 0, 225);
-            square(
-                this.robot.motors[i].getR().x * PIXEL_SIZE - SENSOR_SIZE / 2,
-                this.robot.motors[i].getR().y * PIXEL_SIZE - SENSOR_SIZE / 2,
-                SENSOR_SIZE);
+            rect(this.robot.motors[i].getR().x, this.robot.motors[i].getR().y, SENSOR_SIZE, SENSOR_SIZE);
         }
     }
 

@@ -1,12 +1,13 @@
 function setup() {
     createCanvas(MAP_SIZE, MAP_SIZE);
     frameRate(FPS)
+    rectMode(CENTER)
     // gyro object contains x, y location and orientation
     // each sensor, controler, motor takes the gyro as a parameter to construct
     // robot object contains gyro, sensors, controlers, motors
     u = new Universe();
     g = new Gyro(u, 70, 110);
-    addingRobot = true;
+    addingRobot = false;
     // sensors = [new Sensor(g, new Vector(5, 10))]
     // motorcontrollers = [(new MotorController(g, new Vector(0, 0))).addSensor(sensors[0])]
     // motors = [(new Motor(g, new Vector(-5, -5))).setMotorController(motorcontrollers[0])]
@@ -55,6 +56,7 @@ function draw() {
 
 function mouseClicked() {
     if (addingRobot) {
+        console.log(mouseX, mouseY)
         let gyro = new Gyro(u, mouseX, mouseY);
         let robot = new Robot1(gyro);
         let sensor = new Sensor(gyro, new Vector(5, 10));
@@ -67,7 +69,7 @@ function mouseClicked() {
 
         renderers.push(new Renderer(robot));
         u.addRobot(robot);
-        console.log(u.robots);
+        console.log(robot.gyro.r);
     }
 }
 
