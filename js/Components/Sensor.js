@@ -14,23 +14,15 @@ class Sensor extends Component {
         //         u[i][j] = 0;
         //     }
         // }    
-        let y = Math.round(this.getY())
-        let x = Math.round(this.getX())
-        let grid = this.gyro.universe.stimuli
+        let y = Math.round(this.getR().y);
+        let x = Math.round(this.getR().x);
+        let grid = this.gyro.universe.stimuli;
         if (y >= 0 && y < grid.length && x >= 0 && x < grid[y].length) {
             return this.gyro.universe.stimuli[y][x];
         } else {
             // if the location is outside the grid, return 0    
             return 0;
         }
-    }
-
-    getX() {
-        return this.gyro.r.x + this.offset.x
-    }
-
-    getY() {
-        return this.gyro.r.y + this.offset.y
     }
 
 }
