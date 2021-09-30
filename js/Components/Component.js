@@ -11,7 +11,7 @@ class Component {
         let r = Math.sqrt(x * x + y * y)
         let θ = 0;
 
-        if (x > 0) {
+        if (y > 0) {
             θ = Math.atan2(y, x)
         } else {
             θ = Math.PI + Math.atan2(y, x)

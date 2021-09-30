@@ -13,16 +13,16 @@ function setup() {
     // motorcontrollers = [(new MotorController(g, new Vector(0, 0))).addSensor(sensors[0])]
     // motors = [(new Motor(g, new Vector(-5, -5))).setMotorController(motorcontrollers[0])]
 
-    let r = new Robot1(g);
-    let s = new Sensor(g, new Vector(5, 10));
-    let mC = new MotorController(g, new Vector(0, 0)).addSensor(s);
-    let m = new Motor(g, new Vector(-5, -5)).setMotorController(mC);
+    // let r = new Robot1(g);
+    // let s = new Sensor(g, new Vector(5, 10));
+    // let mC = new MotorController(g, new Vector(0, 0)).addSensor(s);
+    // let m = new Motor(g, new Vector(-5, 1)).setMotorController(mC);
 
-    r.addSensor(s);
-    r.addMotorController(mC);
-    r.addMotor(m);
+    // r.addSensor(s);
+    // r.addMotorController(mC);
+    // r.addMotor(m);
 
-    u.addRobot(r);
+    // u.addRobot(r);
 
     pg = createGraphics(MAP_SIZE, MAP_SIZE);
     pg.background(220);
@@ -35,7 +35,7 @@ function setup() {
 
         }
     }
-    renderers = [new Renderer(r)];
+    renderers = [];
 }
 
 function draw() {
@@ -45,6 +45,10 @@ function draw() {
     // console.log(u.stimuli)
 
     image(pg, 0, 0, MAP_SIZE, MAP_SIZE);
+    if (renderers.length > 0) {
+        renderers[0].renderText();
+
+    }
     for (let renderer of renderers) {
         renderer.renderRobot();
     }
@@ -53,8 +57,6 @@ function draw() {
     }
 }
 
-
-
 function mouseClicked() {
     if (addingRobot) {
         console.log(mouseX, mouseY)
@@ -62,7 +64,7 @@ function mouseClicked() {
         let robot = new Robot1(gyro);
         let sensor = new Sensor(gyro, new Vector(5, 10));
         let motorController = new MotorController(gyro, new Vector(0, 0)).addSensor(sensor);
-        let motor = new Motor(gyro, new Vector(5, 5)).setMotorController(motorController);
+        let motor = new Motor(gyro, new Vector(50, 0)).setMotorController(motorController);
 
         robot.addSensor(sensor);
         robot.addMotorController(motorController);
