@@ -62,9 +62,9 @@ function mouseClicked() {
         console.log(mouseX, mouseY)
         let gyro = new Gyro(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
         let robot = new Robot1(gyro);
-        let sensor = new Sensor(gyro, new Vector(5, 10));
-        let motorController = new MotorController(gyro, new Vector(0, 0)).addSensor(sensor);
-        let motor = new Motor(gyro, new Vector(50, 0)).setMotorController(motorController);
+        let sensor = new Sensor(gyro, new Vector(5, 5));
+        let motorController = new   MotorController(gyro, new Vector(0, 0)).addSensor(sensor);
+        let motor = new Motor(gyro, new Vector(-5, -5)).setMotorController(motorController);
 
         robot.addSensor(sensor);
         robot.addMotorController(motorController);

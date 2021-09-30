@@ -11,10 +11,10 @@ class Component {
         let r = Math.sqrt(x * x + y * y)
         let θ = 0;
 
-        if (y > 0) {
-            θ = Math.atan2(y, x)
+        if (Math.sign(x) == Math.sign(y)) {
+            θ = Math.atan2(x, y)
         } else {
-            θ = Math.PI + Math.atan2(y, x)
+            θ = Math.PI + Math.atan2(x, y)
         }
 
         let rotateBy = this.gyro.θ
