@@ -45,12 +45,12 @@ function draw() {
 
 function mouseClicked() {
     if (addingRobot) {
-        console.log(mouseX, mouseY)
-        let gyro = new Gyro(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-        let sensor = new Sensor(gyro, new Vector(5, 5));
-        let motorController = new MotorController(gyro, new Vector(0, 0), [sensor]);
-        let motor = new Motor(gyro, new Vector(-5, -5), motorController);
-        let robot = new Robot1(gyro, [sensor], [motorController], [motor]);
+        // let gyro = new Gyro(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+        // let sensor = new Sensor(gyro, new Vector(5, 5));
+        // let motorController = new MotorController(gyro, new Vector(0, 0), [sensor]);
+        // let motor = new Motor(gyro, new Vector(-5, -5), motorController);
+        // let robot = new Robot1(gyro, [sensor], [motorController], [motor]);
+        let robot = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
         renderers.push(new Renderer(robot));
         u.addRobot(robot);
     }
