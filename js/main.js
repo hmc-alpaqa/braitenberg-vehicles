@@ -9,20 +9,6 @@ function setup() {
     u = new Universe();
     g = new Gyro(u, 70, 110);
     addingRobot = false;
-    // sensors = [new Sensor(g, new Vector(5, 10))]
-    // motorcontrollers = [(new MotorController(g, new Vector(0, 0))).addSensor(sensors[0])]
-    // motors = [(new Motor(g, new Vector(-5, -5))).setMotorController(motorcontrollers[0])]
-
-    // let r = new Robot1(g);
-    // let s = new Sensor(g, new Vector(5, 10));
-    // let mC = new MotorController(g, new Vector(0, 0)).addSensor(s);
-    // let m = new Motor(g, new Vector(-5, 1)).setMotorController(mC);
-
-    // r.addSensor(s);
-    // r.addMotorController(mC);
-    // r.addMotor(m);
-
-    // u.addRobot(r);
 
     pg = createGraphics(MAP_SIZE, MAP_SIZE);
     pg.background(220);
@@ -61,18 +47,12 @@ function mouseClicked() {
     if (addingRobot) {
         console.log(mouseX, mouseY)
         let gyro = new Gyro(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-        let robot = new Robot1(gyro);
         let sensor = new Sensor(gyro, new Vector(5, 5));
-        let motorController = new   MotorController(gyro, new Vector(0, 0)).addSensor(sensor);
-        let motor = new Motor(gyro, new Vector(-5, -5)).setMotorController(motorController);
-
-        robot.addSensor(sensor);
-        robot.addMotorController(motorController);
-        robot.addMotor(motor);
-
+        let motorController = new MotorController(gyro, new Vector(0, 0), [sensor]);
+        let motor = new Motor(gyro, new Vector(-5, -5), motorController);
+        let robot = new Robot1(gyro, [sensor], [motorController], [motor]);
         renderers.push(new Renderer(robot));
         u.addRobot(robot);
-        console.log(robot.gyro.r);
     }
 }
 
