@@ -8,7 +8,7 @@ function setup() {
     // robot object contains gyro, sensors, controlers, motors
     u = new Universe();
     g = new Gyro(u, 70, 110);
-    addingRobot = false;
+    addingVehicle = "vehicle1";
 
     pg = createGraphics(MAP_SIZE, MAP_SIZE);
     pg.background(220);
@@ -44,15 +44,21 @@ function draw() {
 }
 
 function mouseClicked() {
-    if (addingRobot) {
-        // let gyro = new Gyro(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-        // let sensor = new Sensor(gyro, new Vector(5, 5));
-        // let motorController = new MotorController(gyro, new Vector(0, 0), [sensor]);
-        // let motor = new Motor(gyro, new Vector(-5, -5), motorController);
-        // let robot = new Robot1(gyro, [sensor], [motorController], [motor]);
-        let robot = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-        renderers.push(new Renderer(robot));
-        u.addRobot(robot);
+    let vehicle;
+    if (mouseX > 0 && mouseY > 0) {
+        switch(addingVehicle){
+            case "vehicle1": 
+                vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                break;
+            case "coward":
+                vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                break;
+            case "aggressive":
+                vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                break;
+        }
+        renderers.push(new Renderer(vehicle));
+        u.addRobot(vehicle);
     }
 }
 

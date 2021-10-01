@@ -1,3 +1,3 @@
 document.getElementById("add-vehicle").addEventListener("click", () => {
-    addingRobot = true;
+    addingVehicle = document.getElementById("vehicle-select").value;
 })
