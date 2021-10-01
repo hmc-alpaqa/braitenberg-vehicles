@@ -46,7 +46,7 @@ class Robot1 {
             // we multiply by -1 so the torque is in the theta-direction we want to rotate
             let τ = -1 * motor.getForce() * dist * Math.sin(theta); // τ = F r sin(θ)
 
-            this.gyro.α += τ * dt; // let moment of inertia be 1 so torque = angular accel
+            this.gyro.α += 2 * τ * dt; // let moment of inertia be 1 so torque = angular accel
         }
 
         this.gyro.ω += this.gyro.α * dt;
