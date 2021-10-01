@@ -1,7 +1,7 @@
 class MotorController extends Component {
-    constructor(gyro, offset) {
+    constructor(gyro, offset, sensors=[]) {
         super(gyro, offset);
-        this.sensors = []
+        this.sensors = sensors;
     }
 
     addSensor(sensor) {

@@ -1,10 +1,10 @@
 // robot with a single sensor that moves faster the more intense the light is
 class Robot1 {
-    constructor(gyro) {
+    constructor(gyro, sensors=[], motorControllers=[], motors=[]) {
         this.gyro = gyro;
-        this.sensors = [];
-        this.motorControllers = [];
-        this.motors = [];
+        this.sensors = sensors;
+        this.motorControllers = motorControllers;
+        this.motors = motors;
     }
 
     step(dt) {
