@@ -15,12 +15,14 @@
 
 <body>
   <h1>Braitenberg Vehicles</h1>
-
+  <input type="range" id='friction-slider' min="0" max="1000" step="1" oninput="updateFriction(this.value)">
   <button id="add-vehicle">Add Vehicle</button>
+  <br>
+  <br>
   <script src="js/config.js"></script>
   <script src="js/Vector.js"></script>
   <script src="js/util.js"></script>
-  <script src="js/Renderer.js"></script>  
+  <script src="js/Renderer.js"></script>
   <script src="js/Universe.js"></script>
   <script src="js/Components/Component.js"></script>
   <script src="js/Components/Gyro.js"></script>
