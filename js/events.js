@@ -4,7 +4,8 @@ document.getElementById("add-vehicle").addEventListener("click", () => {
 })
 
 function updateFriction(value) {
-    friction = parseInt(value);
+    frictionMagnitude = parseInt(value);
+    document.getElementById("friction-label").innerHTML = `μ = ${frictionMagnitude}`;
 }
 // document.getElementById("friction-slider").addEventListener("oninput", () => {
 //     friction = document.getElementById("friction-slider").value;

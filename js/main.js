@@ -9,6 +9,7 @@ function setup() {
     u = new Universe();
     g = new Gyro(u, 70, 110);
     addingRobot = false;
+    updateFriction(document.getElementById("friction-slider").value);
     // sensors = [new Sensor(g, new Vector(5, 10))]
     // motorcontrollers = [(new MotorController(g, new Vector(0, 0))).addSensor(sensors[0])]
     // motors = [(new Motor(g, new Vector(-5, -5))).setMotorController(motorcontrollers[0])]

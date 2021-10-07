@@ -15,7 +15,8 @@
 
 <body>
   <h1>Braitenberg Vehicles</h1>
-  <input type="range" id='friction-slider' min="0" max="1000" step="1" oninput="updateFriction(this.value)">
+  <input type="range" id='friction-slider' value="50" min="0" max="200" step="1" oninput="updateFriction(this.value)">
+  <label id='friction-label'></label>
   <button id="add-vehicle">Add Vehicle</button>
   <br>
   <br>
