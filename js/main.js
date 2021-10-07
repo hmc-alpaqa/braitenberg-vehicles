@@ -47,8 +47,7 @@ function draw() {
 
     image(pg, 0, 0, MAP_SIZE, MAP_SIZE);
     if (renderers.length > 0) {
-        renderers[0].renderText();
-
+        renderers[renderers.length - 1].renderText();
     }
     for (let renderer of renderers) {
         renderer.renderRobot();
