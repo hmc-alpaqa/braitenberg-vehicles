@@ -9,10 +9,10 @@ class Vector {
     }
 
     getTheta() {
-        if (Math.sign(x) == Math.sign(y)) {
-            return Math.atan2(x, y)
+        if (Math.sign(this.x) == Math.sign(this.y)) {
+            return Math.atan2(this.x, this.y)
         } else {
-            return Math.PI + Math.atan2(x, y)
+            return Math.PI + Math.atan2(this.x, this.y)
         }
     }
 }
