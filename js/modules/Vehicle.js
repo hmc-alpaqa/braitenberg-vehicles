@@ -1,5 +1,5 @@
 // robot with a single sensor that moves faster the more intense the light is
-class Robot1 {
+class Vehicle {
     constructor(gyro, sensors=[], motorControllers=[], motors=[]) {
         this.gyro = gyro;
         this.sensors = sensors;

@@ -7,7 +7,7 @@ function Coward(u, x, y) {
     let motorController2 = new MotorController(gyro, new Vector(0, 0), [sensor1]);
     let motor1 = new Motor(gyro, new Vector(-PIXEL_SIZE / 2, -PIXEL_SIZE), motorController1);
     let motor2 = new Motor(gyro, new Vector(-PIXEL_SIZE / 2, PIXEL_SIZE), motorController2);
-    let vehicle = new Robot1(gyro, [sensor1, sensor2], [motorController1, motorController2], [motor1, motor2]);
+    let vehicle = new Vehicle(gyro, [sensor1, sensor2], [motorController1, motorController2], [motor1, motor2]);
     return vehicle;
 }
 
@@ -20,6 +20,6 @@ function Aggressive(u, x, y) {
     let motorController2 = new MotorController(gyro, new Vector(0, 0), [sensor2]);
     let motor1 = new Motor(gyro, new Vector(-PIXEL_SIZE, -PIXEL_SIZE), motorController1);
     let motor2 = new Motor(gyro, new Vector(-PIXEL_SIZE, PIXEL_SIZE), motorController2);
-    let vehicle = new Robot1(gyro, [sensor1, sensor2], [motorController1, motorController2], [motor1, motor2]);
+    let vehicle = new Vehicle(gyro, [sensor1, sensor2], [motorController1, motorController2], [motor1, motor2]);
     return vehicle;
 }
