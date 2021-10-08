@@ -8,7 +8,7 @@ function setup() {
     // robot object contains gyro, sensors, controlers, motors
     u = new Universe();
     g = new Gyro(u, 70, 110);
-    addingVehicle = "vehicle1";
+    addingVehicle = Vehicles.VEHICLE1;
     updateFriction(document.getElementById("friction-slider").value);
 
     pg = createGraphics(MAP_SIZE, MAP_SIZE);
@@ -27,10 +27,7 @@ function setup() {
 
 function draw() {
     background(220);
-    // console.log(u)
     // draw a square for each cell in stimuli
-    // console.log(u.stimuli)
-
     image(pg, 0, 0, MAP_SIZE, MAP_SIZE);
     if (renderers.length > 0) {
         renderers[renderers.length - 1].renderText();
@@ -49,13 +46,13 @@ function mouseClicked() {
     let vehicle;
     if (mouseX > 0 && mouseY > 0) {
         switch (addingVehicle) {
-            case "vehicle1":
+            case Vehicles.VEHICLE1:
                 vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
                 break;
-            case "coward":
+            case Vehicles.VEHICLE2A:
                 vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
                 break;
-            case "aggressive":
+            case Vehicles.VEHICLE2B:
                 vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
                 break;
         }
