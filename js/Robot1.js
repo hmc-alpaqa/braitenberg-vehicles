@@ -93,13 +93,26 @@ class Robot1 {
             let dist = Math.sqrt(Math.pow(motor.offset.x, 2), Math.pow(motor.offset.y, 2));
             let theta = Math.atan(-motor.offset.y / Math.abs(motor.offset.x)); // angle of elevation of the motor from the x-axis
             // we multiply by -1 so the torque is in the theta-direction we want to rotate
-            let τ = -1 * motor.getForce() * dist * Math.sin(theta); // τ = F r sin(θ)
+            let motorForce = motor.getForce();
+            // if the robot is stationary there's no friction
+            if (this.gyro.ω < 0.1) {
+                motorForce = motorForce;
+                // if friction is more than the net force, the robot doesnt move
+            } else if (frictionMagnitude > motorForce) {
+                motorForce = 0;
+                // otherwise, vectorsum friction and net force
+            } else {
+                motorForce -= frictionMagnitude / this.motors.length;
+            }
+
+            let τ = -100 * motorForce * dist * Math.sin(theta); // τ = F r sin(θ)
 
             this.gyro.α += τ * dt; // let moment of inertia be 1 so torque = angular accel
         }
 
         this.gyro.ω += this.gyro.α * dt;
         this.gyro.θ += this.gyro.ω * dt;
+        this.gyro.θ %= 2 * Math.PI;
     }
 
     addSensor(sensor) {
