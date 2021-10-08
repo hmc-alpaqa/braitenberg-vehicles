@@ -34,26 +34,13 @@ class Vehicle {
 
 
 
-        // // we're treating friction as both the max static friction
-        // // and the kinetic friction, perhaps we can add mu_k and mu_s separatley
-        // // or we could even add different terrtains with diffeerent mu_k and mu_s
+        // we're treating friction as both the max static friction
+        // and the kinetic friction, perhaps we can add mu_k and mu_s separatley
+        // or we could even add different terrtains with diffeerent mu_k and mu_s
         // let forceDirection = -1 * Math.sign(netForce);
         // let forceVector = forceDirection * friction
         // let netForceWithFriction = netForce + forceVector;
-        // // if the robot is stationary there's no friction
-        // if (Math.abs(this.gyro.v.x) < 0.00001 && Math.abs(this.gyro.v.y) < 0.00001) {
-        //     if (Math.abs(netForceWithFriction) < 0.00001) {
-        //         netForce = 0;
-        //     } else {
-        //         netForce = netForceWithFriction;
-        //     }
-        //     // // if friction is more than the net force, the robot doesnt move
-        //     // } else if (friction > netForce) {
-        //     //     netForce = 0;
-        //     // otherwise, vectorsum friction and net force
-        // } else {
-        //     netForce = netForceWithFriction;
-        // }
+        // if the robot is stationary there's no friction
 
         let fx = Math.cos(-this.gyro.θ) * netForce;
         let fy = Math.sin(-this.gyro.θ) * netForce;
@@ -107,7 +94,7 @@ class Vehicle {
 
             let τ = -100 * motorForce * dist * Math.sin(theta); // τ = F r sin(θ)
 
-            this.gyro.α += 2 * τ * dt; // let moment of inertia be 1 so torque = angular accel
+            this.gyro.α += MOMENT_OF_INERTIA * τ * dt; // let moment of inertia be 1 so torque = angular accel
         }
 
         this.gyro.ω += this.gyro.α * dt;
