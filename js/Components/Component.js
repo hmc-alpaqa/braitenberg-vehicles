@@ -5,17 +5,8 @@ class Component {
     }
 
     getR() {
-        let x = this.offset.x
-        let y = this.offset.y
-
-        let r = Math.sqrt(x * x + y * y)
-        let θ = 0;
-
-        if (Math.sign(x) == Math.sign(y)) {
-            θ = Math.atan2(x, y)
-        } else {
-            θ = Math.PI + Math.atan2(x, y)
-        }
+        let r = this.offset.getMagnitude();
+        let θ = this.offset.getTheta();
 
         let rotateBy = this.gyro.θ
 

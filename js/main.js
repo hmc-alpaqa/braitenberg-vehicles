@@ -32,8 +32,7 @@ function draw() {
 
     image(pg, 0, 0, MAP_SIZE, MAP_SIZE);
     if (renderers.length > 0) {
-        renderers[0].renderText();
-
+        renderers[renderers.length - 1].renderText();
     }
     for (let renderer of renderers) {
         renderer.renderRobot();
@@ -45,20 +44,22 @@ function draw() {
 
 function mouseClicked() {
     let vehicle;
-    if (mouseX > 0 && mouseY > 0) {
-        switch(addingVehicle){
-            case "vehicle1": 
-                vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-                break;
-            case "coward":
-                vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-                break;
-            case "aggressive":
-                vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-                break;
+    if (addingRobot) {
+        if (mouseX > 0 && mouseY > 0) {
+            switch (addingVehicle) {
+                case "vehicle1":
+                    vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                    break;
+                case "coward":
+                    vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                    break;
+                case "aggressive":
+                    vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                    break;
+            }
+            renderers.push(new Renderer(vehicle));
+            u.addRobot(vehicle);
         }
-        renderers.push(new Renderer(vehicle));
-        u.addRobot(vehicle);
     }
 }
 

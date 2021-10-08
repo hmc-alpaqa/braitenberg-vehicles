@@ -21,11 +21,15 @@
     <option value="coward">Coward</option>
     <option value="aggressive">Aggressive</option>
   </select>
+  <input type="range" id='friction-slider' value="50" min="0" max="200" step="1" oninput="updateFriction(this.value)">
+  <label id='friction-label'></label>
   <button id="add-vehicle">Add Vehicle</button>
+  <br>
+  <br>
   <script src="js/config.js"></script>
   <script src="js/Vector.js"></script>
   <script src="js/util.js"></script>
-  <script src="js/Renderer.js"></script>  
+  <script src="js/Renderer.js"></script>
   <script src="js/Universe.js"></script>
   <script src="js/Components/Component.js"></script>
   <script src="js/Components/Gyro.js"></script>
