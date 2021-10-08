@@ -59,20 +59,30 @@ function draw() {
 
 function mouseClicked() {
     if (addingRobot) {
-        console.log(mouseX, mouseY)
-        let gyro = new Gyro(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-        let robot = new Robot1(gyro);
-        let sensor = new Sensor(gyro, new Vector(5, 5));
-        let motorController = new   MotorController(gyro, new Vector(0, 0)).addSensor(sensor);
-        let motor = new Motor(gyro, new Vector(-5, -5)).setMotorController(motorController);
+        // console.log(mouseX, mouseY)
+        if (mouseX > 0 && mouseY > 0) {
+            let gyro = new Gyro(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+            let robot = new Robot1(gyro);
+            let sensor = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, PIXEL_SIZE / 2));
+            let motorController = new MotorController(gyro, new Vector(0, 0)).addSensor(sensor);
+            let motor = new Motor(gyro, new Vector(-PIXEL_SIZE / 2, -PIXEL_SIZE / 2)).setMotorController(motorController);
 
-        robot.addSensor(sensor);
-        robot.addMotorController(motorController);
-        robot.addMotor(motor);
 
-        renderers.push(new Renderer(robot));
-        u.addRobot(robot);
-        console.log(robot.gyro.r);
+            let sensor2 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, -PIXEL_SIZE / 2));
+            let motorController2 = new MotorController(gyro, new Vector(0, 0)).addSensor(sensor2);
+            let motor2 = new Motor(gyro, new Vector(-PIXEL_SIZE / 2, PIXEL_SIZE / 2)).setMotorController(motorController2);
+
+            robot.addSensor(sensor);
+            robot.addMotorController(motorController);
+            robot.addMotor(motor);
+            robot.addSensor(sensor2);
+            robot.addMotorController(motorController2);
+            robot.addMotor(motor2);
+
+            renderers.push(new Renderer(robot));
+            u.addRobot(robot);
+            // console.log(robot.gyro.r);
+        }
     }
 }
 
