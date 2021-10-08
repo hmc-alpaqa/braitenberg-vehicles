@@ -6,3 +6,12 @@ html, body {
 canvas {
   display: block;
 }
+
+.menu-item {
+  display: inline-block;
+}
+
+#menu {
+  display: grid;
+  grid-template-columns: auto auto;
+}

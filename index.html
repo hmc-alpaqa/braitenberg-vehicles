@@ -15,17 +15,21 @@
 
 <body>
   <h1>Braitenberg Vehicles</h1>
-
-  <select id="vehicle-select">
-    <option value="vehicle1">Vehicle 1</option>
-    <option value="coward">Coward</option>
-    <option value="aggressive">Aggressive</option>
-  </select>
-  <input type="range" id='friction-slider' value="50" min="0" max="200" step="1" oninput="updateFriction(this.value)">
-  <label id='friction-label'></label>
-  <button id="add-vehicle">Add Vehicle</button>
-  <br>
-  <br>
+  <div id="menu">
+    <div class="menu-item" id="controls">
+      <button>Start</button>
+      <input type="range" id="friction-slider" value="50" min="0" max="200" step="1" oninput="updateFriction(this.value)">
+      <label id="friction-label"></label>
+    </div>
+    <div class="menu-item" id="actions">
+      <select id="vehicle-select">
+        <option value="vehicle1">Vehicle 1</option>
+        <option value="coward">Coward</option>
+        <option value="aggressive">Aggressive</option>
+      </select>
+      <button id="add-vehicle">Add Vehicle</button>
+    </div>
+  </div>
   <script src="js/config.js"></script>
   <script src="js/Vector.js"></script>
   <script src="js/util.js"></script>
