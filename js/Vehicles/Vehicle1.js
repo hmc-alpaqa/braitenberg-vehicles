@@ -4,6 +4,6 @@ function Vehicle1(u, x, y) {
     // wires sensor to opposite motor
     let motorController = new MotorController(gyro, new Vector(0, 0), [sensor]);
     let motor = new Motor(gyro, new Vector(0, PIXEL_SIZE), motorController);
-    let vehicle = new Robot1(gyro, [sensor], [motorController], [motor]);
+    let vehicle = new Vehicle(gyro, [sensor], [motorController], [motor]);
     return vehicle;
 }
