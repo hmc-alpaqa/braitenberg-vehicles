@@ -17,7 +17,7 @@
   <h1>Braitenberg Vehicles</h1>
   <div id="menu">
     <div class="menu-item" id="controls">
-      <button>Start</button>
+      <button id="start-stop-button">Start</button>
       <input type="range" id="friction-slider" value="50" min="0" max="200" step="1" oninput="updateFriction(this.value)">
       <label id="friction-label"></label>
     </div>
@@ -27,7 +27,7 @@
         <option value="coward">Coward</option>
         <option value="aggressive">Aggressive</option>
       </select>
-      <button id="add-vehicle">Add Vehicle</button>
+      <button id="add-vehicle-button">Add Vehicle</button>
     </div>
   </div>
   <script src="js/config.js"></script>

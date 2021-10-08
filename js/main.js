@@ -38,8 +38,10 @@ function draw() {
     for (let renderer of renderers) {
         renderer.renderRobot();
     }
-    for (let robot of u.robots) {
-        robot.step(1 / FPS);
+    if (!simulationPaused) {
+        for (let robot of u.robots) {
+            robot.step(1 / FPS);
+        }
     }
 }
 
