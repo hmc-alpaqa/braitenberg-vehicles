@@ -9,6 +9,7 @@ function setup() {
     u = new Universe();
     g = new Gyro(u, 70, 110);
     addingVehicle = "vehicle1";
+    updateFriction(document.getElementById("friction-slider").value);
 
     pg = createGraphics(MAP_SIZE, MAP_SIZE);
     pg.background(220);
@@ -44,22 +45,20 @@ function draw() {
 
 function mouseClicked() {
     let vehicle;
-    if (addingRobot) {
-        if (mouseX > 0 && mouseY > 0) {
-            switch (addingVehicle) {
-                case "vehicle1":
-                    vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-                    break;
-                case "coward":
-                    vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-                    break;
-                case "aggressive":
-                    vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-                    break;
-            }
-            renderers.push(new Renderer(vehicle));
-            u.addRobot(vehicle);
+    if (mouseX > 0 && mouseY > 0) {
+        switch (addingVehicle) {
+            case "vehicle1":
+                vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                break;
+            case "coward":
+                vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                break;
+            case "aggressive":
+                vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                break;
         }
+        renderers.push(new Renderer(vehicle));
+        u.addRobot(vehicle);
     }
 }
 
