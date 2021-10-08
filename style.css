@@ -1,6 +1,21 @@
 html, body {
   margin: 0;
-  padding: 0;
+  padding: 1rem;
+  font-family: "Helvetica Neue";
+}
+
+button {
+  border: none;
+  background-color: #EAAA00;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #000000;
+  color: white;
+  transition: 0.3s;
 }
 
 canvas {
@@ -14,4 +29,5 @@ canvas {
 #menu {
   display: grid;
   grid-template-columns: auto auto;
+  margin-bottom: 2rem;
 }
