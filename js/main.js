@@ -61,3 +61,8 @@ function mouseClicked() {
     }
 }
 
+function resetUniverse() {
+    u.robots = [];
+    renderers = [];
+    simulationPaused = true;
+}
