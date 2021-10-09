@@ -1,6 +1,6 @@
 document.querySelector("#add-vehicle-button").addEventListener("click", () => {
     addingVehicle = document.getElementById("vehicle-select").value;
-})
+});
 
 let simulationPaused = true;
 let startStopButton = document.querySelector("#start-stop-button");
@@ -15,7 +15,16 @@ startStopButton.addEventListener("click", () => {
         startStopButton.style.color = "black";
     }
     simulationPaused = !simulationPaused;
-})
+});
+
+document.querySelector("#reset-button").addEventListener("click", () => {
+    if (!simulationPaused) {
+        startStopButton.innerText = "Start";
+        startStopButton.style.backgroundColor = "#EAAA00";
+        startStopButton.style.color = "black";
+    }
+    resetUniverse();
+});
 
 function updateFriction(value) {
     frictionMagnitude = parseInt(value);

@@ -31,3 +31,13 @@ canvas {
   grid-template-columns: auto auto;
   margin-bottom: 2rem;
 }
+
+#reset-button {
+  background-color: #A6192E;
+}
+
+#reset-button:hover {
+  background-color: #000000;
+  color: white;
+  transition: 0.3s;
+}
