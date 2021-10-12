@@ -4,6 +4,9 @@ class Component {
         this.offset = offset;
     }
 
+    getOutput() {
+        throw new Error('The getOutput() method must be implemented by any children of the Component class');
+    }
 
     getR() {
         let r = this.offset.getMagnitude();
