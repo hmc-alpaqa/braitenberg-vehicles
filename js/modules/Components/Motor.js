@@ -1,11 +1,11 @@
 class Motor extends Component {
-    constructor(gyro, offset, motorController) {
+    constructor(gyro, offset, inputs=[]) {
         super(gyro, offset);
-        this.motorController = motorController; // TODO: default argument of null, but optionally passed arg
+        this.inputs = inputs;
     }
 
-    setMotorController(motorController) {
-        this.motorController = motorController;
+    addInput(input) {
+        this.inputs.push(input);
         return this;
     }
 

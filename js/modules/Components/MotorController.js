@@ -1,7 +1,8 @@
 class MotorController extends Component {
-    constructor(gyro, offset, sensors=[]) {
+    constructor(gyro, offset, inputs = [], f) {
         super(gyro, offset);
-        this.sensors = sensors;
+        this.inputs = inputs;
+        this.f = f;
     }
 
     addSensor(sensor) {
@@ -11,9 +12,9 @@ class MotorController extends Component {
 
     calculateOutput() {
         let sum = 0
-        for (let sensor of this.sensors) {
-            sum += 100 * sensor.getValue();
+        for (let input of this.inputs) {
+            sum += input.getOutput();
         }
-        return Math.max(sum, 0) // the motors should never produce negative force
+        return this.f(sum); // the motors should never produce negative force
     }
 }
