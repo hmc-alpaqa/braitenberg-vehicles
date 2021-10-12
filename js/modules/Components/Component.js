@@ -4,6 +4,8 @@ class Component {
         this.offset = offset;
     }
 
+    getOutput();
+
     getR() {
         let r = this.offset.getMagnitude();
         let θ = this.offset.getTheta();
