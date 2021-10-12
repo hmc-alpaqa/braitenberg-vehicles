@@ -22,19 +22,18 @@ function setup() {
 
         }
     }
+    renderers = [];
 }
 
 function draw() {
     background(220);
     // draw a square for each cell in stimuli
     image(pg, 0, 0, MAP_SIZE, MAP_SIZE);
-    if (u.robots.length > 0) {
-        let mostRecentRobot = u.robots[u.robots.length - 1]
-        Renderer.renderText(mostRecentRobot);
-        Renderer.drawPath(mostRecentRobot);
+    if (renderers.length > 0) {
+        renderers[renderers.length - 1].renderText();
     }
-    for (let robot of u.robots) {
-        Renderer.renderRobot(robot);
+    for (let renderer of renderers) {
+        renderer.renderRobot();
     }
     if (!simulationPaused) {
         for (let robot of u.robots) {
@@ -57,6 +56,7 @@ function mouseClicked() {
                 vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
                 break;
         }
+        renderers.push(new Renderer(vehicle));
         u.addRobot(vehicle);
     }
 }
