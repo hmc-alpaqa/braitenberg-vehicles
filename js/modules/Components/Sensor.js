@@ -14,7 +14,7 @@ class Sensor extends Component {
         let x = Math.round(this.getR().x);
         let grid = this.gyro.universe.stimuli;
         if (y >= 0 && y < grid.length && x >= 0 && x < grid[y].length) {
-            return this.gyro.universe.stimuli[y][x];
+            return 100 * this.gyro.universe.stimuli[y][x];
         } else {
             // if the location is outside the grid, return 0    
             return 0;
