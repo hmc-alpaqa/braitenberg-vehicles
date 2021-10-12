@@ -17,7 +17,7 @@ class Vehicle {
 
         for (i = 0; i < this.motors.length; i++) {
             let motor = this.motors[i];
-            netForce += motor.getForce();
+            netForce += motor.getOutput();
         }
 
 
@@ -80,7 +80,7 @@ class Vehicle {
             let dist = Math.sqrt(Math.pow(motor.offset.x, 2), Math.pow(motor.offset.y, 2));
             let theta = Math.atan(-motor.offset.y / Math.abs(motor.offset.x)); // angle of elevation of the motor from the x-axis
             // we multiply by -1 so the torque is in the theta-direction we want to rotate
-            let motorForce = motor.getForce();
+            let motorForce = motor.getOutput();
             // if the robot is stationary there's no friction
             if (this.gyro.ω < 0.1) {
                 motorForce = motorForce;
