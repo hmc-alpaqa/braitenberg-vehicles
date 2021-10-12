@@ -4,10 +4,9 @@ function setup() {
     rectMode(CENTER);
     angleMode(RADIANS);
     // gyro object contains x, y location and orientation
-    // each sensor, controler, motor takes the gyro as a parameter to construct
-    // robot object contains gyro, sensors, controlers, motors
+    // each sensor, controller, motor takes the gyro as a parameter to construct
+    // Vehicle object contains gyro, sensors, controllers, motors
     u = new Universe();
-    g = new Gyro(u, 70, 110);
     addingVehicle = Vehicles.VEHICLE1;
     updateFriction(document.getElementById("friction-slider").value);
 
@@ -28,17 +27,17 @@ function draw() {
     background(220);
     // draw a square for each cell in stimuli
     image(pg, 0, 0, MAP_SIZE, MAP_SIZE);
-    if (u.robots.length > 0) {
-        let mostRecentRobot = u.robots[u.robots.length - 1]
-        Renderer.renderText(mostRecentRobot);
-        Renderer.drawPath(mostRecentRobot);
+    if (u.vehicles.length > 0) {
+        let mostRecentVehicle = u.vehicles[u.vehicles.length - 1]
+        Renderer.renderText(mostRecentVehicle);
+        Renderer.drawPath(mostRecentVehicle);
     }
-    for (let robot of u.robots) {
-        Renderer.renderRobot(robot);
+    for (let vehicle of u.vehicles) {
+        Renderer.renderVehicle(vehicle);
     }
     if (!simulationPaused) {
-        for (let robot of u.robots) {
-            robot.step(1 / FPS);
+        for (let vehicle of u.vehicles) {
+            vehicle.step(1 / FPS);
         }
     }
 }
@@ -57,12 +56,12 @@ function mouseClicked() {
                 vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
                 break;
         }
-        u.addRobot(vehicle);
+        u.addVehicle(vehicle);
     }
 }
 
 function resetUniverse() {
-    u.robots = [];
+    u.vehicles = [];
     renderers = [];
     simulationPaused = true;
 }
