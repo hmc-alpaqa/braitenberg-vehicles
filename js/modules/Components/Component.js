@@ -4,7 +4,9 @@ class Component {
         this.offset = offset;
     }
 
-    getOutput();
+    getOutput() {
+        throw new Error('The getOutput() method must be implemented by any children of the Component class');
+    }
 
     getR() {
         let r = this.offset.getMagnitude();
@@ -16,7 +18,7 @@ class Component {
 
         let xEffective = r * Math.cos(θEffective)
         let yEffective = r * Math.sin(θEffective)
-        
+
         return new Vector(
             this.gyro.r.x + xEffective,
             this.gyro.r.y + yEffective,

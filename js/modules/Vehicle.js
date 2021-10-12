@@ -1,10 +1,14 @@
 // robot with a single sensor that moves faster the more intense the light is
 class Vehicle {
-    constructor(gyro, sensors=[], motorControllers=[], motors=[]) {
+    constructor(gyro, sensors = [], motorControllers = [], motors = []) {
         this.gyro = gyro;
         this.sensors = sensors;
         this.motorControllers = motorControllers;
         this.motors = motors;
+
+        // used for drawing path of vehicle
+        this.path = [];
+        this.speeds = [];
     }
 
     step(dt) {
@@ -17,7 +21,7 @@ class Vehicle {
 
         for (i = 0; i < this.motors.length; i++) {
             let motor = this.motors[i];
-            netForce += motor.getForce();
+            netForce += motor.getOutput();
         }
 
 
@@ -66,6 +70,13 @@ class Vehicle {
 
         this.gyro.r.x += dt * this.gyro.v.x;
         this.gyro.r.y += dt * this.gyro.v.y;
+
+        if (this.path.length > SECONDS_PATH_VISIBLE * FPS) {
+            this.path.shift();
+            this.speeds.shift();
+        }
+        this.path.push(this.gyro.r.copy());
+        this.speeds.push(this.gyro.v.copy());
     }
 
     rotate(dt) {
@@ -80,7 +91,7 @@ class Vehicle {
             let dist = Math.sqrt(Math.pow(motor.offset.x, 2), Math.pow(motor.offset.y, 2));
             let theta = Math.atan(-motor.offset.y / Math.abs(motor.offset.x)); // angle of elevation of the motor from the x-axis
             // we multiply by -1 so the torque is in the theta-direction we want to rotate
-            let motorForce = motor.getForce();
+            let motorForce = motor.getOutput();
             // if the robot is stationary there's no friction
             if (this.gyro.ω < 0.1) {
                 motorForce = motorForce;

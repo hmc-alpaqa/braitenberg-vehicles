@@ -10,7 +10,7 @@ class MotorController extends Component {
         return this
     }
 
-    calculateOutput() {
+    getOutput() {
         let sum = 0
         for (let input of this.inputs) {
             sum += input.getOutput();
