@@ -6,69 +6,69 @@
  */
 class Renderer {
 
-    // static renderAll(robot) {
-    //     Renderer.renderRobot(robot);
-    //     Renderer.renderText(robot);
+    // static renderAll(vehicle) {
+    //     Renderer.renderVehicle(vehicle);
+    //     Renderer.renderText(vehicle);
     // }
 
     /**
-     * Renders the body of the robot at the current position and rotation, then calls
-     * helpers to render the robot's constituent parts
-     * @param {Vehicle} robot 
+     * Renders the body of the vehicle at the current position and rotation, then calls
+     * helpers to render the vehicle's constituent parts
+     * @param {Vehicle} vehicle 
      */
-    static renderRobot(robot) {
+    static renderVehicle(vehicle) {
         // noStroke()
         fill(225, 225, 225);
-        // render the body of the robot so that it is positioned at the center of the gyro
-        let xTarget = robot.gyro.r.x * PIXEL_SIZE;
-        let yTarget = robot.gyro.r.y * PIXEL_SIZE;
-        Renderer.renderRect(xTarget, yTarget, ROBOT_SIZE, ROBOT_SIZE, robot.gyro.θ)
-        Renderer.renderSensors(robot);
-        Renderer.renderMotors(robot);
+        // render the body of the vehicle so that it is positioned at the center of the gyro
+        let xTarget = vehicle.gyro.r.x * PIXEL_SIZE;
+        let yTarget = vehicle.gyro.r.y * PIXEL_SIZE;
+        Renderer.renderRect(xTarget, yTarget, VEHICLE_SIZE, VEHICLE_SIZE, vehicle.gyro.θ)
+        Renderer.renderSensors(vehicle);
+        Renderer.renderMotors(vehicle);
     }
 
-    static renderSensors(robot) {
-        for (i = 0; i < robot.sensors.length; i++) {
+    static renderSensors(vehicle) {
+        for (i = 0; i < vehicle.sensors.length; i++) {
             fill(0, 225, 0);
             Renderer.renderRect(
-                robot.sensors[i].getR().x * PIXEL_SIZE,
-                robot.sensors[i].getR().y * PIXEL_SIZE,
+                vehicle.sensors[i].getR().x * PIXEL_SIZE,
+                vehicle.sensors[i].getR().y * PIXEL_SIZE,
                 SENSOR_SIZE,
                 SENSOR_SIZE,
-                robot.gyro.θ
+                vehicle.gyro.θ
             )
         }
     }
 
-    static renderMotors(robot) {
-        for (i = 0; i < robot.motors.length; i++) {
+    static renderMotors(vehicle) {
+        for (i = 0; i < vehicle.motors.length; i++) {
             fill(0, 0, 225);
             Renderer.renderRect(
-                robot.motors[i].getR().x * PIXEL_SIZE,
-                robot.motors[i].getR().y * PIXEL_SIZE,
+                vehicle.motors[i].getR().x * PIXEL_SIZE,
+                vehicle.motors[i].getR().y * PIXEL_SIZE,
                 SENSOR_SIZE,
                 SENSOR_SIZE,
-                robot.gyro.θ
+                vehicle.gyro.θ
             )
         }
     }
 
 
     /**
-     * Draws the path that the robot has taken over the course of the past
+     * Draws the path that the vehicle has taken over the course of the past
      * SECONDS_PATH_VISIBLE seconds of simulation. The path will be thicker
      * corresponding to times the vehicle had a greater velocity
-     * @param {Vehicle} robot 
+     * @param {Vehicle} vehicle 
      */
-    static drawPath(robot) {
-        for (i = 1; i < robot.path.length; i++) {
-            strokeWeight(robot.speeds[i].getMagnitude() / 10); // stroke weight is proportional to velocity
-            stroke(0, 0, 0, 255 * (SECONDS_PATH_VISIBLE * FPS + i - robot.path.length) / (SECONDS_PATH_VISIBLE * FPS)); // dilute the path over time
+    static drawPath(vehicle) {
+        for (i = 1; i < vehicle.path.length; i++) {
+            strokeWeight(vehicle.speeds[i].getMagnitude() / 10); // stroke weight is proportional to velocity
+            stroke(0, 0, 0, 255 * (SECONDS_PATH_VISIBLE * FPS + i - vehicle.path.length) / (SECONDS_PATH_VISIBLE * FPS)); // dilute the path over time
             line(
-                robot.path[i - 1].x * PIXEL_SIZE,
-                robot.path[i - 1].y * PIXEL_SIZE,
-                robot.path[i].x * PIXEL_SIZE,
-                robot.path[i].y * PIXEL_SIZE
+                vehicle.path[i - 1].x * PIXEL_SIZE,
+                vehicle.path[i - 1].y * PIXEL_SIZE,
+                vehicle.path[i].x * PIXEL_SIZE,
+                vehicle.path[i].y * PIXEL_SIZE
             );
         }
         strokeWeight(1);
@@ -77,25 +77,25 @@ class Renderer {
 
 
     /**
-     * Data dashboard rendering the position, velocity, and acceleration of the robot
+     * Data dashboard rendering the position, velocity, and acceleration of the vehicle
      * both linearly and angularly at the current time
-     * @param {Vehicle} robot - the robot to render the stats of
+     * @param {Vehicle} vehicle - the vehicle to render the stats of
      */
-    static renderText(robot) {
-        text('x: ' + robot.gyro.r.x.toFixed(2), 10, 10)
-        text('y: ' + robot.gyro.r.y.toFixed(2), 10, 30)
-        text('θ: ' + (robot.gyro.θ / 3.14).toFixed(2) + '	π', 10, 50)
-        text('vx: ' + robot.gyro.v.x.toFixed(2), 80, 10)
-        text('vy: ' + robot.gyro.v.y.toFixed(2), 80, 30)
-        text('ω: ' + robot.gyro.ω.toFixed(2), 80, 50)
-        text('ax: ' + robot.gyro.a.x.toFixed(2), 150, 10)
-        text('ay: ' + robot.gyro.a.y.toFixed(2), 150, 30)
-        text('α: ' + robot.gyro.α.toFixed(2), 150, 50)
+    static renderText(vehicle) {
+        text('x: ' + vehicle.gyro.r.x.toFixed(2), 10, 10)
+        text('y: ' + vehicle.gyro.r.y.toFixed(2), 10, 30)
+        text('θ: ' + (vehicle.gyro.θ / 3.14).toFixed(2) + '	π', 10, 50)
+        text('vx: ' + vehicle.gyro.v.x.toFixed(2), 80, 10)
+        text('vy: ' + vehicle.gyro.v.y.toFixed(2), 80, 30)
+        text('ω: ' + vehicle.gyro.ω.toFixed(2), 80, 50)
+        text('ax: ' + vehicle.gyro.a.x.toFixed(2), 150, 10)
+        text('ay: ' + vehicle.gyro.a.y.toFixed(2), 150, 30)
+        text('α: ' + vehicle.gyro.α.toFixed(2), 150, 50)
     }
 
     /**
      * Helper function to render a rectangle at a given position with a given rotation
-     * this is helpful for rendering the robot and its sensors and motors at an angle
+     * this is helpful for rendering the vehicle and its sensors and motors at an angle
      * @param {number} xTarget - the x position of the rectangle
      * @param {number} yTarget - the y position of the rectangle
      * @param {number} w - the width of the rectangle
