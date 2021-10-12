@@ -1,18 +1,21 @@
+/**
+ * The static class that handles rendering of the vehicles and their related
+ * entities, forces, and stats
+ * @class Renderer
+ * @static 
+ */
 class Renderer {
 
-    static renderAll(robot) {
-        Renderer.renderRobot(robot);
-        Renderer.renderText(robot);
-    }
+    // static renderAll(robot) {
+    //     Renderer.renderRobot(robot);
+    //     Renderer.renderText(robot);
+    // }
 
-    static renderRect(xTarget, yTarget, w, h, rotation) {
-        translate(xTarget, yTarget);
-        rotate(rotation);
-        rect(0, 0, w, h);
-        rotate(-rotation);
-        translate(-xTarget, -yTarget);
-    }
-
+    /**
+     * Renders the body of the robot at the current position and rotation, then calls
+     * helpers to render the robot's constituent parts
+     * @param {Vehicle} robot 
+     */
     static renderRobot(robot) {
         // noStroke()
         fill(225, 225, 225);
@@ -50,6 +53,13 @@ class Renderer {
         }
     }
 
+
+    /**
+     * Draws the path that the robot has taken over the course of the past
+     * SECONDS_PATH_VISIBLE seconds of simulation. The path will be thicker
+     * corresponding to times the vehicle had a greater velocity
+     * @param {Vehicle} robot 
+     */
     static drawPath(robot) {
         for (i = 1; i < robot.path.length; i++) {
             strokeWeight(robot.speeds[i].getMagnitude() / 10); // stroke weight is proportional to velocity
@@ -65,6 +75,12 @@ class Renderer {
         stroke(0, 0, 0);
     }
 
+
+    /**
+     * Data dashboard rendering the position, velocity, and acceleration of the robot
+     * both linearly and angularly at the current time
+     * @param {Vehicle} robot - the robot to render the stats of
+     */
     static renderText(robot) {
         text('x: ' + robot.gyro.r.x.toFixed(2), 10, 10)
         text('y: ' + robot.gyro.r.y.toFixed(2), 10, 30)
@@ -76,4 +92,22 @@ class Renderer {
         text('ay: ' + robot.gyro.a.y.toFixed(2), 150, 30)
         text('α: ' + robot.gyro.α.toFixed(2), 150, 50)
     }
+
+    /**
+     * Helper function to render a rectangle at a given position with a given rotation
+     * this is helpful for rendering the robot and its sensors and motors at an angle
+     * @param {number} xTarget - the x position of the rectangle
+     * @param {number} yTarget - the y position of the rectangle
+     * @param {number} w - the width of the rectangle
+     * @param {number} h - the height of the rectangle
+     * @param {number} rotation - the rotation of the rectangle
+     */
+    static renderRect(xTarget, yTarget, w, h, rotation) {
+        translate(xTarget, yTarget);
+        rotate(rotation);
+        rect(0, 0, w, h);
+        rotate(-rotation);
+        translate(-xTarget, -yTarget);
+    }
+
 }
