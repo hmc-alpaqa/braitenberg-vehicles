@@ -1,5 +1,5 @@
 class Motor extends Component {
-    constructor(gyro, offset, inputs=[]) {
+    constructor(gyro, offset, inputs = []) {
         super(gyro, offset);
         this.inputs = inputs;
     }
@@ -9,8 +9,12 @@ class Motor extends Component {
         return this;
     }
 
-    getForce() {
-        return this.motorController.calculateOutput();
+    getOutput() {
+        let sum = 0
+        for (let i = 0; i < this.inputs.length; i++) {
+            sum += this.inputs[i].getOutput();
+        }
+        return sum;
     }
 
 }
