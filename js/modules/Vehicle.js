@@ -1,10 +1,14 @@
 // robot with a single sensor that moves faster the more intense the light is
 class Vehicle {
-    constructor(gyro, sensors=[], motorControllers=[], motors=[]) {
+    constructor(gyro, sensors = [], motorControllers = [], motors = []) {
         this.gyro = gyro;
         this.sensors = sensors;
         this.motorControllers = motorControllers;
         this.motors = motors;
+
+        // used for drawing path of vehicle
+        this.path = [];
+        this.speeds = [];
     }
 
     step(dt) {
@@ -66,6 +70,13 @@ class Vehicle {
 
         this.gyro.r.x += dt * this.gyro.v.x;
         this.gyro.r.y += dt * this.gyro.v.y;
+
+        if (this.path.length > SECONDS_PATH_VISIBLE * FPS) {
+            this.path.shift();
+            this.speeds.shift();
+        }
+        this.path.push(this.gyro.r.copy());
+        this.speeds.push(this.gyro.v.copy());
     }
 
     rotate(dt) {

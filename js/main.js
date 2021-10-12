@@ -31,6 +31,7 @@ function draw() {
     if (u.robots.length > 0) {
         let mostRecentRobot = u.robots[u.robots.length - 1]
         Renderer.renderText(mostRecentRobot);
+        Renderer.drawPath(mostRecentRobot);
     }
     for (let robot of u.robots) {
         Renderer.renderRobot(robot);

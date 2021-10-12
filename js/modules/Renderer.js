@@ -50,6 +50,21 @@ class Renderer {
         }
     }
 
+    static drawPath(robot) {
+        for (i = 1; i < robot.path.length; i++) {
+            strokeWeight(robot.speeds[i].getMagnitude() / 10); // stroke weight is proportional to velocity
+            stroke(0, 0, 0, 255 * (SECONDS_PATH_VISIBLE * FPS + i - robot.path.length) / (SECONDS_PATH_VISIBLE * FPS)); // dilute the path over time
+            line(
+                robot.path[i - 1].x * PIXEL_SIZE,
+                robot.path[i - 1].y * PIXEL_SIZE,
+                robot.path[i].x * PIXEL_SIZE,
+                robot.path[i].y * PIXEL_SIZE
+            );
+        }
+        strokeWeight(1);
+        stroke(0, 0, 0);
+    }
+
     static renderText(robot) {
         text('x: ' + robot.gyro.r.x.toFixed(2), 10, 10)
         text('y: ' + robot.gyro.r.y.toFixed(2), 10, 30)
