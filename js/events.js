@@ -6,8 +6,13 @@ document.querySelector("#add-vehicle-button").addEventListener("click", () => {
 
 ////////// ADD SOURCE BUTTON //////////
 document.querySelector("#add-source-button").addEventListener("click", () => {
-    addingSource = true;
     sourceIntensity = document.querySelector("#source-intensity-input").value;
+    if (sourceIntensity > 0 && sourceIntensity <= 1000) {
+        addingSource = true;
+    } else {
+        alert("Please enter an intensity above 0 and under 1000.");
+    }
+    
 })
 
 ////////// START/STOP BUTTON //////////
