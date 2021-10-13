@@ -1,7 +1,15 @@
+////////// ADD VEHICLE BUTTON //////////
 document.querySelector("#add-vehicle-button").addEventListener("click", () => {
-    addingVehicle = document.getElementById("vehicle-select").value;
+    addingVehicle = document.querySelector("#vehicle-select").value;
 });
 
+////////// ADD SOURCE BUTTON //////////
+document.querySelector("#add-source-button").addEventListener("click", () => {
+    addingSource = true;
+    sourceIntensity = document.querySelector("#source-intensity-input").value;
+})
+
+////////// START/STOP BUTTON //////////
 let simulationPaused = true;
 let startStopButton = document.querySelector("#start-stop-button");
 startStopButton.addEventListener("click", () => {
@@ -17,6 +25,7 @@ startStopButton.addEventListener("click", () => {
     simulationPaused = !simulationPaused;
 });
 
+////////// RESET BUTTON //////////
 document.querySelector("#reset-button").addEventListener("click", () => {
     if (!simulationPaused) {
         startStopButton.innerText = "Start";
@@ -26,7 +35,8 @@ document.querySelector("#reset-button").addEventListener("click", () => {
     resetUniverse();
 });
 
+////////// FRICTION SLIDER //////////
 function updateFriction(value) {
     frictionMagnitude = parseInt(value);
-    document.getElementById("friction-label").innerHTML = `μ = ${frictionMagnitude}`;
+    document.querySelector("#friction-label").innerHTML = `μ = ${frictionMagnitude}`;
 }
