@@ -1,4 +1,4 @@
-function Coward(u, x, y) {
+function Vehicle2a(u, x, y) {
     let gyro = new Gyro(u, x, y);
     let sensor1 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, -PIXEL_SIZE));
     let sensor2 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, PIXEL_SIZE));
@@ -9,7 +9,7 @@ function Coward(u, x, y) {
     return vehicle;
 }
 
-function Aggressive(u, x, y) {
+function Vehicle2b(u, x, y) {
     let gyro = new Gyro(u, x, y);
     let sensor1 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, -PIXEL_SIZE));
     let sensor2 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, PIXEL_SIZE));

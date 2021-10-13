@@ -50,10 +50,10 @@ function mouseClicked() {
                 vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
                 break;
             case Vehicles.VEHICLE2A:
-                vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                vehicle = Vehicle2a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
                 break;
             case Vehicles.VEHICLE2B:
-                vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                vehicle = Vehicle2b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
                 break;
         }
         u.addVehicle(vehicle);
