@@ -14,6 +14,10 @@ class Vehicle {
         this.speeds = [];
     }
 
+    copy() {
+        return Vehicle(this.gyro, this.sensors, this.motorControllers, this.motors);
+    }
+
     /**
      * Advances the vehicle's position and rotation by a small time step
      * @param {number} dt - The amount of time to advance the vehicle by
