@@ -8,19 +8,21 @@ function setup() {
     // Vehicle object contains gyro, sensors, controllers, motors
     u = new Universe();
     addingVehicle = Vehicles.VEHICLE1;
+    addingSource = false;
+    sourceIntensity = 100;
     updateFriction(document.getElementById("friction-slider").value);
 
     pg = createGraphics(MAP_SIZE, MAP_SIZE);
     pg.background(220);
     pg.noStroke();
-    for (y = 0; y < u.stimuli.length; y++) {
-        for (x = 0; x < u.stimuli[y].length; x++) {
-            // console.log(u.stimuli[i][j])
-            pg.square(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE);
-            pg.fill(255 + 256 * u.stimuli[y][x], 255 - 256 * abs(u.stimuli[y][x]), 190 - 256 * u.stimuli[y][x])
+    // for (y = 0; y < u.stimuli.length; y++) {
+    //     for (x = 0; x < u.stimuli[y].length; x++) {
+    //         // console.log(u.stimuli[i][j])
+    //         pg.square(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE);
+    //         pg.fill(255 + 256 * u.stimuli[y][x], 255 - 256 * abs(u.stimuli[y][x]), 190 - 256 * u.stimuli[y][x])
 
-        }
-    }
+    //     }
+    // }
 }
 
 function draw() {
@@ -35,6 +37,11 @@ function draw() {
     for (let vehicle of u.vehicles) {
         Renderer.renderVehicle(vehicle);
     }
+
+    for (let source of u.sources) {
+        Renderer.renderSource(source);
+    }
+
     if (!simulationPaused) {
         for (let vehicle of u.vehicles) {
             vehicle.step(1 / FPS);
@@ -45,18 +52,22 @@ function draw() {
 function mouseClicked() {
     let vehicle;
     if (mouseX > 0 && mouseY > 0) {
-        switch (addingVehicle) {
-            case Vehicles.VEHICLE1:
-                vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-                break;
-            case Vehicles.VEHICLE2A:
-                vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-                break;
-            case Vehicles.VEHICLE2B:
-                vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-                break;
+        if (addingSource) {
+            u.addSource(new Source(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, sourceIntensity));
+        } else {
+            switch (addingVehicle) {
+                case Vehicles.VEHICLE1:
+                    vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                    break;
+                case Vehicles.VEHICLE2A:
+                    vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                    break;
+                case Vehicles.VEHICLE2B:
+                    vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                    break;
+            }
+            u.addVehicle(vehicle);
         }
-        u.addVehicle(vehicle);
     }
 }
 
@@ -64,4 +75,5 @@ function resetUniverse() {
     u.vehicles = [];
     renderers = [];
     simulationPaused = true;
+    addingSource = false;
 }
