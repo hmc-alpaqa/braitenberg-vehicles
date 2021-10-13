@@ -1,6 +1,7 @@
 function setup() {
     createCanvas(MAP_SIZE, MAP_SIZE);
     frameRate(FPS);
+    ellipseMode(CENTER);
     rectMode(CENTER);
     angleMode(RADIANS);
     // gyro object contains x, y location and orientation
