@@ -15,14 +15,6 @@ function setup() {
     pg = createGraphics(MAP_SIZE, MAP_SIZE);
     pg.background(220);
     pg.noStroke();
-    // for (y = 0; y < u.stimuli.length; y++) {
-    //     for (x = 0; x < u.stimuli[y].length; x++) {
-    //         // console.log(u.stimuli[i][j])
-    //         pg.square(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE);
-    //         pg.fill(255 + 256 * u.stimuli[y][x], 255 - 256 * abs(u.stimuli[y][x]), 190 - 256 * u.stimuli[y][x])
-
-    //     }
-    // }
 }
 
 function draw() {
@@ -54,6 +46,8 @@ function mouseClicked() {
     if (mouseX > 0 && mouseY > 0) {
         if (addingSource) {
             u.addSource(new Source(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, sourceIntensity));
+            generateTerrain();
+            renderTerrain();
         } else {
             switch (addingVehicle) {
                 case Vehicles.VEHICLE1:
@@ -67,6 +61,24 @@ function mouseClicked() {
                     break;
             }
             u.addVehicle(vehicle);
+        }
+    }
+}
+
+function generateTerrain() {
+    for (let i = 0; i < MAP_RESOLUTION; i++) {
+        for (let j = 0; j < MAP_RESOLUTION; j++) {
+            u.stimuli[i][j] = u.getStimulus(j, i);
+        }
+    }
+}
+
+function renderTerrain() {
+    for (y = 0; y < u.stimuli.length; y++) {
+        for (x = 0; x < u.stimuli[y].length; x++) {
+            pg.square(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE);
+            pg.fill(255 + 256 * u.stimuli[y][x], 255 - 256 * abs(u.stimuli[y][x]), 190 - 256 * u.stimuli[y][x])
+
         }
     }
 }
