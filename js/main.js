@@ -29,7 +29,7 @@ function draw() {
     }
     for (let vehicle of u.vehicles) {
         Renderer.renderVehicle(vehicle);
-        if (vehicle.gyro.r.getMagnitude() > 10000) {
+        if (vehicle.gyro.r.getMagnitude() > 2048) {
             u.removeVehicle(vehicle);
         }
     }
@@ -47,7 +47,7 @@ function draw() {
 
 function mouseClicked() {
     let vehicle;
-    if (mouseX > 0 && mouseY > 0) {
+    if (mouseX > 0 && mouseY > 0 && mouseX < MAP_SIZE && mouseY < MAP_SIZE) {
         if (addingSource) {
             u.addSource(new Source(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, sourceIntensity));
             generateTerrain();
