@@ -31,7 +31,7 @@ class Vehicle {
     move(dt) {
         let netForce = 0;
 
-        for (i = 0; i < this.motors.length; i++) {
+        for (let i = 0; i < this.motors.length; i++) {
             let motor = this.motors[i];
             netForce += motor.getOutput();
         }
@@ -103,7 +103,7 @@ class Vehicle {
         // find the torque of the motor
         this.gyro.α = 0
 
-        for (i = 0; i < this.motors.length; i++) {
+        for (let i = 0; i < this.motors.length; i++) {
             let motor = this.motors[i];
             let dist = Math.sqrt(Math.pow(motor.offset.x, 2), Math.pow(motor.offset.y, 2));
             let theta = Math.atan(-motor.offset.y / Math.abs(motor.offset.x)); // angle of elevation of the motor from the x-axis

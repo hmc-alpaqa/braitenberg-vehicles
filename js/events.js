@@ -1,5 +1,6 @@
 ////////// ADD VEHICLE BUTTON //////////
 document.querySelector("#add-vehicle-button").addEventListener("click", () => {
+    addingSource = false;
     addingVehicle = document.querySelector("#vehicle-select").value;
 });
 

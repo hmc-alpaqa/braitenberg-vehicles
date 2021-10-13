@@ -85,7 +85,17 @@ function renderTerrain() {
 
 function resetUniverse() {
     u.vehicles = [];
+    u.sources = [];
     renderers = [];
     simulationPaused = true;
-    addingSource = false;
+    u.stimuli = []
+    for (let i = 0; i < MAP_RESOLUTION; i++) {
+        let row = []
+        for (let j = 0; j < MAP_RESOLUTION; j++) {
+            row.push(0);
+        }
+        u.stimuli.push(row);
+    }
+    pg.background(220);
+    pg.noStroke();
 }
