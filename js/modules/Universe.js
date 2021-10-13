@@ -27,6 +27,14 @@ class Universe {
         this.vehicles.push(vehicle);
     }
 
+    removeVehicle(vehicle) {
+        let index = this.vehicles.indexOf(vehicle);
+        if (index > -1) {
+            this.vehicles.splice(index, 1);
+        }
+    }
+
+
     addSource(source) {
         this.sources.push(source);
     }
