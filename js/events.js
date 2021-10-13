@@ -28,5 +28,5 @@ document.querySelector("#reset-button").addEventListener("click", () => {
 
 function updateFriction(value) {
     frictionMagnitude = parseInt(value);
-    document.getElementById("friction-label").innerHTML = `μ = ${frictionMagnitude}`;
+    document.getElementById("friction-label").innerHTML = `Friction μ = ${frictionMagnitude}`;
 }
