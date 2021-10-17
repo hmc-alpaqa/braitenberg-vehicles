@@ -40,7 +40,6 @@ class Vehicle {
             netForce += motor.getOutput();
         }
 
-
         // find the velocity vector's theta
         // create new friction force directed at theta + pi
         // set magnitude to force intensity:
@@ -52,11 +51,9 @@ class Vehicle {
         let yFriction = frictionMagnitude * Math.sin(frictionTheta);
 
 
-
-
         // we're treating friction as both the max static friction
-        // and the kinetic friction, perhaps we can add mu_k and mu_s separatley
-        // or we could even add different terrtains with diffeerent mu_k and mu_s
+        // and the kinetic friction, perhaps we can add mu_k and mu_s separately
+        // or we could even add different terrains with different mu_k and mu_s
         // let forceDirection = -1 * Math.sign(netForce);
         // let forceVector = forceDirection * friction
         // let netForceWithFriction = netForce + forceVector;
@@ -116,10 +113,10 @@ class Vehicle {
             // if the vehicle is stationary there's no friction
             if (this.gyro.ω < 0.1) {
                 motorForce = motorForce;
-                // if friction is more than the net force, the vehicle doesnt move
+                // if friction is more than the net force, the vehicle doesn't move
             } else if (frictionMagnitude > motorForce) {
                 motorForce = 0;
-                // otherwise, vectorsum friction and net force
+                // otherwise, vector sum friction and net force
             } else {
                 motorForce -= frictionMagnitude / this.motors.length;
             }
