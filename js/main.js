@@ -10,6 +10,7 @@ function setup() {
     u = new Universe();
     addingVehicle = Vehicles.VEHICLE1;
     addingSource = false;
+    removingSource = false;
     sourceIntensity = 100;
     updateFriction(document.getElementById("friction-slider").value);
 
@@ -52,6 +53,13 @@ function mouseClicked() {
             u.addSource(new Source(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, sourceIntensity));
             generateTerrain();
             renderTerrain();
+        } else if (removingSource) {
+            let source = u.getSource(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+            if (source) {
+                u.removeSource(source);
+                generateTerrain();
+                renderTerrain();
+            }
         } else {
             switch (addingVehicle) {
                 case Vehicles.VEHICLE1:
