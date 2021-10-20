@@ -23,6 +23,11 @@ canvas {
   display: block;
 }
 
+.clicked {
+  background-color: black;
+  color: white;
+}
+
 .menu-item {
   display: inline-block;
 }
