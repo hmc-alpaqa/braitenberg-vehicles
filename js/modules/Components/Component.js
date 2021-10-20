@@ -8,6 +8,10 @@ class Component {
         throw new Error('The getOutput() method must be implemented by any children of the Component class');
     }
 
+    memoizedCopy() {
+        throw new Error('The copy() method must be implemented by any children of the Component class');
+    }
+
     getR() {
         let r = this.offset.getMagnitude();
         let θ = this.offset.getTheta();
