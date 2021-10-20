@@ -44,6 +44,23 @@ function draw() {
             vehicle.step(1 / FPS);
         }
     }
+
+    if (addingVehicle) {
+        switch (addingVehicle) {
+            case Vehicles.VEHICLE1:
+                vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                Renderer.renderVehicle(vehicle);
+                break;
+            case Vehicles.VEHICLE2A:
+                vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                Renderer.renderVehicle(vehicle);
+                break;
+            case Vehicles.VEHICLE2B:
+                vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                Renderer.renderVehicle(vehicle);
+                break;
+        }
+    }
 }
 
 function mouseClicked() {
