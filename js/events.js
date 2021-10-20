@@ -27,6 +27,7 @@ addSourceButton.addEventListener("click", () => {
         addingSource = false;
         addSourceButton.classList.remove("clicked");
     } else if (sourceIntensity > 0 && sourceIntensity <= 1000) {
+        addingVehicle = Vehicles.NONE;
         addingSource = true;
         removingSource = false;
         addVehicleButton.classList.remove("clicked");
@@ -44,6 +45,7 @@ removeSourceButton.addEventListener("click", () => {
         removingSource = false;
         removeSourceButton.classList.remove("clicked");
     } else {
+        addingVehicle = Vehicles.NONE;
         addingSource = false;
         removingSource = true;
         addVehicleButton.classList.remove("clicked");
