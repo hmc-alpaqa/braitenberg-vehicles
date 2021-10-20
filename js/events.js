@@ -7,18 +7,26 @@ let resetButton = document.querySelector("#reset-button");
 
 ////////// ADD VEHICLE BUTTON //////////
 addVehicleButton.addEventListener("click", () => {
-    addingSource = false;
-    removingSource = false;
-    addingVehicle = document.querySelector("#vehicle-select").value;
-    addVehicleButton.classList.add("clicked");
-    addSourceButton.classList.remove("clicked");
-    removeSourceButton.classList.remove("clicked");
+    if (addingVehicle != Vehicles.NONE) {
+        addingVehicle = Vehicles.NONE;
+        addVehicleButton.classList.remove("clicked");
+    } else {
+        addingSource = false;
+        removingSource = false;
+        addingVehicle = document.querySelector("#vehicle-select").value;
+        addVehicleButton.classList.add("clicked");
+        addSourceButton.classList.remove("clicked");
+        removeSourceButton.classList.remove("clicked");
+    }
 });
 
 ////////// ADD SOURCE BUTTON //////////
 addSourceButton.addEventListener("click", () => {
     sourceIntensity = document.querySelector("#source-intensity-input").value;
-    if (sourceIntensity > 0 && sourceIntensity <= 1000) {
+    if (addingSource) {
+        addingSource = false;
+        addSourceButton.classList.remove("clicked");
+    } else if (sourceIntensity > 0 && sourceIntensity <= 1000) {
         addingSource = true;
         removingSource = false;
         addVehicleButton.classList.remove("clicked");
@@ -32,11 +40,16 @@ addSourceButton.addEventListener("click", () => {
 
 ////////// REMOVE SOURCE BUTTON //////////
 removeSourceButton.addEventListener("click", () => {
-    addingSource = false;
-    removingSource = true;
-    addVehicleButton.classList.remove("clicked");
-    addSourceButton.classList.remove("clicked");
-    removeSourceButton.classList.add("clicked");
+    if (removingSource) {
+        removingSource = false;
+        removeSourceButton.classList.remove("clicked");
+    } else {
+        addingSource = false;
+        removingSource = true;
+        addVehicleButton.classList.remove("clicked");
+        addSourceButton.classList.remove("clicked");
+        removeSourceButton.classList.add("clicked");
+    }
 })
 
 ////////// START/STOP BUTTON //////////
