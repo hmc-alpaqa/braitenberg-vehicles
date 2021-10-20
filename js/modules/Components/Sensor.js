@@ -21,4 +21,17 @@ class Sensor extends Component {
         }
     }
 
+
+    memoizedCopy(copiedComponents = {}) {
+        if (this in copiedComponents) {
+            return copiedComponents[this];
+        } else {
+            if (!this.gyro in copiedComponents) {
+                copiedComponents[this.gyro] = this.gyro.copy();
+            }
+            let newCopy = new Sensor(copiedComponents[this.gyro], this.offset.copy());
+            copiedComponents[this] = newCopy;
+            return newCopy;
+        }
+    }
 }

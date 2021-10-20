@@ -17,4 +17,17 @@ class MotorController extends Component {
         }
         return this.f(sum); // the motors should never produce negative force
     }
+
+    memoizedCopy(copiedComponents = {}) {
+        if (this in copiedComponents) {
+            return copiedComponents[this];
+        } else {
+            if (!this.gyro in copiedComponents) {
+                copiedComponents[this.gyro] = this.gyro.copy();
+            }
+            let newCopy = new MotorController(copiedComponents[this.gyro], this.offset.copy(), this.inputs.map(input => input.copy(copiedComponents)), this.f);
+            copiedComponents[this] = newCopy;
+            return newCopy;
+        }
+    }
 }

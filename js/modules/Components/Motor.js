@@ -17,4 +17,16 @@ class Motor extends Component {
         return Math.min(Math.max(0, sum), 300);
     }
 
+    memoizedCopy(copiedComponents = {}) {
+        if (this in copiedComponents) {
+            return copiedComponents[this];
+        } else {
+            if (!this.gyro in copiedComponents) {
+                copiedComponents[this.gyro] = this.gyro.copy();
+            }
+            let newCopy = new Motor(copiedComponents[this.gyro], this.offset.copy(), this.inputs.map(input => input.copy(copiedComponents)));
+            copiedComponents[this] = newCopy;
+            return newCopy;
+        }
+    }
 }
