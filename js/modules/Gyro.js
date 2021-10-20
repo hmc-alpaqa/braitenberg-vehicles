@@ -11,4 +11,8 @@ class Gyro {
         this.ω = 0; // angular velocity
         this.α = 0; // angular acceleration
     }
+
+    copy() {
+        return new Gyro(this.universe, this.r.x, this.r.y);
+    }
 }
