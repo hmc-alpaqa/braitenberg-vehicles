@@ -8,7 +8,7 @@ function setup() {
     // each sensor, controller, motor takes the gyro as a parameter to construct
     // Vehicle object contains gyro, sensors, controllers, motors
     u = new Universe();
-    addingVehicle = Vehicles.VEHICLE1;
+    addingVehicle = Vehicles.NONE;
     addingSource = false;
     removingSource = false;
     sourceIntensity = 100;
@@ -85,6 +85,8 @@ function mouseClicked() {
             }
         } else {
             switch (addingVehicle) {
+                case Vehicles.NONE:
+                    return;
                 case Vehicles.VEHICLE1:
                     vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                     break;
