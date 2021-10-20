@@ -17,6 +17,8 @@ function setup() {
     pg = createGraphics(MAP_SIZE, MAP_SIZE);
     pg.background(220);
     pg.noStroke();
+
+    θ = 0;
 }
 
 function draw() {
@@ -48,19 +50,23 @@ function draw() {
     if (addingVehicle) {
         switch (addingVehicle) {
             case Vehicles.VEHICLE1:
-                vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE2A:
-                vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE2B:
-                vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
                 break;
         }
     }
+}
+
+function mouseWheel(event) {
+    θ += event.delta/100;
 }
 
 function mouseClicked() {
@@ -80,13 +86,13 @@ function mouseClicked() {
         } else {
             switch (addingVehicle) {
                 case Vehicles.VEHICLE1:
-                    vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                    vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                     break;
                 case Vehicles.VEHICLE2A:
-                    vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                    vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                     break;
                 case Vehicles.VEHICLE2B:
-                    vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                    vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                     break;
             }
             u.addVehicle(vehicle);
