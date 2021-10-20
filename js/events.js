@@ -1,16 +1,29 @@
+////////// BUTTONS //////////
+let addVehicleButton = document.querySelector("#add-vehicle-button");
+let addSourceButton = document.querySelector("#add-source-button");
+let removeSourceButton = document.querySelector("#remove-source-button");
+let startStopButton = document.querySelector("#start-stop-button");
+let resetButton = document.querySelector("#reset-button");
+
 ////////// ADD VEHICLE BUTTON //////////
-document.querySelector("#add-vehicle-button").addEventListener("click", () => {
+addVehicleButton.addEventListener("click", () => {
     addingSource = false;
     removingSource = false;
     addingVehicle = document.querySelector("#vehicle-select").value;
+    addVehicleButton.classList.add("clicked");
+    addSourceButton.classList.remove("clicked");
+    removeSourceButton.classList.remove("clicked");
 });
 
 ////////// ADD SOURCE BUTTON //////////
-document.querySelector("#add-source-button").addEventListener("click", () => {
+addSourceButton.addEventListener("click", () => {
     sourceIntensity = document.querySelector("#source-intensity-input").value;
     if (sourceIntensity > 0 && sourceIntensity <= 1000) {
         addingSource = true;
         removingSource = false;
+        addVehicleButton.classList.remove("clicked");
+        addSourceButton.classList.add("clicked");
+        removeSourceButton.classList.remove("clicked");
     } else {
         alert("Please enter an intensity above 0 and under 1000.");
     }
@@ -18,33 +31,35 @@ document.querySelector("#add-source-button").addEventListener("click", () => {
 })
 
 ////////// REMOVE SOURCE BUTTON //////////
-document.querySelector("#remove-source-button").addEventListener("click", () => {
+removeSourceButton.addEventListener("click", () => {
     addingSource = false;
     removingSource = true;
+    addVehicleButton.classList.remove("clicked");
+    addSourceButton.classList.remove("clicked");
+    removeSourceButton.classList.add("clicked");
 })
 
 ////////// START/STOP BUTTON //////////
 let simulationPaused = true;
-let startStopButton = document.querySelector("#start-stop-button");
 startStopButton.addEventListener("click", () => {
     if (simulationPaused) {
         startStopButton.innerText = "Stop";
-        startStopButton.style.color = "#FFFFFF";
-        startStopButton.style.backgroundColor = "#000000";
+        startStopButton.classList.add("clicked");
     } else {
-        startStopButton.innerText = "Start";
-        startStopButton.style.backgroundColor = "#EAAA00";
-        startStopButton.style.color = "black";
+        startStopButton.innerText = "Start"
+        startStopButton.classList.remove("clicked");
     }
     simulationPaused = !simulationPaused;
 });
 
 ////////// RESET BUTTON //////////
-document.querySelector("#reset-button").addEventListener("click", () => {
+resetButton.addEventListener("click", () => {
     if (!simulationPaused) {
         startStopButton.innerText = "Start";
-        startStopButton.style.backgroundColor = "#EAAA00";
-        startStopButton.style.color = "black";
+        addVehicleButton.classList.remove("clicked");
+        addSourceButton.classList.remove("clicked");
+        removeSourceButton.classList.remove("clicked");
+        startStopButton.classList.remove("clicked");
     }
     resetUniverse();
 });
