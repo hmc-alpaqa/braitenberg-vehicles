@@ -63,6 +63,12 @@ function draw() {
                 break;
         }
     }
+
+    if (keyIsPressed && (keyCode === RIGHT_ARROW)) {
+        θ += 0.05;
+    } else if (keyIsPressed && (keyCode === LEFT_ARROW)) {
+        θ -= 0.05;
+    }
 }
 
 function mouseWheel(event) {
