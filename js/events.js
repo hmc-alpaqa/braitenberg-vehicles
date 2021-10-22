@@ -1,9 +1,17 @@
-////////// BUTTONS //////////
+////////// DOM ELEMENTS //////////
+let vehicleSelect = document.querySelector("#vehicle-select");
 let addVehicleButton = document.querySelector("#add-vehicle-button");
 let addSourceButton = document.querySelector("#add-source-button");
 let removeSourceButton = document.querySelector("#remove-source-button");
 let startStopButton = document.querySelector("#start-stop-button");
 let resetButton = document.querySelector("#reset-button");
+
+////////// ADD VEHICLE INPUT //////////
+vehicleSelect.addEventListener("change", () => {
+    if (addingVehicle != Vehicles.NONE) {
+        addingVehicle = vehicleSelect.value;
+    }
+})
 
 ////////// ADD VEHICLE BUTTON //////////
 addVehicleButton.addEventListener("click", () => {
@@ -13,7 +21,7 @@ addVehicleButton.addEventListener("click", () => {
     } else {
         addingSource = false;
         removingSource = false;
-        addingVehicle = document.querySelector("#vehicle-select").value;
+        addingVehicle = vehicleSelect.value;
         addVehicleButton.classList.add("clicked");
         addSourceButton.classList.remove("clicked");
         removeSourceButton.classList.remove("clicked");
