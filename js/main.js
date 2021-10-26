@@ -54,12 +54,10 @@ function draw() {
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE2A:
-                vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
-                Renderer.renderVehicle(vehicle);
+                vehicle = Vehicle2a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
                 break;
             case Vehicles.VEHICLE2B:
-                vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
-                Renderer.renderVehicle(vehicle);
+                vehicle = Vehicle2b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
                 break;
         }
     }

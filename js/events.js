@@ -90,5 +90,5 @@ resetButton.addEventListener("click", () => {
 ////////// FRICTION SLIDER //////////
 function updateFriction(value) {
     frictionMagnitude = parseInt(value);
-    document.querySelector("#friction-label").innerHTML = `μ = ${frictionMagnitude}`;
+    document.querySelector("#friction-label").innerHTML = `Friction μ = ${frictionMagnitude}`;
 }
