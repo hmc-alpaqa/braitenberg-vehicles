@@ -118,10 +118,10 @@ class Vehicle {
                 motorForce = 0;
                 // otherwise, vector sum friction and net force
             } else {
-                motorForce -= frictionMagnitude / this.motors.length;
+                motorForce -= (VEHICLE_SIZE/2 * frictionMagnitude)/MOMENT_OF_INERTIA
             }
 
-            let τ = -100 * motorForce * dist * Math.sin(theta); // τ = F r sin(θ)
+            let τ = -10 * motorForce * dist * Math.sin(theta); // τ = F r sin(θ)
 
             this.gyro.α += MOMENT_OF_INERTIA * τ * dt; // let moment of inertia be 1 so torque = angular accel
         }
