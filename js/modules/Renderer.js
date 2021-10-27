@@ -28,7 +28,7 @@ class Renderer {
     }
 
     static renderSensors(vehicle) {
-        for (i = 0; i < vehicle.sensors.length; i++) {
+        for (let i = 0; i < vehicle.sensors.length; i++) {
             fill(0, 225, 0);
             Renderer.renderRect(
                 vehicle.sensors[i].getR().x * PIXEL_SIZE,
@@ -41,7 +41,7 @@ class Renderer {
     }
 
     static renderMotors(vehicle) {
-        for (i = 0; i < vehicle.motors.length; i++) {
+        for (let i = 0; i < vehicle.motors.length; i++) {
             fill(0, 0, 225);
             Renderer.renderRect(
                 vehicle.motors[i].getR().x * PIXEL_SIZE,
@@ -53,7 +53,6 @@ class Renderer {
         }
     }
 
-
     /**
      * Draws the path that the vehicle has taken over the course of the past
      * SECONDS_PATH_VISIBLE seconds of simulation. The path will be thicker
@@ -61,7 +60,7 @@ class Renderer {
      * @param {Vehicle} vehicle 
      */
     static drawPath(vehicle) {
-        for (i = 1; i < vehicle.path.length; i++) {
+        for (let i = 1; i < vehicle.path.length; i++) {
             strokeWeight(vehicle.speeds[i].getMagnitude() / 10); // stroke weight is proportional to velocity
             stroke(0, 0, 0, 255 * (SECONDS_PATH_VISIBLE * FPS + i - vehicle.path.length) / (SECONDS_PATH_VISIBLE * FPS)); // dilute the path over time
             line(
@@ -91,6 +90,13 @@ class Renderer {
         text('ax: ' + vehicle.gyro.a.x.toFixed(2), 150, 10)
         text('ay: ' + vehicle.gyro.a.y.toFixed(2), 150, 30)
         text('α: ' + vehicle.gyro.α.toFixed(2), 150, 50)
+    }
+
+    static renderSource(source) {
+        fill(255);
+        circle(source.r.x * PIXEL_SIZE, source.r.y * PIXEL_SIZE, 20);
+        fill(0);
+        text(source.intensity, source.r.x * PIXEL_SIZE, source.r.y * PIXEL_SIZE);
     }
 
     /**

@@ -25,21 +25,29 @@
     </div>
     <div class="menu-item" id="actions">
       <h3>Actions</h3>
-      <select id="vehicle-select">
-        <option value="vehicle1">Vehicle 1</option>
-        <option value="vehicle2a">Vehicle 2a: Coward</option>
-        <option value="vehicle2b">Vehicle 2b: Aggressive</option>
-      </select>
-      <button id="add-vehicle-button">Add Vehicle</button>
+      <div>
+        <select id="vehicle-select">
+          <option value="vehicle1">Vehicle 1</option>
+          <option value="vehicle2a">Vehicle 2a: Coward</option>
+          <option value="vehicle2b">Vehicle 2b: Aggressive</option>
+        </select>
+        <button id="add-vehicle-button">Add Vehicle</button>
+      </div>
+      <div>
+        <label for="source-intensity-input">Intensity:</label>
+        <input id="source-intensity-input" type="number" value="500" min="0" max="1000">
+        <button id="add-source-button">Add Source</button>
+        <button id="remove-source-button">Remove Source</button>
+      </div>
     </div>
   </div>
   <script src="js/config.js"></script>
-  <script src="js/util.js"></script>
   <script src="js/modules/Vector.js"></script>
   <script src="js/modules/Renderer.js"></script>
   <script src="js/modules/Universe.js"></script>
   <script src="js/modules/Vehicle.js"></script>
   <script src="js/modules/Gyro.js"></script>
+  <script src="js/modules/Source.js"></script>
   <script src="js/modules/Components/Component.js"></script>
   <script src="js/modules/Components/Sensor.js"></script>
   <script src="js/modules/Components/MotorController.js"></script>

@@ -14,6 +14,10 @@ class Vehicle {
         this.speeds = [];
     }
 
+    copy() {
+        return Vehicle(this.gyro, this.sensors, this.motorControllers, this.motors);
+    }
+
     /**
      * Advances the vehicle's position and rotation by a small time step
      * @param {number} dt - The amount of time to advance the vehicle by
@@ -31,11 +35,10 @@ class Vehicle {
     move(dt) {
         let netForce = 0;
 
-        for (i = 0; i < this.motors.length; i++) {
+        for (let i = 0; i < this.motors.length; i++) {
             let motor = this.motors[i];
             netForce += motor.getOutput();
         }
-
 
         // find the velocity vector's theta
         // create new friction force directed at theta + pi
@@ -48,11 +51,9 @@ class Vehicle {
         let yFriction = frictionMagnitude * Math.sin(frictionTheta);
 
 
-
-
         // we're treating friction as both the max static friction
-        // and the kinetic friction, perhaps we can add mu_k and mu_s separatley
-        // or we could even add different terrtains with diffeerent mu_k and mu_s
+        // and the kinetic friction, perhaps we can add mu_k and mu_s separately
+        // or we could even add different terrains with different mu_k and mu_s
         // let forceDirection = -1 * Math.sign(netForce);
         // let forceVector = forceDirection * friction
         // let netForceWithFriction = netForce + forceVector;
@@ -103,7 +104,7 @@ class Vehicle {
         // find the torque of the motor
         this.gyro.α = 0
 
-        for (i = 0; i < this.motors.length; i++) {
+        for (let i = 0; i < this.motors.length; i++) {
             let motor = this.motors[i];
             let dist = Math.sqrt(Math.pow(motor.offset.x, 2), Math.pow(motor.offset.y, 2));
             let theta = Math.atan(-motor.offset.y / Math.abs(motor.offset.x)); // angle of elevation of the motor from the x-axis
@@ -112,15 +113,15 @@ class Vehicle {
             // if the vehicle is stationary there's no friction
             if (this.gyro.ω < 0.1) {
                 motorForce = motorForce;
-                // if friction is more than the net force, the vehicle doesnt move
+                // if friction is more than the net force, the vehicle doesn't move
             } else if (frictionMagnitude > motorForce) {
                 motorForce = 0;
-                // otherwise, vectorsum friction and net force
+                // otherwise, vector sum friction and net force
             } else {
-                motorForce -= frictionMagnitude / this.motors.length;
+                motorForce -= (VEHICLE_SIZE/2 * frictionMagnitude)/MOMENT_OF_INERTIA
             }
 
-            let τ = -100 * motorForce * dist * Math.sin(theta); // τ = F r sin(θ)
+            let τ = -10 * motorForce * dist * Math.sin(theta); // τ = F r sin(θ)
 
             this.gyro.α += MOMENT_OF_INERTIA * τ * dt; // let moment of inertia be 1 so torque = angular accel
         }

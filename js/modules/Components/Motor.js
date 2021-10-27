@@ -14,7 +14,7 @@ class Motor extends Component {
         for (let i = 0; i < this.inputs.length; i++) {
             sum += this.inputs[i].getOutput();
         }
-        return Math.max(0, sum);
+        return Math.min(Math.max(0, sum), 300);
     }
 
 }
