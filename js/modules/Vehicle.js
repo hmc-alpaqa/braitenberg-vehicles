@@ -3,11 +3,12 @@
  * by adding a specific configuration of components to this blueprint.
  */
 class Vehicle {
-    constructor(gyro, sensors = [], motorControllers = [], motors = []) {
+    constructor(gyro, sensors = [], motorControllers = [], motors = [], inhibitors = []) {
         this.gyro = gyro;
         this.sensors = sensors;
         this.motorControllers = motorControllers;
         this.motors = motors;
+        this.inhibitors = inhibitors;
 
         // used for drawing path of vehicle
         this.path = [];
@@ -15,7 +16,29 @@ class Vehicle {
     }
 
     copy() {
-        return Vehicle(this.gyro, this.sensors, this.motorControllers, this.motors);
+        let copiedComponents = new WeakMap();
+        let sensors = [];
+        let motorControllers = [];
+        let motors = [];
+        copiedComponents.set(this.gyro, this.gyro.copy());
+        for (let i = 0; i < this.getAllComponents().length; i++) {
+            let component = this.getAllComponents()[i];
+            copiedComponents.set(component, component.memoizedCopy(copiedComponents));
+            let c = copiedComponents.get(component)
+            let className = component.constructor.name;
+            switch (className) {
+                case "Sensor":
+                    sensors.push(c);
+                    break;
+                case "MotorController":
+                    motorControllers.push(c);
+                    break;
+                case "Motor":
+                    motors.push(c);
+                    break;
+            }
+        }
+        return new Vehicle(copiedComponents.get(this.gyro), sensors, motorControllers, motors);
     }
 
     /**
@@ -84,12 +107,14 @@ class Vehicle {
         this.gyro.r.x += dt * this.gyro.v.x;
         this.gyro.r.y += dt * this.gyro.v.y;
 
-        if (this.path.length > SECONDS_PATH_VISIBLE * FPS) {
+        if (this.path.length > SECONDS_PATH_VISIBLE * FPS / FREQUENCY_OF_SENSOR_UPDATES) {
             this.path.shift();
             this.speeds.shift();
         }
-        this.path.push(this.gyro.r.copy());
-        this.speeds.push(this.gyro.v.copy());
+        if (frameCount % FREQUENCY_OF_SENSOR_UPDATES == 0) {
+            this.path.push(this.gyro.r.copy());
+            this.speeds.push(this.gyro.v.copy());
+        }
     }
 
     /**
@@ -141,5 +166,9 @@ class Vehicle {
 
     addMotor(motor) {
         this.motors.push(motor);
+    }
+
+    getAllComponents() {
+        return [].concat(this.motors, this.sensors, this.motorControllers, this.inhibitors);
     }
 }

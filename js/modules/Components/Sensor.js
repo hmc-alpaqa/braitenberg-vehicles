@@ -27,10 +27,10 @@ class Sensor extends Component {
             return copiedComponents[this];
         } else {
             if (!this.gyro in copiedComponents) {
-                copiedComponents[this.gyro] = this.gyro.copy();
+                copiedComponents.set(this.gyro, this.gyro.copy());
             }
-            let newCopy = new Sensor(copiedComponents[this.gyro], this.offset.copy());
-            copiedComponents[this] = newCopy;
+            let newCopy = new Sensor(copiedComponents.get(this.gyro), this.offset.copy());
+            copiedComponents.set(this, newCopy);
             return newCopy;
         }
     }

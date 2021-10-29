@@ -72,7 +72,7 @@ function mouseClicked() {
                     vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
                     break;
             }
-            u.addVehicle(vehicle);
+            u.addVehicle(vehicle.copy());
         }
     }
 }

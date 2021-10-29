@@ -22,10 +22,10 @@ class Motor extends Component {
             return copiedComponents[this];
         } else {
             if (!this.gyro in copiedComponents) {
-                copiedComponents[this.gyro] = this.gyro.copy();
+                copiedComponents.set(this.gyro, this.gyro.copy());
             }
-            let newCopy = new Motor(copiedComponents[this.gyro], this.offset.copy(), this.inputs.map(input => input.copy(copiedComponents)));
-            copiedComponents[this] = newCopy;
+            let newCopy = new Motor(copiedComponents.get(this.gyro), this.offset.copy(), this.inputs.map(input => input.memoizedCopy(copiedComponents)));
+            copiedComponents.set(this, newCopy);
             return newCopy;
         }
     }
