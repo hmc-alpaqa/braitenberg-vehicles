@@ -8,7 +8,7 @@ function setup() {
     // each sensor, controller, motor takes the gyro as a parameter to construct
     // Vehicle object contains gyro, sensors, controllers, motors
     u = new Universe();
-    addingVehicle = Vehicles.VEHICLE1;
+    addingVehicle = Vehicles.NONE;
     addingSource = false;
     removingSource = false;
     sourceIntensity = 100;
@@ -17,6 +17,8 @@ function setup() {
     pg = createGraphics(MAP_SIZE, MAP_SIZE);
     pg.background(220);
     pg.noStroke();
+
+    θ = 0;
 }
 
 function draw() {
@@ -44,6 +46,33 @@ function draw() {
             vehicle.step(1 / FPS);
         }
     }
+
+    if (addingVehicle) {
+        switch (addingVehicle) {
+            case Vehicles.VEHICLE1:
+                vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                Renderer.renderVehicle(vehicle);
+                break;
+            case Vehicles.VEHICLE2A:
+                vehicle = Vehicle2a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                Renderer.renderVehicle(vehicle);
+                break;
+            case Vehicles.VEHICLE2B:
+                vehicle = Vehicle2b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                Renderer.renderVehicle(vehicle);
+                break;
+        }
+    }
+
+    if (keyIsPressed && (keyCode === RIGHT_ARROW)) {
+        θ += 0.05;
+    } else if (keyIsPressed && (keyCode === LEFT_ARROW)) {
+        θ -= 0.05;
+    }
+}
+
+function mouseWheel(event) {
+    θ += event.delta/100;
 }
 
 function mouseClicked() {
@@ -62,14 +91,16 @@ function mouseClicked() {
             }
         } else {
             switch (addingVehicle) {
+                case Vehicles.NONE:
+                    return;
                 case Vehicles.VEHICLE1:
-                    vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                    vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                     break;
                 case Vehicles.VEHICLE2A:
-                    vehicle = Coward(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                    vehicle = Vehicle2a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                     break;
                 case Vehicles.VEHICLE2B:
-                    vehicle = Aggressive(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+                    vehicle = Vehicle2b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                     break;
             }
             u.addVehicle(vehicle.copy());
