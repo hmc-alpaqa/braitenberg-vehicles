@@ -14,7 +14,7 @@ class Motor extends Component {
         for (let i = 0; i < this.inputs.length; i++) {
             sum += this.inputs[i].getOutput();
         }
-        return Math.min(Math.max(0, sum), 300);
+        return Math.min(Math.max(0, sum), 300); // caps min speed at 0 and max at 300
     }
 
 }
