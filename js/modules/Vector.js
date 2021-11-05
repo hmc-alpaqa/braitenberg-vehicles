@@ -40,4 +40,12 @@ class Vector {
     copy() {
         return new Vector(this.x, this.y);
     }
+
+    add(vector) {
+        return new Vector(this.x + vector.x, this.y + vector.y);
+    }
+
+    subtract(vector) {
+        return new Vector(this.x - vector.x, this.y - vector.y);
+    }
 }
