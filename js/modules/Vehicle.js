@@ -24,7 +24,6 @@ class Vehicle {
      */
     step(dt) {
         this.move(dt);
-        this.rotate(dt);
     }
 
     /**
@@ -33,56 +32,29 @@ class Vehicle {
      * @param {Number} dt - The amount of time to step the vehicle by
      */
     move(dt) {
-        let netForce = 0;
-
-        for (let i = 0; i < this.motors.length; i++) {
-            let motor = this.motors[i];
-            netForce += motor.getOutput();
+        if (this.motors.length === 1) {
+            let step = this.motors[0].getOutput() * dt;
+            this.gyro.r = this.gyro.r.add(new Vector(step * Math.cos(this.gyro.θ), step * Math.sin(this.gyro.θ)));
         }
+        else if (this.motors.length === 2) {
+            // assume that there are only two motors and the motors both face parallel to the robot body
+            let motorPos1 = this.motors[0].getR();
+            let motorPos2 = this.motors[1].getR();
+            let step1 = this.motors[0].getOutput() * dt;
+            let step2 = this.motors[1].getOutput() * dt;
+            let stepVector1 = new Vector(step1 * Math.cos(this.gyro.θ), step1 * Math.sin(this.gyro.θ))
+            let stepVector2 = new Vector(step2 * Math.cos(this.gyro.θ), step2 * Math.sin(this.gyro.θ))
+            let motorFut1 = motorPos1.add(stepVector1); // future position of the motors
+            let motorFut2 = motorPos2.add(stepVector2);
 
-        // find the velocity vector's theta
-        // create new friction force directed at theta + pi
-        // set magnitude to force intensity:
-        // resolve vector to x, y forces and add to net force
-        // max netforce, 0
-        let vTheta = Math.atan2(this.gyro.v.y, this.gyro.v.x);
-        let frictionTheta = vTheta + Math.PI;
-        let xFriction = frictionMagnitude * Math.cos(frictionTheta);
-        let yFriction = frictionMagnitude * Math.sin(frictionTheta);
-
-
-        // we're treating friction as both the max static friction
-        // and the kinetic friction, perhaps we can add mu_k and mu_s separately
-        // or we could even add different terrains with different mu_k and mu_s
-        // let forceDirection = -1 * Math.sign(netForce);
-        // let forceVector = forceDirection * friction
-        // let netForceWithFriction = netForce + forceVector;
-        // if the vehicle is stationary there's no friction
-
-        let fx = Math.cos(-this.gyro.θ) * netForce;
-        let fy = Math.sin(-this.gyro.θ) * netForce;
-
-        if (Math.abs(this.gyro.v.getMagnitude()) < 1) {
-            if (frictionMagnitude > netForce) {
-                fx = 0;
-                fy = 0;
-                this.gyro.v.x = 0;
-                this.gyro.v.y = 0;
-            }
-        } else {
-            fx += xFriction;
-            fy += yFriction;
+            let angleOfRotation = angle(motorPos1, motorPos2, motorFut1, motorFut2)
+            let midpoint = midPoint(motorPos1, motorPos2);
+            let midpointOffset = this.gyro.r.subtract(midpoint);
+            let pt = perpendicular(motorPos1, motorPos2, midpoint);
+            let newMidpoint = intersection(motorFut1, motorFut2, midpoint, pt);
+            this.gyro.r = newMidpoint.add(midpointOffset)
+            this.gyro.θ += angleOfRotation;
         }
-
-        // let mass be 1 so that force = acceleration
-        this.gyro.a.x = fx;
-        this.gyro.a.y = fy;
-
-        this.gyro.v.x += dt * this.gyro.a.x;
-        this.gyro.v.y += dt * this.gyro.a.y;
-
-        this.gyro.r.x += dt * this.gyro.v.x;
-        this.gyro.r.y += dt * this.gyro.v.y;
 
         if (this.path.length > SECONDS_PATH_VISIBLE * FPS) {
             this.path.shift();
