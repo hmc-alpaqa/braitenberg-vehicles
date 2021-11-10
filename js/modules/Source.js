@@ -5,7 +5,7 @@ class Source {
     }
 
     getIntensity(x, y) {
-        let dist = (new Vector(x - this.r.x, y - this.r.y)).getMagnitude();
+        let dist = (new Vector(this.r.x - x, this.r.y - y)).getMagnitude();
         return this.intensity / Math.pow(dist, 2);
     }
 }
