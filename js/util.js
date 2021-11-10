@@ -3,6 +3,14 @@ function intersection(V1, V2, W1, W2) {
     var mV = (V2.y - V1.y) / (V2.x - V1.x);
     var mW = (W2.y - W1.y) / (W2.x - W1.x);
 
+    if (mV == Infinity) {
+        mV = Math.pow(2, 16);
+    }
+
+    if (mW == Infinity) {
+        mW = Math.pow(2, 16);
+    }
+
     var x = (mV * V1.x - V1.y - mW * W1.x + W1.y) / (mV - mW);
     var y = mV * (x - V1.x) + V1.y;
 
