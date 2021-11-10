@@ -48,4 +48,8 @@ class Vector {
     subtract(vector) {
         return new Vector(this.x - vector.x, this.y - vector.y);
     }
+
+    multiply(scalar) {
+        return new Vector(this.x * scalar, this.y * scalar);
+    }
 }
