@@ -61,6 +61,9 @@ function draw() {
                 vehicle = Vehicle2b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
                 break;
+            case Vehicles.VEHICLE3A:
+                vehicle = Vehicle3a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                Renderer.renderVehicle(vehicle);
         }
     }
 
@@ -102,6 +105,8 @@ function mouseClicked() {
                 case Vehicles.VEHICLE2B:
                     vehicle = Vehicle2b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                     break;
+                case Vehicles.VEHICLE3A:
+                    vehicle = Vehicle3a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
             }
             u.addVehicle(vehicle);
         }
