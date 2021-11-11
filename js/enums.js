@@ -4,4 +4,5 @@ const Vehicles = {
     VEHICLE2A: "vehicle2a",
     VEHICLE2B: "vehicle2b",
     VEHICLE2C: "vehicle2c",
+    VEHICLE3A: "vehicle3a",
 }
