@@ -1,4 +1,4 @@
-class MotorController extends Component {
+class Inhibitor extends Component {
     constructor(gyro, offset, inputs = [], a, b) {
         super(gyro, offset);
         this.inputs = inputs;
@@ -11,11 +11,15 @@ class MotorController extends Component {
         return this
     }
 
-    calculateOutput() {
+    getOutput() {
         let sum = 0
         for (let input of this.inputs) {
             sum += input.getOutput();
         }
-        return a * sum + b; // the motors should never produce negative force
+        // the motors should never produce negative force
+        if (sum > this.b) {
+            sum = this.b;
+        }
+        return this.a * sum + this.b;
     }
 }
