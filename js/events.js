@@ -24,6 +24,7 @@ vehicleSelect.addEventListener("change", () => {
 ////////// VELOCITY SLIDER //////////
 velocitySlider.addEventListener("input", () => {
     velocityLabel.innerHTML = `Starting Velocity: ${velocitySlider.value}`;
+    vehicle3StartingVelocity = velocitySlider.value;
 })
 
 ////////// ADD VEHICLE BUTTON //////////

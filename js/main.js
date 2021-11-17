@@ -11,6 +11,7 @@ function setup() {
     addingVehicle = Vehicles.NONE;
     addingSource = false;
     removingSource = false;
+    vehicle3StartingVelocity = 250;
     sourceIntensity = 100;
     updateFriction(document.getElementById("friction-slider").value);
 
@@ -142,7 +143,8 @@ function resetUniverse() {
     u.sources = [];
     renderers = [];
     simulationPaused = true;
-    u.stimuli = []
+    u.stimuli = [];
+    vehicle3StartingVelocity = 250;
     for (let i = 0; i < MAP_RESOLUTION; i++) {
         let row = []
         for (let j = 0; j < MAP_RESOLUTION; j++) {
