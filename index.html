@@ -26,14 +26,20 @@
     <div class="menu-item" id="actions">
       <h3>Actions</h3>
       <div>
-        <select id="vehicle-select">
-          <option value="vehicle1">Vehicle 1</option>
-          <option value="vehicle2a">Vehicle 2a: Coward</option>
-          <option value="vehicle2b">Vehicle 2b: Aggressive</option>
-          <option value="vehicle2c">Vehicle 2c: Luxurious Vehicle 1</option>
-          <option value="vehicle3a">Vehicle 3a: Love</option>
-        </select>
-        <button id="add-vehicle-button">Add Vehicle</button>
+        <div>
+          <select id="vehicle-select">
+            <option value="vehicle1">Vehicle 1</option>
+            <option value="vehicle2a">Vehicle 2a: Coward</option>
+            <option value="vehicle2b">Vehicle 2b: Aggressive</option>
+            <option value="vehicle2c">Vehicle 2c: Luxurious Vehicle 1</option>
+            <option value="vehicle3a">Vehicle 3a: Love</option>
+          </select>
+          <button id="add-vehicle-button">Add Vehicle</button>
+        </div>
+        <div style="display: none" id="starting-velocity">
+          <input type="range" id="velocity-slider" value="5" min="0" max="10" step="1">
+          <label id="velocity-label" for="velocity-slider">Starting Velocity: 5</label>
+        </div>
       </div>
       <div>
         <label for="source-intensity-input">Intensity:</label>
