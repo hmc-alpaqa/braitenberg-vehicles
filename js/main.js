@@ -144,7 +144,6 @@ function resetUniverse() {
     renderers = [];
     simulationPaused = true;
     u.stimuli = [];
-    vehicle3StartingVelocity = 250;
     for (let i = 0; i < MAP_RESOLUTION; i++) {
         let row = []
         for (let j = 0; j < MAP_RESOLUTION; j++) {
