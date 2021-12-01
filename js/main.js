@@ -12,7 +12,6 @@ function setup() {
     addingSource = false;
     removingSource = false;
     sourceIntensity = 100;
-    updateFriction(document.getElementById("friction-slider").value);
 
     pg = createGraphics(MAP_SIZE, MAP_SIZE);
     pg.background(220);
