@@ -20,6 +20,12 @@ vehicleSelect.addEventListener("change", () => {
     } else {
         startingVelocity.style.display = "none";
     }
+
+    if (vehicleSelect.value == Vehicles.VEHICLE4A) {
+        velocityFunctionSelect.style.display = "block";
+    } else {
+        velocityFunctionSelect.style.display = "none";
+    }
 })
 
 ////////// VELOCITY SLIDER //////////
