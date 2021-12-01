@@ -30,13 +30,13 @@ class Renderer {
     static renderSensors(vehicle) {
         for (let sensor of vehicle.sensors) {
             stroke(0);
+            // the sensor consists of a line and an arc
             Renderer.renderLine(
                 sensor.getR().x * PIXEL_SIZE - (SENSOR_SIZE * Math.cos(vehicle.gyro.θ)) / 2,
                 sensor.getR().y * PIXEL_SIZE - (SENSOR_SIZE * Math.sin(vehicle.gyro.θ)) / 2,
                 SENSOR_SIZE,
                 vehicle.gyro.θ
             );
-            // have to convert the vehicle angle to radians for the p5js arc function
             Renderer.renderArc(
                 sensor.getR().x * PIXEL_SIZE + SENSOR_SIZE * Math.cos(vehicle.gyro.θ),
                 sensor.getR().y * PIXEL_SIZE + SENSOR_SIZE * Math.sin(vehicle.gyro.θ),
@@ -108,6 +108,18 @@ class Renderer {
         text(source.intensity, source.r.x * PIXEL_SIZE, source.r.y * PIXEL_SIZE);
     }
 
+    /**
+     * Helper function to render an arc at a given position with a given rotation
+     * this is helpful for rendering the vehicle's sensors an angle
+     * @param {number} xTarget - the x position of the arc
+     * @param {number} yTarget - the y position of the arc
+     * @param {number} w - the width of the arc
+     * @param {number} h - the height of the arc
+     * @param {number} start - the start angle of the arc
+     * @param {number} stop - the end angle of the arc
+     * @param {number} rotation - the rotation of the arc
+     */
+
     static renderArc(xTarget, yTarget, w, h, start, stop, rotation) {
         translate(xTarget, yTarget);
         rotate(rotation);
@@ -116,6 +128,14 @@ class Renderer {
         translate(-xTarget, -yTarget);
     }
 
+    /**
+     * Helper function to render a line at a given position with a given rotation
+     * this is helpful for rendering the vehicle's sensors an angle
+     * @param {number} xTarget - the x position of the line
+     * @param {number} yTarget - the y position of the line
+     * @param {number} length - the length of the line
+     * @param {number} rotation - the rotation of the line
+     */
     static renderLine(xTarget, yTarget, length, rotation) {
         line(xTarget, yTarget, xTarget + length * Math.cos(rotation), yTarget + length * Math.sin(rotation));
     }
