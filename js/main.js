@@ -1,5 +1,6 @@
 function setup() {
-    createCanvas(MAP_SIZE, MAP_SIZE);
+    canvas = createCanvas(MAP_LENGTH, MAP_HEIGHT);
+    canvas.parent("canvas");
     frameRate(FPS);
     ellipseMode(CENTER);
     rectMode(CENTER);
@@ -13,7 +14,7 @@ function setup() {
     removingSource = false;
     sourceIntensity = 100;
 
-    pg = createGraphics(MAP_SIZE, MAP_SIZE);
+    pg = createGraphics(MAP_LENGTH, MAP_HEIGHT);
     pg.background(220);
     pg.noStroke();
 
@@ -23,7 +24,7 @@ function setup() {
 function draw() {
     background(220);
     // draw a square for each cell in stimuli
-    image(pg, 0, 0, MAP_SIZE, MAP_SIZE);
+    image(pg, 0, 0, MAP_LENGTH, MAP_HEIGHT);
     if (u.vehicles.length > 0) {
         let mostRecentVehicle = u.vehicles[u.vehicles.length - 1]
         Renderer.renderData(mostRecentVehicle);
@@ -88,7 +89,7 @@ function mouseWheel(event) {
 
 function mouseClicked() {
     let vehicle;
-    if (mouseX > 0 && mouseY > 0 && mouseX < MAP_SIZE && mouseY < MAP_SIZE) {
+    if (mouseX > 0 && mouseY > 0 && mouseX < MAP_LENGTH && mouseY < MAP_HEIGHT) {
         if (addingSource) {
             u.addSource(new Source(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, sourceIntensity));
             generateTerrain();
@@ -130,15 +131,15 @@ function mouseClicked() {
 
 function generateTerrain() {
     for (let y = 0; y < MAP_RESOLUTION; y++) {
-        for (let x = 0; x < MAP_RESOLUTION; x++) {
+        for (let x = 0; x < MAP_RESOLUTION / ASPECT_RATIO; x++) {
             u.stimuli[y][x] = u.getStimulus(x, y);
         }
     }
 }
 
 function renderTerrain() {
-    for (y = 0; y < u.stimuli.length; y++) {
-        for (x = 0; x < u.stimuli[y].length; x++) {
+    for (let y = 0; y < u.stimuli.length; y++) {
+        for (let x = 0; x < u.stimuli[y].length; x++) {
             pg.fill(255 + 256 * u.stimuli[y][x], 255 - 256 * abs(u.stimuli[y][x]), 190 - 256 * u.stimuli[y][x])
             pg.square(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE);
         }

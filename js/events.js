@@ -86,9 +86,3 @@ resetButton.addEventListener("click", () => {
     }
     resetUniverse();
 });
-
-////////// FRICTION SLIDER //////////
-function updateFriction(value) {
-    frictionMagnitude = parseInt(value);
-    document.querySelector("#friction-label").innerHTML = `Friction μ = ${frictionMagnitude}`;
-}

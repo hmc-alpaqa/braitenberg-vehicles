@@ -6,7 +6,7 @@ class Universe {
         this.stimuli = [];
         for (let i = 0; i < MAP_RESOLUTION; i++) {
             let row = []
-            for (let j = 0; j < MAP_RESOLUTION; j++) {
+            for (let j = 0; j < Math.round(MAP_RESOLUTION / ASPECT_RATIO); j++) {
                 row.push(0);
             }
             this.stimuli.push(row);
@@ -14,7 +14,7 @@ class Universe {
     }
 
     draw() {
-        let pixelSize = MAP_RESOLUTION / MAP_SIZE;
+        let pixelSize = MAP_RESOLUTION / (MAP_LENGTH * MAP_HEIGHT);
         // draw a square for each cell in stimuli
         for (i = 0; i < this.stimuli; i++) {
             for (j = 0; j < this.stimuli[i]; j++) {

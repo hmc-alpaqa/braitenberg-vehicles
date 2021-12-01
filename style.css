@@ -28,12 +28,21 @@ canvas {
   color: white;
 }
 
+.container {
+  display: grid;
+  grid-template-columns: 75% 25%;
+}
+
 .menu-item {
   display: inline-block;
 }
 
+#canvas {
+  grid-column: 1/2;
+}
+
 #menu {
-  display: grid;
+  grid-column: 2/3;
   grid-template-columns: auto auto;
   margin-bottom: 2rem;
 }
