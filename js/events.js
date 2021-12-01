@@ -2,6 +2,9 @@
 let vehicleSelect = document.querySelector("#vehicle-select");
 let addVehicleButton = document.querySelector("#add-vehicle-button");
 let velocityFunctionSelect = document.querySelector("#velocity-function-select");
+let startingVelocity = document.querySelector("#starting-velocity");
+let velocitySlider = document.querySelector("#velocity-slider");
+let velocityLabel = document.querySelector("#velocity-label");
 let addSourceButton = document.querySelector("#add-source-button");
 let removeSourceButton = document.querySelector("#remove-source-button");
 let startStopButton = document.querySelector("#start-stop-button");
@@ -12,6 +15,17 @@ vehicleSelect.addEventListener("change", () => {
     if (addingVehicle != Vehicles.NONE) {
         addingVehicle = vehicleSelect.value;
     }
+    if (vehicleSelect.value == Vehicles.VEHICLE3A) {
+        startingVelocity.style.display = "block";
+    } else {
+        startingVelocity.style.display = "none";
+    }
+})
+
+////////// VELOCITY SLIDER //////////
+velocitySlider.addEventListener("change", () => {
+    velocityLabel.innerHTML = `Starting Velocity: ${velocitySlider.value}`;
+    vehicle3StartingVelocity = parseInt(velocitySlider.value);
 })
 
 ////////// ADD VEHICLE BUTTON //////////

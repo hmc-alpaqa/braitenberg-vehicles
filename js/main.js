@@ -12,6 +12,7 @@ function setup() {
     addingVehicle = Vehicles.NONE;
     addingSource = false;
     removingSource = false;
+    vehicle3StartingVelocity = 250;
     sourceIntensity = 100;
     updateFriction(document.getElementById("friction-slider").value);
 
@@ -69,6 +70,11 @@ function draw() {
             case Vehicles.VEHICLE3A:
                 vehicle = Vehicle3a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
+                break;
+            case Vehicles.VEHICLE3B:
+                vehicle = Vehicle3b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                Renderer.renderVehicle(vehicle);
+                break;
         }
     }
 
@@ -116,6 +122,9 @@ function mouseClicked() {
                 case Vehicles.VEHICLE3A:
                     vehicle = Vehicle3a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                     break;
+                case Vehicles.VEHICLE3B:
+                    vehicle = Vehicle3b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                    break;
                 case Vehicles.VEHICLE4A:
                     vehicle = Vehicle4a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                     break;
@@ -147,7 +156,7 @@ function resetUniverse() {
     u.sources = [];
     renderers = [];
     simulationPaused = true;
-    u.stimuli = []
+    u.stimuli = [];
     for (let i = 0; i < MAP_RESOLUTION; i++) {
         let row = []
         for (let j = 0; j < MAP_RESOLUTION; j++) {

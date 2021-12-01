@@ -1,9 +1,9 @@
 class Inhibitor extends Component {
-    constructor(gyro, offset, inputs = [], a, b) {
+    constructor(gyro, offset, inputs = [], multiplier, startingVelocity) {
         super(gyro, offset);
         this.inputs = inputs;
-        this.a = a;
-        this.b = b;
+        this.multiplier = multiplier;
+        this.startingVelocity = startingVelocity;
     }
 
     addSensor(sensor) {
@@ -17,9 +17,9 @@ class Inhibitor extends Component {
             sum += input.getOutput();
         }
         // the motors should never produce negative force
-        if (sum > this.b) {
-            sum = this.b;
+        if (sum > this.startingVelocity) {
+            sum = this.startingVelocity;
         }
-        return this.a * sum + this.b;
+        return this.multiplier * sum + this.startingVelocity;
     }
 }
