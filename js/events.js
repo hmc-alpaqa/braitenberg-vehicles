@@ -15,7 +15,7 @@ vehicleSelect.addEventListener("change", () => {
     if (addingVehicle != Vehicles.NONE) {
         addingVehicle = vehicleSelect.value;
     }
-    if (vehicleSelect.value == Vehicles.VEHICLE3A) {
+    if (vehicleSelect.value == Vehicles.VEHICLE3A || vehicleSelect.value == Vehicles.VEHICLE3B) {
         startingVelocity.style.display = "block";
     } else {
         startingVelocity.style.display = "none";
