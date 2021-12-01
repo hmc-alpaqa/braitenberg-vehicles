@@ -31,13 +31,20 @@ addVehicleButton.addEventListener("click", () => {
 
 ////////// VELOCITY FUNCTION SELECT //////////
 velocityFunctionSelect.addEventListener("change", () => {
+    console.log(velocityFunctionSelect.value == VelocityFunctions.SQRT);
     switch (velocityFunctionSelect.value) {
         case VelocityFunctions.SINUSOIDAL:
             velocityFunction = x => 100 * (Math.sin(x) + 1);
+            break;
         case VelocityFunctions.QUADRATIC:
             velocityFunction = x => Math.pow(x, 2);
+            break;
         case VelocityFunctions.SQRT:
             velocityFunction = x => Math.pow(x, 0.5);
+            break;
+        case VelocityFunctions.LOG:
+            velocityFunction = x => Math.log(x+1);
+            break;
     }
 });
 

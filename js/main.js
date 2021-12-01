@@ -115,8 +115,10 @@ function mouseClicked() {
                     break;
                 case Vehicles.VEHICLE3A:
                     vehicle = Vehicle3a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                    break;
                 case Vehicles.VEHICLE4A:
                     vehicle = Vehicle4a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                    break;
             }
             u.addVehicle(vehicle);
         }

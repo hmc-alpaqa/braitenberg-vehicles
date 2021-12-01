@@ -12,4 +12,5 @@ const VelocityFunctions = {
     SINUSOIDAL: "sinusoidal",
     QUADRATIC: "quadratic",
     SQRT: "sqrt",
+    LOG: "log",
 }
