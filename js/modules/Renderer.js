@@ -28,14 +28,23 @@ class Renderer {
     }
 
     static renderSensors(vehicle) {
-        for (let i = 0; i < vehicle.sensors.length; i++) {
-            fill(0, 225, 0);
-            Renderer.renderRect(
-                vehicle.sensors[i].getR().x * PIXEL_SIZE,
-                vehicle.sensors[i].getR().y * PIXEL_SIZE,
-                SENSOR_SIZE,
+        for (let sensor of vehicle.sensors) {
+            stroke(0);
+            Renderer.renderLine(
+                sensor.getR().x * PIXEL_SIZE - (SENSOR_SIZE * Math.cos(vehicle.gyro.θ)) / 2,
+                sensor.getR().y * PIXEL_SIZE - (SENSOR_SIZE * Math.sin(vehicle.gyro.θ)) / 2,
                 SENSOR_SIZE,
                 vehicle.gyro.θ
+            );
+            // have to convert the vehicle angle to radians for the p5js arc function
+            Renderer.renderArc(
+                sensor.getR().x * PIXEL_SIZE + SENSOR_SIZE * Math.cos(vehicle.gyro.θ),
+                sensor.getR().y * PIXEL_SIZE + SENSOR_SIZE * Math.sin(vehicle.gyro.θ),
+                SENSOR_SIZE,
+                0.5 * SENSOR_SIZE,
+                Math.PI / 6,
+                -1 * Math.PI / 6,
+                vehicle.gyro.θ,
             )
         }
     }
@@ -99,15 +108,28 @@ class Renderer {
         text(source.intensity, source.r.x * PIXEL_SIZE, source.r.y * PIXEL_SIZE);
     }
 
+    static renderArc(xTarget, yTarget, w, h, start, stop, rotation) {
+        translate(xTarget, yTarget);
+        rotate(rotation);
+        arc(0, 0, w, h, start, stop);
+        rotate(-rotation);
+        translate(-xTarget, -yTarget);
+    }
+
+    static renderLine(xTarget, yTarget, length, rotation) {
+        line(xTarget, yTarget, xTarget + length * Math.cos(rotation), yTarget + length * Math.sin(rotation));
+    }
+
     /**
      * Helper function to render a rectangle at a given position with a given rotation
-     * this is helpful for rendering the vehicle and its sensors and motors at an angle
+     * this is helpful for rendering the vehicle and its motors at an angle
      * @param {number} xTarget - the x position of the rectangle
      * @param {number} yTarget - the y position of the rectangle
      * @param {number} w - the width of the rectangle
      * @param {number} h - the height of the rectangle
      * @param {number} rotation - the rotation of the rectangle
      */
+
     static renderRect(xTarget, yTarget, w, h, rotation) {
         translate(xTarget, yTarget);
         rotate(rotation);
