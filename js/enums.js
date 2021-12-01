@@ -1,9 +1,9 @@
 const Vehicles = {
     NONE: "none",
-    VEHICLE1: "vehicle1",
-    VEHICLE2A: "vehicle2a",
-    VEHICLE2B: "vehicle2b",
-    VEHICLE2C: "vehicle2c",
-    VEHICLE3A: "vehicle3a",
-    VEHICLE3B: "vehicle3b",
+    VEHICLE1: "1",
+    VEHICLE2A: "2a",
+    VEHICLE2B: "2b",
+    VEHICLE2C: "2c",
+    VEHICLE3A: "3a",
+    VEHICLE3B: "3b",
 }
