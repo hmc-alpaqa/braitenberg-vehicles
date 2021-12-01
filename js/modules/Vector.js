@@ -26,10 +26,11 @@ class Vector {
      * @returns {Number} the angle of elevation of this vector in radians
      */
     getTheta() {
-        if (Math.sign(this.x) == Math.sign(this.y)) {
-            return Math.atan2(this.x, this.y)
+        let theta = Math.atan2(this.y, this.x);
+        if (theta >= 0) {
+            return theta
         } else {
-            return Math.PI + Math.atan2(this.x, this.y)
+            return 2 * Math.PI + Math.atan2(this.y, this.x)
         }
     }
 

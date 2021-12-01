@@ -21,7 +21,7 @@ class Component {
 
         return new Vector(
             this.gyro.r.x + xEffective,
-            this.gyro.r.y + yEffective,
+            this.gyro.r.y - yEffective,
         )
     }
 }

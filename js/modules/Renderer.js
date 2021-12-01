@@ -110,10 +110,9 @@ class Renderer {
      */
     static renderRect(xTarget, yTarget, w, h, rotation) {
         translate(xTarget, yTarget);
-        rotate(rotation);
-        rect(0, 0, w, h);
         rotate(-rotation);
+        rect(0, 0, w, h);
+        rotate(rotation);
         translate(-xTarget, -yTarget);
     }
-
 }
