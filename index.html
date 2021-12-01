@@ -34,12 +34,21 @@
             <option value="vehicle2c">Vehicle 2c: Luxurious Vehicle 1</option>
             <option value="vehicle3a">Vehicle 3a: Love</option>
             <option value="vehicle3b">Vehicle 3b: Explorer</option>
+            <option value="vehicle4a">Vehicle 4a: Instincts</option>
           </select>
           <button id="add-vehicle-button">Add Vehicle</button>
         </div>
         <div style="display: none" id="starting-velocity">
           <input type="range" id="velocity-slider" value="250" min="0" max="500" step="1">
           <label id="velocity-label" for="velocity-slider">Starting Velocity: 250</label>
+        </div>
+        <div>
+          <select id="velocity-function-select">
+            <option value="sinusoidal">Sinusoidal</option>
+            <option value="quadratic">Quadratic</option>
+            <option value="sqrt">Square Root</option>
+            <option value="log">Log</option>
+          </select>
         </div>
       </div>
       <div>
@@ -51,6 +60,7 @@
     </div>
   </div>
   <script src="js/config.js"></script>
+  <script src="js/enums.js"></script>
   <script src="js/modules/Vector.js"></script>
   <script src="js/util.js"></script>
   <script src="js/modules/Renderer.js"></script>
@@ -66,7 +76,7 @@
   <script src="js/Vehicles/Vehicle1.js"></script>
   <script src="js/Vehicles/Vehicle2.js"></script>
   <script src="js/Vehicles/Vehicle3.js"></script>
-  <script src="js/enums.js"></script>
+  <script src="js/Vehicles/Vehicle4.js"></script>
   <script src="js/events.js"></script>
   <script src="js/main.js"></script>
 </body>

@@ -1,9 +1,10 @@
 ////////// DOM ELEMENTS //////////
 let vehicleSelect = document.querySelector("#vehicle-select");
 let addVehicleButton = document.querySelector("#add-vehicle-button");
+let velocityFunctionSelect = document.querySelector("#velocity-function-select");
 let startingVelocity = document.querySelector("#starting-velocity");
 let velocitySlider = document.querySelector("#velocity-slider");
-let velocityLabel = document.querySelector("#velocity-label")
+let velocityLabel = document.querySelector("#velocity-label");
 let addSourceButton = document.querySelector("#add-source-button");
 let removeSourceButton = document.querySelector("#remove-source-button");
 let startStopButton = document.querySelector("#start-stop-button");
@@ -39,6 +40,25 @@ addVehicleButton.addEventListener("click", () => {
         addVehicleButton.classList.add("clicked");
         addSourceButton.classList.remove("clicked");
         removeSourceButton.classList.remove("clicked");
+    }
+});
+
+////////// VELOCITY FUNCTION SELECT //////////
+velocityFunctionSelect.addEventListener("change", () => {
+    console.log(velocityFunctionSelect.value == VelocityFunctions.SQRT);
+    switch (velocityFunctionSelect.value) {
+        case VelocityFunctions.SINUSOIDAL:
+            velocityFunction = x => 100 * (Math.sin(x) + 1);
+            break;
+        case VelocityFunctions.QUADRATIC:
+            velocityFunction = x => Math.pow(x, 2);
+            break;
+        case VelocityFunctions.SQRT:
+            velocityFunction = x => Math.pow(x, 0.5);
+            break;
+        case VelocityFunctions.LOG:
+            velocityFunction = x => Math.log(x+1);
+            break;
     }
 });
 

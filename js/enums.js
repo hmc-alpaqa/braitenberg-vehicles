@@ -6,4 +6,12 @@ const Vehicles = {
     VEHICLE2C: "vehicle2c",
     VEHICLE3A: "vehicle3a",
     VEHICLE3B: "vehicle3b",
+    VEHICLE4A: "vehicle4a",
+}
+
+const VelocityFunctions = {
+    SINUSOIDAL: "sinusoidal",
+    QUADRATIC: "quadratic",
+    SQRT: "sqrt",
+    LOG: "log",
 }
