@@ -10,7 +10,8 @@ button {
   border-radius: 0.2rem;
   padding: 0.5rem;
   transition: 0.3s;
-  margin: 10px;
+  margin: 0;
+  display: inline;
 }
 
 button:hover {
@@ -21,6 +22,28 @@ button:hover {
 
 canvas {
   display: block;
+}
+
+select {
+  border: none;
+}
+
+select:focus {
+  outline: none;
+}
+
+.danger-button {
+  background-color: #A6192E;
+}
+
+.danger-button:hover {
+  background-color: #000000;
+  color: white;
+  transition: 0.3s;
+}
+
+h1{
+  margin: auto 0;
 }
 
 .clicked {
@@ -35,10 +58,19 @@ canvas {
 
 .menu-item {
   display: inline-block;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  margin: 0 1rem 1rem 1rem;
+  padding: 1rem;
+  width: 100%;
 }
 
 #canvas {
   grid-column: 1/2;
+}
+
+#controls {
+  background-color: #FFD100;
 }
 
 #menu {
@@ -47,12 +79,14 @@ canvas {
   margin-bottom: 2rem;
 }
 
-#reset-button {
-  background-color: #A6192E;
+#sources {
+  background-color: #007FA3;
 }
 
-#reset-button:hover {
-  background-color: #000000;
-  color: white;
-  transition: 0.3s;
+#vehicles {
+  background-color: #B7BF10;
+}
+
+#vehicle-select {
+  display: inline;
 }

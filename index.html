@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <h1 style="margin-top: 0">Braitenberg Vehicles</h1>
+  <h1>Braitenberg Vehicles</h1>
   <div class="container">
     <div id="canvas">
     </div>
@@ -22,26 +22,27 @@
       <div class="menu-item" id="controls">
         <h3>Controls</h3>
         <button id="start-stop-button">Start</button>
-        <button id="reset-button">Reset</button>
+        <button class="danger-button" id="reset-button">Reset</button>
       </div>
-      <div class="menu-item" id="actions">
-        <h3>Actions</h3>
-      <div class="menu-item">
-          <select id="vehicle-select">
-            <option value="1">Vehicle 1</option>
-            <option value="2a">Vehicle 2a: Coward</option>
-            <option value="2b">Vehicle 2b: Aggressive</option>
-            <option value="2c">Vehicle 2c: Luxurious Vehicle 1</option>
-            <option value="3a">Vehicle 3a: Love</option>
-            <option value="3b">Vehicle 3b: Explorer</option>
-          </select>
-          <button id="add-vehicle-button">Add Vehicle</button>
-        </div>
-        <div>
-          <label for="source-intensity-input">Intensity:</label>
-          <input id="source-intensity-input" type="number" value="500" min="0" max="1000">
+      <div class="menu-item" id="vehicles">
+        <h3>Vehicles</h3>
+        <select id="vehicle-select">
+          <option value="1">Vehicle 1</option>
+          <option value="2a">Vehicle 2a: Coward</option>
+          <option value="2b">Vehicle 2b: Aggressive</option>
+          <option value="2c">Vehicle 2c: Luxurious Vehicle 1</option>
+          <option value="3a">Vehicle 3a: Love</option>
+          <option value="3b">Vehicle 3b: Explorer</option>
+        </select>
+        <button id="add-vehicle-button">Add Vehicle</button>
+      </div>
+      <div class="menu-item" id="sources">
+        <h3>Sources</h3>
+        <label for="source-intensity-input">Intensity:</label>
+        <input id="source-intensity-input" type="number" value="500" min="0" max="1000">
+        <div style="margin-top: 10px">
           <button id="add-source-button">Add Source</button>
-          <button id="remove-source-button">Remove Source</button>
+          <button class="danger-button" id="remove-source-button">Remove Source</button>
         </div>
       </div>
     </div>
