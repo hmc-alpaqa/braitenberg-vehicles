@@ -4,6 +4,10 @@ html, body {
   font-family: "Helvetica Neue";
 }
 
+input:focus, select:focus {
+  outline: none;
+}
+
 button {
   border: none;
   background-color: #EAAA00;
@@ -24,12 +28,12 @@ canvas {
   display: block;
 }
 
-select {
+input {
   border: none;
 }
 
-select:focus {
-  outline: none;
+select {
+  border: none;
 }
 
 .danger-button {
