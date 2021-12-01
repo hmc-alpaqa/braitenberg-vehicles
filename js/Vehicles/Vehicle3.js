@@ -1,6 +1,6 @@
 ////////// LOVE //////////
 function Vehicle3a(u, x, y) {
-    let gyro = new Gyro(u, x, y, θ);
+    let gyro = new Gyro(u, x, y, θ, Vehicles.VEHICLE3A);
     let sensor1 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, -PIXEL_SIZE));
     let sensor2 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, PIXEL_SIZE));
     // wires sensor to same inhibitor
@@ -12,7 +12,7 @@ function Vehicle3a(u, x, y) {
 
 ////////// EXPLORER //////////
 function Vehicle3b(u, x, y) {
-    let gyro = new Gyro(u, x, y, θ);
+    let gyro = new Gyro(u, x, y, θ, Vehicles.VEHICLE3B);
     let sensor1 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, -PIXEL_SIZE));
     let sensor2 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, PIXEL_SIZE));
     // wires sensor to same inhibitor

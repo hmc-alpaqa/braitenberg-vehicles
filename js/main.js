@@ -27,7 +27,7 @@ function draw() {
     image(pg, 0, 0, MAP_SIZE, MAP_SIZE);
     if (u.vehicles.length > 0) {
         let mostRecentVehicle = u.vehicles[u.vehicles.length - 1]
-        Renderer.renderText(mostRecentVehicle);
+        Renderer.renderData(mostRecentVehicle);
         Renderer.drawPath(mostRecentVehicle);
     }
     for (let vehicle of u.vehicles) {

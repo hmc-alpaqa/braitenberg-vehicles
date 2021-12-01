@@ -5,24 +5,22 @@
  * @static 
  */
 class Renderer {
-
-    // static renderAll(vehicle) {
-    //     Renderer.renderVehicle(vehicle);
-    //     Renderer.renderText(vehicle);
-    // }
-
     /**
      * Renders the body of the vehicle at the current position and rotation, then calls
      * helpers to render the vehicle's constituent parts
      * @param {Vehicle} vehicle 
      */
     static renderVehicle(vehicle) {
-        // noStroke()
         fill(225, 225, 225);
-        // render the body of the vehicle so that it is positioned at the center of the gyro
+        // renders the body of the vehicle so that it is positioned at the center of the gyro
         let xTarget = vehicle.gyro.r.x * PIXEL_SIZE;
         let yTarget = vehicle.gyro.r.y * PIXEL_SIZE;
         Renderer.renderRect(xTarget, yTarget, VEHICLE_SIZE, VEHICLE_SIZE, vehicle.gyro.θ)
+        fill(0);
+        textAlign(CENTER);
+        // shh don't question the magic number
+        // renders the label for the vehicle
+        Renderer.renderText(vehicle.gyro.name, xTarget, yTarget + 3, vehicle.gyro.θ);
         Renderer.renderSensors(vehicle);
         Renderer.renderMotors(vehicle);
     }
@@ -90,7 +88,8 @@ class Renderer {
      * both linearly and angularly at the current time
      * @param {Vehicle} vehicle - the vehicle to render the stats of
      */
-    static renderText(vehicle) {
+    static renderData(vehicle) {
+        textAlign(LEFT);
         text('x: ' + vehicle.gyro.r.x.toFixed(2), 10, 10)
         text('y: ' + vehicle.gyro.r.y.toFixed(2), 10, 30)
         text('θ: ' + (vehicle.gyro.θ / 3.14).toFixed(2) + '	π', 10, 50)
@@ -110,8 +109,24 @@ class Renderer {
     }
 
     /**
+     * Helper function to render text at a given position with a given rotation
+     * this is helpful for rendering the vehicle's name at an angle
+     * @param {string} renderedText
+     * @param {number} xTarget - the x position of the text
+     * @param {number} yTarget - the y position of the text
+     * @param {number} rotation - the rotation of the text
+     */
+    static renderText(renderedText, xTarget, yTarget, rotation) {
+        translate(xTarget, yTarget);
+        rotate(rotation);
+        text(renderedText, 0, 0);
+        rotate(-rotation);
+        translate(-xTarget, -yTarget);
+    }
+
+    /**
      * Helper function to render an arc at a given position with a given rotation
-     * this is helpful for rendering the vehicle's sensors an angle
+     * this is helpful for rendering the vehicle's sensors at an angle
      * @param {number} xTarget - the x position of the arc
      * @param {number} yTarget - the y position of the arc
      * @param {number} w - the width of the arc

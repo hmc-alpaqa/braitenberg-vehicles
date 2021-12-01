@@ -1,6 +1,6 @@
 ////////// COWARD //////////
 function Vehicle2a(u, x, y) {
-    let gyro = new Gyro(u, x, y, θ);
+    let gyro = new Gyro(u, x, y, θ, Vehicles.VEHICLE2A);
     let sensor1 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, -PIXEL_SIZE));
     let sensor2 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, PIXEL_SIZE));
     // wires sensor to opposite motor
@@ -12,7 +12,7 @@ function Vehicle2a(u, x, y) {
 
 ////////// AGGRESSIVE //////////
 function Vehicle2b(u, x, y) {
-    let gyro = new Gyro(u, x, y, θ);
+    let gyro = new Gyro(u, x, y, θ, Vehicles.VEHICLE2B);
     let sensor1 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, -PIXEL_SIZE));
     let sensor2 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, PIXEL_SIZE));
     // wires sensor to same motor
@@ -24,7 +24,7 @@ function Vehicle2b(u, x, y) {
 
 ////////// LUXURIOUS VEHICLE 1 //////////
 function Vehicle2c(u, x, y) {
-    let gyro = new Gyro(u, x, y, θ);
+    let gyro = new Gyro(u, x, y, θ, Vehicles.VEHICLE2C);
     let sensor1 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, -PIXEL_SIZE));
     let sensor2 = new Sensor(gyro, new Vector(PIXEL_SIZE / 2, PIXEL_SIZE));
     // wires sensors to both motors
