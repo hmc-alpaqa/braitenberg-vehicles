@@ -37,6 +37,7 @@ class Renderer {
                 SENSOR_SIZE,
                 vehicle.gyro.θ
             );
+            noFill();
             Renderer.renderArc(
                 sensor.getR().x * PIXEL_SIZE + SENSOR_SIZE * Math.cos(vehicle.gyro.θ),
                 sensor.getR().y * PIXEL_SIZE + SENSOR_SIZE * Math.sin(vehicle.gyro.θ),
