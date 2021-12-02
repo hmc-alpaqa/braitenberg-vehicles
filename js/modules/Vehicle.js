@@ -38,10 +38,11 @@ class Vehicle {
         }
         else if (this.motors.length === 2) {
             // assume that there are only two motors and the motors both face parallel to the robot body
+            this.gyro.v = new Vector(this.motors[0].getOutput(), this.motors[1].getOutput())
             let motorPos1 = this.motors[0].getR();
             let motorPos2 = this.motors[1].getR();
-            let step1 = this.motors[0].getOutput() * dt;
-            let step2 = this.motors[1].getOutput() * dt;
+            let step1 = this.gyro.v.x * dt;
+            let step2 = this.gyro.v.y * dt;
             let stepVector1 = new Vector(step1 * Math.cos(this.gyro.θ), step1 * Math.sin(this.gyro.θ))
             let stepVector2 = new Vector(step2 * Math.cos(this.gyro.θ), step2 * Math.sin(this.gyro.θ))
             let motorFut1 = motorPos1.add(stepVector1); // future position of the motors

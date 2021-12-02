@@ -34,6 +34,7 @@ function draw() {
     }
     for (let vehicle of u.vehicles) {
         Renderer.renderVehicle(vehicle);
+        // Renderer.drawPath(vehicle);
         if (vehicle.gyro.r.getMagnitude() > 2048) {
             u.removeVehicle(vehicle);
         }
