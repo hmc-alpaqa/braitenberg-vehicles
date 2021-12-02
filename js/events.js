@@ -1,10 +1,20 @@
 ////////// DOM ELEMENTS //////////
+let doc = document.documentElement;
+let fullscreenButton = document.querySelector("#fullscreen-button");
 let vehicleSelect = document.querySelector("#vehicle-select");
 let addVehicleButton = document.querySelector("#add-vehicle-button");
 let addSourceButton = document.querySelector("#add-source-button");
 let removeSourceButton = document.querySelector("#remove-source-button");
 let startStopButton = document.querySelector("#start-stop-button");
 let resetButton = document.querySelector("#reset-button");
+
+////////// FULLSCREEN //////////
+fullscreenButton.addEventListener("click", () => {
+    doc.requestFullscreen();
+})
+// if (document.fullscreenElement == null) {
+    
+// }
 
 ////////// ADD VEHICLE INPUT //////////
 vehicleSelect.addEventListener("change", () => {
