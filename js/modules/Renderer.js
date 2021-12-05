@@ -22,7 +22,7 @@ class Renderer {
         // render the body of the vehicle so that it is positioned at the center of the gyro
         let xTarget = vehicle.gyro.r.x * PIXEL_SIZE;
         let yTarget = vehicle.gyro.r.y * PIXEL_SIZE;
-        Renderer.renderRect(xTarget, yTarget, VEHICLE_SIZE, VEHICLE_SIZE, vehicle.gyro.θ)
+        Renderer.renderRect(xTarget, yTarget, VEHICLE_SIZE * PIXEL_SIZE, VEHICLE_SIZE * PIXEL_SIZE, vehicle.gyro.θ)
         Renderer.renderSensors(vehicle);
         Renderer.renderMotors(vehicle);
     }
@@ -33,8 +33,8 @@ class Renderer {
             Renderer.renderRect(
                 vehicle.sensors[i].getR().x * PIXEL_SIZE,
                 vehicle.sensors[i].getR().y * PIXEL_SIZE,
-                SENSOR_SIZE,
-                SENSOR_SIZE,
+                SENSOR_SIZE * PIXEL_SIZE,
+                SENSOR_SIZE * PIXEL_SIZE,
                 vehicle.gyro.θ
             )
         }
@@ -46,8 +46,8 @@ class Renderer {
             Renderer.renderRect(
                 vehicle.motors[i].getR().x * PIXEL_SIZE,
                 vehicle.motors[i].getR().y * PIXEL_SIZE,
-                SENSOR_SIZE,
-                SENSOR_SIZE,
+                SENSOR_SIZE * PIXEL_SIZE,
+                SENSOR_SIZE * PIXEL_SIZE,
                 vehicle.gyro.θ
             )
         }
@@ -61,7 +61,7 @@ class Renderer {
      */
     static drawPath(vehicle) {
         for (let i = 1; i < vehicle.path.length; i++) {
-            strokeWeight(vehicle.speeds[i].getMagnitude() / 10); // stroke weight is proportional to velocity
+            strokeWeight(math.max(100, 1000 / vehicle.speeds[i].getMagnitude())); // stroke weight is proportional to velocity
             stroke(0, 0, 0, 255 * (SECONDS_PATH_VISIBLE * FPS + i - vehicle.path.length) / (SECONDS_PATH_VISIBLE * FPS)); // dilute the path over time
             line(
                 vehicle.path[i - 1].x * PIXEL_SIZE,

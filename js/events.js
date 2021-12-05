@@ -5,6 +5,8 @@ let velocityFunctionSelect = document.querySelector("#velocity-function-select")
 let startingVelocity = document.querySelector("#starting-velocity");
 let velocitySlider = document.querySelector("#velocity-slider");
 let velocityLabel = document.querySelector("#velocity-label");
+let zoomSlider = document.querySelector("#zoom-slider");
+let zoomLabel = document.querySelector("#zoom-label");
 let addSourceButton = document.querySelector("#add-source-button");
 let removeSourceButton = document.querySelector("#remove-source-button");
 let startStopButton = document.querySelector("#start-stop-button");
@@ -34,6 +36,12 @@ velocitySlider.addEventListener("change", () => {
     vehicle3StartingVelocity = parseInt(velocitySlider.value);
 })
 
+////////// ZOOM SLIDER //////////
+zoomSlider.addEventListener("input", () => {
+    zoomLabel.innerHTML = `Zoom: ${zoomSlider.value}`;
+    MAP_SIZE = parseInt(zoomSlider.value);
+    PIXEL_SIZE = MAP_SIZE / MAP_RESOLUTION;
+})
 ////////// ADD VEHICLE BUTTON //////////
 addVehicleButton.addEventListener("click", () => {
     if (addingVehicle != Vehicles.NONE) {
@@ -63,7 +71,7 @@ velocityFunctionSelect.addEventListener("change", () => {
             velocityFunction = x => Math.pow(x, 0.5);
             break;
         case VelocityFunctions.LOG:
-            velocityFunction = x => Math.log(x+1);
+            velocityFunction = x => Math.log(x + 1);
             break;
     }
 });
@@ -84,7 +92,7 @@ addSourceButton.addEventListener("click", () => {
     } else {
         alert("Please enter an intensity above 0 and under 1000.");
     }
-    
+
 })
 
 ////////// REMOVE SOURCE BUTTON //////////
