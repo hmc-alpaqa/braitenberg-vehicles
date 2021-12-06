@@ -15,7 +15,7 @@ function setup() {
     sourceIntensity = 100;
 
     pg = createGraphics(MAP_LENGTH, MAP_HEIGHT);
-    pg.background(220);
+    pg.background(120);
     pg.noStroke();
 
     sensorGraphic = createGraphics(SENSOR_SIZE * 2, SENSOR_SIZE)
