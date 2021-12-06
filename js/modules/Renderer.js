@@ -2,41 +2,37 @@ class Renderer {
     static sensorGraphicSetup() {
         sensorGraphic.line(0, SENSOR_SIZE / 2,
             SENSOR_SIZE, SENSOR_SIZE / 2);
-        sensorGraphic.arc(SENSOR_SIZE, SENSOR_SIZE / 2, 
+        sensorGraphic.noFill();
+        sensorGraphic.arc(SENSOR_SIZE * 1.5, SENSOR_SIZE / 2, 
                     SENSOR_SIZE, 0.5 * SENSOR_SIZE,
                     PI / 6, -PI / 6);
     }
 
     static motorGraphicSetup() {
+        motorGraphic.noStroke();
         motorGraphic.fill(0, 0, 225);
-        motorGraphic.rect(MOTOR_SIZE / 2, 
-            MOTOR_SIZE / 2, 
-            MOTOR_SIZE,
-            MOTOR_SIZE);
+        motorGraphic.square(0, 0, MOTOR_SIZE);
     }
 
     static renderVehicle(vehicle) {
-        for (let motor of vehicle.motors) {
-            vehicleGraphic.image(motorGraphic, MOTOR_SIZE / 2, motor.offset.y * PIXEL_SIZE);
-        }
+        vehicleGraphic.noStroke();
+        vehicleGraphic.fill(150, 150, 150);
+        vehicleGraphic.square(MOTOR_SIZE, 0, VEHICLE_SIZE);
+        vehicleGraphic.textAlign(CENTER);
+        vehicleGraphic.text(vehicle.gyro.name, MOTOR_SIZE + VEHICLE_SIZE / 2, VEHICLE_SIZE / 2);
 
-        vehicleGraphic.fill(225, 225, 225);
-        vehicleGraphic.rect(MOTOR_SIZE + VEHICLE_SIZE / 2, VEHICLE_SIZE / 2, VEHICLE_SIZE, VEHICLE_SIZE);
+        for (let motor of vehicle.motors) {
+            vehicleGraphic.image(motorGraphic, 0, motor.offset.x + 0.5 * (VEHICLE_SIZE - MOTOR_SIZE));
+        }
 
         for (let sensor of vehicle.sensors) {
-            vehicleGraphic.image(sensorGraphic, MOTOR_SIZE + VEHICLE_SIZE, sensor.offset.y * PIXEL_SIZE);
+            vehicleGraphic.image(sensorGraphic, MOTOR_SIZE + VEHICLE_SIZE, sensor.offset.x + 0.5 * (VEHICLE_SIZE - MOTOR_SIZE));
         }
-        image(vehicleGraphic, vehicle.gyro.r.x * PIXEL_SIZE - (VEHICLE_SIZE + 2 * SENSOR_SIZE + MOTOR_SIZE) / 2, vehicle.gyro.r.y * PIXEL_SIZE - VEHICLE_SIZE / 2);
-    }
-
-    static rotateVehicle(θ) {
-        let x = vehicle.gyro.r.x * PIXEL_SIZE;
-        let y = vehicle.gyro.r.y * PIXEL_SIZE;
-        translate(x, y);
-        rotate(θ)
-        // vehicle
-        rotate(-θ);
-        translate(-x, -y);
+        translate(vehicle.gyro.r.x * PIXEL_SIZE, vehicle.gyro.r.y * PIXEL_SIZE);
+        rotate(vehicle.gyro.θ);
+        image(vehicleGraphic, vehicle.gyro.r.x * PIXEL_SIZE - MOTOR_SIZE - VEHICLE_SIZE / 2, vehicle.gyro.r.y * PIXEL_SIZE - VEHICLE_SIZE / 2);
+        rotate(-vehicle.gyro.θ);
+        translate(-vehicle.gyro.r.x * PIXEL_SIZE, -vehicle.gyro.r.y * PIXEL_SIZE);
     }
 
     static renderSource(source) {
