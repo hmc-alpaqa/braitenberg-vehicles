@@ -1,4 +1,12 @@
 class Renderer {
+    static graphicsSetup() {
+        sensorGraphic = createGraphics(PIXEL_SIZE * SENSOR_SIZE * 2, PIXEL_SIZE * SENSOR_SIZE);
+        Renderer.sensorGraphicSetup();
+        motorGraphic = createGraphics(PIXEL_SIZE * MOTOR_SIZE, PIXEL_SIZE * MOTOR_SIZE);
+        Renderer.motorGraphicSetup();
+        vehicleGraphic = createGraphics(PIXEL_SIZE * (VEHICLE_SIZE + (2 * SENSOR_SIZE) + MOTOR_SIZE), PIXEL_SIZE * VEHICLE_SIZE);
+    }
+
     static sensorGraphicSetup() {
         sensorGraphic.line(0, PIXEL_SIZE * SENSOR_SIZE / 2,
             PIXEL_SIZE * SENSOR_SIZE, PIXEL_SIZE * SENSOR_SIZE / 2);

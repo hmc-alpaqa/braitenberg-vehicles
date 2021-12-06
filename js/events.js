@@ -83,11 +83,7 @@ zoomSlider.addEventListener("input", () => {
     zoomLabel.innerHTML = `Zoom: ${zoomSlider.value}`;
     MAP_RESOLUTION = parseInt(zoomSlider.value);
     PIXEL_SIZE = MAP_LENGTH / MAP_RESOLUTION;
-    sensorGraphic = createGraphics(PIXEL_SIZE * SENSOR_SIZE * 2, PIXEL_SIZE * SENSOR_SIZE);
-    Renderer.sensorGraphicSetup();
-    motorGraphic = createGraphics(PIXEL_SIZE * MOTOR_SIZE, PIXEL_SIZE * MOTOR_SIZE);
-    Renderer.motorGraphicSetup();
-    vehicleGraphic = createGraphics(PIXEL_SIZE * (VEHICLE_SIZE + (2 * SENSOR_SIZE) + MOTOR_SIZE), PIXEL_SIZE * VEHICLE_SIZE);
+    Renderer.graphicsSetup();
 });
 
 ////////// ADD VEHICLE BUTTON //////////
@@ -175,10 +171,15 @@ startStopButton.addEventListener("click", () => {
 resetButton.addEventListener("click", () => {
     if (!simulationPaused) {
         startStopButton.innerText = "Start";
+        zoomLabel.innerHTML = "Zoom: 100";
         addVehicleButton.classList.remove("clicked");
         addSourceButton.classList.remove("clicked");
         removeSourceButton.classList.remove("clicked");
         startStopButton.classList.remove("clicked");
+
+        MAP_RESOLUTION = parseInt(zoomSlider.value);
+        PIXEL_SIZE = MAP_LENGTH / MAP_RESOLUTION;
+        Renderer.graphicsSetup();
     }
     resetUniverse();
 });
