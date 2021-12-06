@@ -1,7 +1,11 @@
 html, body {
   margin: 0;
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
   font-family: "Helvetica Neue";
+}
+
+input:focus, select:focus {
+  outline: none;
 }
 
 button {
@@ -10,7 +14,8 @@ button {
   border-radius: 0.2rem;
   padding: 0.5rem;
   transition: 0.3s;
-  margin: 10px;
+  margin: 0;
+  display: inline;
 }
 
 button:hover {
@@ -23,27 +28,82 @@ canvas {
   display: block;
 }
 
+input {
+  border: none;
+}
+
+select {
+  border: none;
+}
+
+.danger-button {
+  background-color: #A6192E;
+}
+
+.danger-button:hover {
+  background-color: #000000;
+  color: white;
+  transition: 0.3s;
+}
+
+h1{
+  margin: auto 0;
+}
+
 .clicked {
   background-color: black;
   color: white;
 }
 
+.container {
+  display: grid;
+  grid-template-columns: 75% 25%;
+}
+
 .menu-item {
   display: inline-block;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  margin: 0 1rem 1rem 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+#canvas {
+  grid-column: 1/2;
+}
+
+#controls {
+  background-color: #FFD100;
+}
+
+#fullscreen-message {
+  color: white;
+  text-align: center;
+  z-index: 1;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
 }
 
 #menu {
-  display: grid;
+  grid-column: 2/3;
   grid-template-columns: auto auto;
   margin-bottom: 2rem;
 }
 
-#reset-button {
-  background-color: #A6192E;
+#sources {
+  background-color: #007FA3;
 }
 
-#reset-button:hover {
-  background-color: #000000;
-  color: white;
-  transition: 0.3s;
+#vehicles {
+  background-color: #B7BF10;
+}
+
+#vehicle-select {
+  display: inline;
 }

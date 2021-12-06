@@ -1,4 +1,7 @@
 ////////// DOM ELEMENTS //////////
+let doc = document.documentElement;
+let fullscreenButton = document.querySelector("#fullscreen-button");
+let fullscreenMessage = document.querySelector("#fullscreen-message");
 let vehicleSelect = document.querySelector("#vehicle-select");
 let addVehicleButton = document.querySelector("#add-vehicle-button");
 let velocityFunctionSelect = document.querySelector("#velocity-function-select");
@@ -11,6 +14,17 @@ let addSourceButton = document.querySelector("#add-source-button");
 let removeSourceButton = document.querySelector("#remove-source-button");
 let startStopButton = document.querySelector("#start-stop-button");
 let resetButton = document.querySelector("#reset-button");
+
+////////// FULLSCREEN //////////
+fullscreenButton.addEventListener("click", () => {
+    doc.requestFullscreen().then(fullscreenMessage.style.display = "none");
+});
+
+document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+        document.exitFullscreen().then(fullscreenMessage.style.display = "block");
+    } 
+})
 
 ////////// ADD VEHICLE INPUT //////////
 vehicleSelect.addEventListener("change", () => {
@@ -39,8 +53,8 @@ velocitySlider.addEventListener("change", () => {
 ////////// ZOOM SLIDER //////////
 zoomSlider.addEventListener("input", () => {
     zoomLabel.innerHTML = `Zoom: ${zoomSlider.value}`;
-    MAP_SIZE = parseInt(zoomSlider.value);
-    PIXEL_SIZE = MAP_SIZE / MAP_RESOLUTION;
+    MAP_RESOLUTION = parseInt(zoomSlider.value);
+    PIXEL_SIZE = MAP_LENGTH / MAP_RESOLUTION;
 })
 ////////// ADD VEHICLE BUTTON //////////
 addVehicleButton.addEventListener("click", () => {
@@ -134,9 +148,3 @@ resetButton.addEventListener("click", () => {
     }
     resetUniverse();
 });
-
-////////// FRICTION SLIDER //////////
-function updateFriction(value) {
-    frictionMagnitude = parseInt(value);
-    document.querySelector("#friction-label").innerHTML = `Friction μ = ${frictionMagnitude}`;
-}

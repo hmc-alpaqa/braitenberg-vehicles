@@ -1,5 +1,5 @@
 class Gyro {
-    constructor(universe, x, y, θ) {
+    constructor(universe, x, y, θ, name) {
         this.universe = universe;
         this.r = new Vector(x, y); // position
         this.θ = θ; // angle of positioning relative to the x-axis
@@ -10,5 +10,7 @@ class Gyro {
         // you can use greek characters in js lol
         this.ω = 0; // angular velocity
         this.α = 0; // angular acceleration
+
+        this.name = name;
     }
 }

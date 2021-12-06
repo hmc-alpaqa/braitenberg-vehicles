@@ -1,5 +1,6 @@
 function setup() {
-    createCanvas(MAP_SIZE, MAP_SIZE);
+    canvas = createCanvas(MAP_LENGTH, MAP_HEIGHT);
+    canvas.parent("canvas");
     frameRate(FPS);
     ellipseMode(CENTER);
     rectMode(CENTER);
@@ -14,22 +15,26 @@ function setup() {
     removingSource = false;
     vehicle3StartingVelocity = 250;
     sourceIntensity = 100;
-    updateFriction(document.getElementById("friction-slider").value);
 
-    pg = createGraphics(MAP_SIZE, MAP_SIZE);
-    pg.background(220);
+    pg = createGraphics(MAP_LENGTH, MAP_HEIGHT);
+    pg.background(120);
     pg.noStroke();
 
+    sensorGraphic = createGraphics(PIXEL_SIZE * SENSOR_SIZE * 2, PIXEL_SIZE * SENSOR_SIZE)
+    Renderer.sensorGraphicSetup();
+    motorGraphic = createGraphics(PIXEL_SIZE * MOTOR_SIZE, PIXEL_SIZE * MOTOR_SIZE)
+    Renderer.motorGraphicSetup();
+    vehicleGraphic = createGraphics(PIXEL_SIZE * (VEHICLE_SIZE + (2 * SENSOR_SIZE) + MOTOR_SIZE), PIXEL_SIZE * VEHICLE_SIZE);
     θ = 0;
 }
 
 function draw() {
     background(220);
     // draw a square for each cell in stimuli
-    image(pg, 0, 0, MAP_SIZE, MAP_SIZE);
+    image(pg, 0, 0, MAP_LENGTH, MAP_HEIGHT);
     if (u.vehicles.length > 0) {
         let mostRecentVehicle = u.vehicles[u.vehicles.length - 1]
-        Renderer.renderText(mostRecentVehicle);
+        Renderer.renderData(mostRecentVehicle);
         Renderer.drawPath(mostRecentVehicle);
     }
     for (let vehicle of u.vehicles) {
@@ -76,6 +81,10 @@ function draw() {
                 vehicle = Vehicle3b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
                 break;
+            case Vehicles.VEHICLE4A:
+                vehicle = Vehicle4a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                Renderer.renderVehicle(vehicle);
+                break;
         }
     }
 
@@ -92,7 +101,7 @@ function mouseWheel(event) {
 
 function mouseClicked() {
     let vehicle;
-    if (mouseX > 0 && mouseY > 0 && mouseX < MAP_SIZE && mouseY < MAP_SIZE) {
+    if (mouseX > 0 && mouseY > 0 && mouseX < MAP_LENGTH && mouseY < MAP_HEIGHT) {
         if (addingSource) {
             u.addSource(new Source(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, sourceIntensity));
             generateTerrain();
@@ -137,15 +146,15 @@ function mouseClicked() {
 
 function generateTerrain() {
     for (let y = 0; y < MAP_RESOLUTION; y++) {
-        for (let x = 0; x < MAP_RESOLUTION; x++) {
+        for (let x = 0; x < MAP_RESOLUTION / ASPECT_RATIO; x++) {
             u.stimuli[y][x] = u.getStimulus(x, y);
         }
     }
 }
 
 function renderTerrain() {
-    for (y = 0; y < u.stimuli.length; y++) {
-        for (x = 0; x < u.stimuli[y].length; x++) {
+    for (let y = 0; y < u.stimuli.length; y++) {
+        for (let x = 0; x < u.stimuli[y].length; x++) {
             pg.fill(255 + 256 * u.stimuli[y][x], 255 - 256 * abs(u.stimuli[y][x]), 190 - 256 * u.stimuli[y][x])
             pg.square(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE);
         }
