@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Sketch</title>
+  <title>Braitenberg Vehicles</title>
 
   <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -19,8 +19,38 @@
     <h1>You can enter fullscreen mode by pressing the button below.</h1>
     <button id="fullscreen-button">Fullscreen</button>
   </div>
-  <h1>Braitenberg Vehicles</h1>
-  <div class="container">
+  <div id="about-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">x</span>
+      <h1>About</h1>
+      <hr>
+      <p>
+        This website was created by Harvey Mudd College students under the guidance of <a target="_blank" href="https://www.cs.hmc.edu/~bang/">Professor Lucas Bang</a>. The simulations are based on the book <a href="https://archive.org/details/vehiclesexperime00brai" target="_blank"><i>Vehicles: Experiments in Synthetic Psychology</i></a> by Valentino Braitenberg.
+      </p>
+      <p>
+        To request a feature, fill out <a href="https://forms.gle/kEHMDuVuQ9kuQo6YA" target="_blank">this</a> form. To report a bug, fill out <a href="https://forms.gle/zEg78qYWrdCviKSF7" target="_blank">this</a> form.
+      </p>
+    </div>
+  </div>
+  <div id="how-to-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">x</span>
+      <h1>How to Use</h1>
+      <hr>
+      <h2>Adding a Vehicle</h2>
+      <p>To add a vehicle, select a vehicle in the dropdown and click the Add Vehicle button. Then, move your mouse to where you wish to place the vehicle. Use the arrow keys to adjust the angle. You can keep adding vehicles while the Add Vehicle button is pressed. To change the vehicle being added, reselect the vehicle in the dropdown. If you wish to stop adding vehicles, click the Add Vehicle button again.</p>
+      <h2>Adding a Source</h2>
+      <p>To add a source, enter the desired intensity of the source and click the Add Source button. Then, move your mouse to where you wish to place the source. You can keep adding sources while the Add source button is pressed. To change the intensity of the source being added, enter the new desired intensity in the input box. If you wish to stop adding sources, click the Add Source button again.</p>
+      <h2>Removing a Source</h2>
+      <p>To remove a source, click the Remove Source button. Then, click on the source you wish to remove. You can keep removing sources while the Remove Source button is pressed. If you wish to stop removing sources, click the Remove Source button again.</p>
+    </div>
+  </div>
+  <div class="header">
+    <h1>Braitenberg Vehicles</h1>
+    <button id="about-button">About</button>
+    <button id="how-to-button">How to Use</button>
+  </div>
+  <div class="container" style="margin-top: 0.5rem">
     <div id="canvas">
     </div>
     <div id="menu">

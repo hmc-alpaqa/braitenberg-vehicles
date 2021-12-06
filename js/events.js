@@ -1,20 +1,32 @@
-////////// DOM ELEMENTS //////////
+/********* DOM ELEMENTS *********/
 let doc = document.documentElement;
 let fullscreenButton = document.querySelector("#fullscreen-button");
 let fullscreenMessage = document.querySelector("#fullscreen-message");
+let aboutButton = document.querySelector("#about-button");
+let aboutModal = document.querySelector("#about-modal");
+let howToButton = document.querySelector("#how-to-button");
+let howToModal = document.querySelector("#how-to-modal");
+let closeModalButtons = document.querySelectorAll(".modal-close");
+
+////////// CONTROLS //////////
+let startStopButton = document.querySelector("#start-stop-button");
+let resetButton = document.querySelector("#reset-button");
+let zoomSlider = document.querySelector("#zoom-slider");
+let zoomLabel = document.querySelector("#zoom-label");
+
+////////// VEHICLES //////////
 let vehicleSelect = document.querySelector("#vehicle-select");
 let addVehicleButton = document.querySelector("#add-vehicle-button");
 let velocityFunctionSelect = document.querySelector("#velocity-function-select");
 let startingVelocity = document.querySelector("#starting-velocity");
 let velocitySlider = document.querySelector("#velocity-slider");
 let velocityLabel = document.querySelector("#velocity-label");
-let zoomSlider = document.querySelector("#zoom-slider");
-let zoomLabel = document.querySelector("#zoom-label");
+
+////////// SOURCES //////////
 let addSourceButton = document.querySelector("#add-source-button");
 let removeSourceButton = document.querySelector("#remove-source-button");
-let startStopButton = document.querySelector("#start-stop-button");
-let resetButton = document.querySelector("#reset-button");
 
+/********* EVENT HANDLING *********/
 ////////// FULLSCREEN //////////
 fullscreenButton.addEventListener("click", () => {
     doc.requestFullscreen().then(fullscreenMessage.style.display = "none");
@@ -24,7 +36,23 @@ document.addEventListener("fullscreenchange", () => {
     if (!document.fullscreenElement) {
         document.exitFullscreen().then(fullscreenMessage.style.display = "block");
     } 
-})
+});
+
+////////// MODALS //////////
+aboutButton.addEventListener("click", () => {
+    aboutModal.style.display = "block";
+});
+
+howToButton.addEventListener("click", () => {
+    howToModal.style.display = "block";
+});
+
+for (closeModalButton of closeModalButtons) {
+    closeModalButton.addEventListener("click", () => {
+        aboutModal.style.display = "none";
+        howToModal.style.display = "none";
+    });
+}
 
 ////////// ADD VEHICLE INPUT //////////
 vehicleSelect.addEventListener("change", () => {
@@ -42,7 +70,7 @@ vehicleSelect.addEventListener("change", () => {
     } else {
         velocityFunctionSelect.style.display = "none";
     }
-})
+});
 
 ////////// VELOCITY SLIDER //////////
 velocitySlider.addEventListener("change", () => {
@@ -60,7 +88,8 @@ zoomSlider.addEventListener("input", () => {
     motorGraphic = createGraphics(PIXEL_SIZE * MOTOR_SIZE, PIXEL_SIZE * MOTOR_SIZE);
     Renderer.motorGraphicSetup();
     vehicleGraphic = createGraphics(PIXEL_SIZE * (VEHICLE_SIZE + (2 * SENSOR_SIZE) + MOTOR_SIZE), PIXEL_SIZE * VEHICLE_SIZE);
-})
+});
+
 ////////// ADD VEHICLE BUTTON //////////
 addVehicleButton.addEventListener("click", () => {
     if (addingVehicle != Vehicles.NONE) {
@@ -112,7 +141,7 @@ addSourceButton.addEventListener("click", () => {
         alert("Please enter an intensity above 0 and under 1000.");
     }
 
-})
+});
 
 ////////// REMOVE SOURCE BUTTON //////////
 removeSourceButton.addEventListener("click", () => {
@@ -127,7 +156,7 @@ removeSourceButton.addEventListener("click", () => {
         addSourceButton.classList.remove("clicked");
         removeSourceButton.classList.add("clicked");
     }
-})
+});
 
 ////////// START/STOP BUTTON //////////
 let simulationPaused = true;
