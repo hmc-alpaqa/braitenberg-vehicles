@@ -17,10 +17,12 @@ class Renderer {
     static renderVehicle(vehicle) {
         vehicleGraphic.clear();
         vehicleGraphic.noStroke();
-        vehicleGraphic.fill(225, 225, 225);
+        vehicleGraphic.fill(225);
         vehicleGraphic.square(MOTOR_SIZE, 0, VEHICLE_SIZE);
+        vehicleGraphic.fill(0);
+        vehicleGraphic.textSize(VEHICLE_SIZE / 2)
         vehicleGraphic.textAlign(CENTER);
-        vehicleGraphic.text(vehicle.gyro.name, MOTOR_SIZE + VEHICLE_SIZE / 2, VEHICLE_SIZE / 2);
+        vehicleGraphic.text(vehicle.gyro.name, MOTOR_SIZE + VEHICLE_SIZE / 2, 0.7 * VEHICLE_SIZE);
         for (let motor of vehicle.motors) {
             vehicleGraphic.image(motorGraphic, 0, motor.offset.y * PIXEL_SIZE + 0.5 * (VEHICLE_SIZE - MOTOR_SIZE));
         }
