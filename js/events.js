@@ -55,6 +55,11 @@ zoomSlider.addEventListener("input", () => {
     zoomLabel.innerHTML = `Zoom: ${zoomSlider.value}`;
     MAP_RESOLUTION = parseInt(zoomSlider.value);
     PIXEL_SIZE = MAP_LENGTH / MAP_RESOLUTION;
+    sensorGraphic = createGraphics(PIXEL_SIZE * SENSOR_SIZE * 2, PIXEL_SIZE * SENSOR_SIZE);
+    Renderer.sensorGraphicSetup();
+    motorGraphic = createGraphics(PIXEL_SIZE * MOTOR_SIZE, PIXEL_SIZE * MOTOR_SIZE);
+    Renderer.motorGraphicSetup();
+    vehicleGraphic = createGraphics(PIXEL_SIZE * (VEHICLE_SIZE + (2 * SENSOR_SIZE) + MOTOR_SIZE), PIXEL_SIZE * VEHICLE_SIZE);
 })
 ////////// ADD VEHICLE BUTTON //////////
 addVehicleButton.addEventListener("click", () => {
