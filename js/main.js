@@ -18,6 +18,11 @@ function setup() {
     pg.background(220);
     pg.noStroke();
 
+    sensorGraphic = createGraphics(SENSOR_SIZE * 2, SENSOR_SIZE)
+    Renderer.sensorGraphicSetup();
+    motorGraphic = createGraphics(MOTOR_SIZE, MOTOR_SIZE)
+    Renderer.motorGraphicSetup();
+    vehicleGraphic = createGraphics(VEHICLE_SIZE + 2 * SENSOR_SIZE + MOTOR_SIZE, VEHICLE_SIZE);
     θ = 0;
 }
 
