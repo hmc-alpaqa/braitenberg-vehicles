@@ -88,7 +88,7 @@ function draw() {
         }
     }
 
-    if (keyIsPressed && (keyCode === RIGHT_ARROW)) {
+    if (keyIsPressed && (keyCode === RIGHT_ARROW) && zoomSlider.value < 200) {
         θ += 0.05;
     } else if (keyIsPressed && (keyCode === LEFT_ARROW)) {
         θ -= 0.05;
@@ -96,7 +96,13 @@ function draw() {
 }
 
 function mouseWheel(event) {
-    θ += event.delta/100;
+    if (parseInt(zoomSlider.value) <= 200 && parseInt(zoomSlider.value) >= 50) {
+        zoomSlider.value = parseInt(zoomSlider.value) + event.delta;
+        zoomLabel.innerText = `Zoom ${zoomSlider.value}`;
+        MAP_RESOLUTION = parseInt(zoomSlider.value);
+        PIXEL_SIZE = MAP_LENGTH / MAP_RESOLUTION;
+        Renderer.graphicsSetup();
+    }
 }
 
 function mouseClicked() {
