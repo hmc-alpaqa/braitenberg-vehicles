@@ -102,6 +102,7 @@ function mouseWheel(event) {
         MAP_RESOLUTION = parseInt(zoomSlider.value);
         PIXEL_SIZE = MAP_LENGTH / MAP_RESOLUTION;
         Renderer.graphicsSetup();
+        renderTerrain();
     }
 }
 
