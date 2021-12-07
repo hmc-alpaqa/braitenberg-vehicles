@@ -171,15 +171,15 @@ startStopButton.addEventListener("click", () => {
 resetButton.addEventListener("click", () => {
     if (!simulationPaused) {
         startStopButton.innerText = "Start";
-        zoomLabel.innerHTML = "Zoom: 100";
         addVehicleButton.classList.remove("clicked");
         addSourceButton.classList.remove("clicked");
         removeSourceButton.classList.remove("clicked");
         startStopButton.classList.remove("clicked");
-
-        MAP_RESOLUTION = parseInt(zoomSlider.value);
-        PIXEL_SIZE = MAP_LENGTH / MAP_RESOLUTION;
-        Renderer.graphicsSetup();
     }
+    zoomLabel.innerHTML = "Zoom: 100";
+    zoomSlider.value = 100;
+    MAP_RESOLUTION = 100;
+    PIXEL_SIZE = MAP_LENGTH / MAP_RESOLUTION;
+    Renderer.graphicsSetup();
     resetUniverse();
 });

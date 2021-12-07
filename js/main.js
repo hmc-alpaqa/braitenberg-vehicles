@@ -174,6 +174,6 @@ function resetUniverse() {
         }
         u.stimuli.push(row);
     }
-    pg.background(220);
+    pg.background(120);
     pg.noStroke();
 }
