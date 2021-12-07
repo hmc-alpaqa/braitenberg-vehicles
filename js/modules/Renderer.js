@@ -67,7 +67,7 @@ class Renderer {
 
     static drawPath(vehicle) {
         for (let i = 1; i < vehicle.path.length; i++) {
-            strokeWeight(Math.max(100, 1000 / vehicle.speeds[i].getMagnitude())); // stroke weight is proportional to velocity
+            strokeWeight(Math.min(VEHICLE_SIZE * PIXEL_SIZE, Math.max(1, 1000/vehicle.speeds[i].getMagnitude()))); // stroke weight is proportional to velocity
             stroke(0, 0, 0, 255 * (SECONDS_PATH_VISIBLE * FPS + i - vehicle.path.length) / (SECONDS_PATH_VISIBLE * FPS)); // dilute the path over time
             line(
                 vehicle.path[i - 1].x * PIXEL_SIZE,
