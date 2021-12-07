@@ -73,6 +73,7 @@
           <option value="3a">Vehicle 3a: Love</option>
           <option value="3b">Vehicle 3b: Explorer</option>
           <option value="4a">Vehicle 4a: Instincts</option>
+          <option value="4b">Vehicle 4b: Will</option>
         </select>
         <button id="add-vehicle-button">Add Vehicle</button>
         <div style="display: none" id="starting-velocity">
@@ -80,11 +81,20 @@
           <label id="velocity-label" for="velocity-slider">Starting Velocity: 250</label>
         </div>
         <div>
-          <select style="display: none" id="velocity-function-select">
+          <select style="display: none" id="vehicle-4a-select">
             <option value="sinusoidal">Sinusoidal</option>
             <option value="quadratic">Quadratic</option>
             <option value="sqrt">Square Root</option>
             <option value="log">Log</option>
+            <option value="semicircle">Semicircle</option>
+            <option value="flipped semicircle">Flipped Semicircle</option>
+          </select>
+          <select style="display: none" id="vehicle-4b-select">
+            <option value="repeating linear">Repeating Linear</option>
+            <option value="ascending linear">Ascending Linear</option>
+            <option value="repeating steps">Repeating Steps</option>
+            <option value="ascending steps">Ascending Steps</option>
+            <option value="hyperbola">Hyperbola</option>
           </select>
         </div>
       </div>

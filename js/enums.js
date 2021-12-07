@@ -7,6 +7,7 @@ const Vehicles = {
     VEHICLE3A: "3a",
     VEHICLE3B: "3b",
     VEHICLE4A: "4a",
+    VEHICLE4B: "4b",
 }
 
 const VelocityFunctions = {

@@ -17,7 +17,8 @@ let zoomLabel = document.querySelector("#zoom-label");
 ////////// VEHICLES //////////
 let vehicleSelect = document.querySelector("#vehicle-select");
 let addVehicleButton = document.querySelector("#add-vehicle-button");
-let velocityFunctionSelect = document.querySelector("#velocity-function-select");
+let vehicle4aSelect = document.querySelector("#vehicle-4a-select");
+let vehicle4bSelect = document.querySelector("#vehicle-4b-select");
 let startingVelocity = document.querySelector("#starting-velocity");
 let velocitySlider = document.querySelector("#velocity-slider");
 let velocityLabel = document.querySelector("#velocity-label");
@@ -66,9 +67,17 @@ vehicleSelect.addEventListener("change", () => {
     }
 
     if (vehicleSelect.value == Vehicles.VEHICLE4A) {
-        velocityFunctionSelect.style.display = "block";
+        velocityFunction = VELOCITY_FUNCTIONS[vehicle4aSelect.value];
+        vehicle4aSelect.style.display = "block";
     } else {
-        velocityFunctionSelect.style.display = "none";
+        vehicle4aSelect.style.display = "none";
+    }
+
+    if (vehicleSelect.value == Vehicles.VEHICLE4B) {
+        velocityFunction = VELOCITY_FUNCTIONS[vehicle4bSelect.value];
+        vehicle4bSelect.style.display = "block";
+    } else {
+        vehicle4bSelect.style.display = "none";
     }
 });
 
@@ -102,24 +111,14 @@ addVehicleButton.addEventListener("click", () => {
     }
 });
 
-////////// VELOCITY FUNCTION SELECT //////////
-velocityFunctionSelect.addEventListener("change", () => {
-    console.log(velocityFunctionSelect.value == VelocityFunctions.SQRT);
-    switch (velocityFunctionSelect.value) {
-        case VelocityFunctions.SINUSOIDAL:
-            velocityFunction = x => 100 * (Math.sin(x) + 1);
-            break;
-        case VelocityFunctions.QUADRATIC:
-            velocityFunction = x => Math.pow(x, 2);
-            break;
-        case VelocityFunctions.SQRT:
-            velocityFunction = x => Math.pow(x, 0.5);
-            break;
-        case VelocityFunctions.LOG:
-            velocityFunction = x => Math.log(x + 1);
-            break;
-    }
+////////// VELOCITY FUNCTION SELECTS //////////
+vehicle4aSelect.addEventListener("change", () => {
+    velocityFunction = VELOCITY_FUNCTIONS[vehicle4aSelect.value];
 });
+
+vehicle4bSelect.addEventListener("change", () => {
+    velocityFunction = VELOCITY_FUNCTIONS[vehicle4bSelect.value];
+})
 
 ////////// ADD SOURCE BUTTON //////////
 addSourceButton.addEventListener("click", () => {
