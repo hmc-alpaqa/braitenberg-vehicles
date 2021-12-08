@@ -33,8 +33,9 @@ class Vehicle {
      */
     move(dt) {
         if (this.motors.length === 1) {
-            let step = this.motors[0].getOutput() * dt;
-            this.gyro.r = this.gyro.r.add(new Vector(step * Math.cos(this.gyro.θ), step * Math.sin(this.gyro.θ)));
+            this.gyro.v = new Vector(0, 0).initFromPolar(this.motors[0].getOutput(), this.gyro.θ);
+            let step = this.gyro.v.multiply(dt);
+            this.gyro.r = this.gyro.r.add(step);
         }
         else if (this.motors.length === 2) {
             // assume that there are only two motors and the motors both face parallel to the robot body

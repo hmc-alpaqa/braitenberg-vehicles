@@ -13,6 +13,12 @@ class Vector {
         this.y = y;
     }
 
+    initFromPolar(magnitude, theta) {
+        this.x = Math.cos(theta) * magnitude;
+        this.y = Math.sin(theta) * magnitude;
+        return this;
+    }
+
     /**
      * Calculates the magnitude of this vector (the length of the vector).
      * @returns {Number} the magnitude of this vector
