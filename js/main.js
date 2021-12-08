@@ -115,12 +115,14 @@ function mouseClicked() {
     if (mouseX > 0 && mouseY > 0 && mouseX < MAP_LENGTH && mouseY < MAP_HEIGHT) {
         if (addingSource) {
             u.addSource(new Source(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, sourceIntensity));
+            Renderer.graphicsSetup();
             generateTerrain();
             renderTerrain();
         } else if (removingSource) {
             let source = u.getSource(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
             if (source) {
                 u.removeSource(source);
+                Renderer.graphicsSetup();
                 generateTerrain();
                 renderTerrain();
             }
@@ -159,10 +161,13 @@ function mouseClicked() {
 }
 
 function generateTerrain() {
+    u.stimuli = [];
     for (let y = 0; y < MAP_RESOLUTION; y++) {
+        let row = [];
         for (let x = 0; x < MAP_RESOLUTION / ASPECT_RATIO; x++) {
-            u.stimuli[y][x] = u.getStimulus(x, y);
+            row.push(u.getStimulus(x, y));
         }
+        u.stimuli.push(row);
     }
 }
 
