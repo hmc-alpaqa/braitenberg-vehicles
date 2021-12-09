@@ -9,7 +9,7 @@ function setup() {
     // each sensor, controller, motor takes the gyro as a parameter to construct
     // Vehicle object contains gyro, sensors, controllers, motors
     u = new Universe();
-    velocityFunction = x => 100*(Math.sin(x) + 1);
+    velocityFunction = x => 100 * (Math.sin(x) + 1);
     addingVehicle = Vehicles.NONE;
     addingSource = false;
     removingSource = false;
@@ -117,11 +117,16 @@ function mouseClicked() {
             u.addSource(new Source(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, sourceIntensity));
             Renderer.graphicsSetup();
             generateTerrain();
+            resetCanvas();
             renderTerrain();
         } else if (removingSource) {
             let source = u.getSource(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
             if (source) {
                 u.removeSource(source);
+                resetCanvas();
+                Renderer.graphicsSetup();
+                generateTerrain();
+                renderTerrain();
                 Renderer.graphicsSetup();
                 generateTerrain();
                 renderTerrain();
@@ -162,13 +167,18 @@ function mouseClicked() {
 
 function generateTerrain() {
     u.stimuli = [];
-    for (let y = 0; y < MAP_RESOLUTION; y++) {
+    for (let y = 0; y < Math.floor(MAP_HEIGHT / PIXEL_SIZE); y++) {
         let row = [];
-        for (let x = 0; x < MAP_RESOLUTION / ASPECT_RATIO; x++) {
+        for (let x = 0; x < Math.floor(MAP_LENGTH / PIXEL_SIZE); x++) {
             row.push(u.getStimulus(x, y));
         }
         u.stimuli.push(row);
     }
+}
+
+function resetCanvas() {
+    pg.fill(255, 255, 190);
+    pg.rect(0, 0, MAP_LENGTH, MAP_HEIGHT);
 }
 
 function renderTerrain() {
