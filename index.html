@@ -75,7 +75,11 @@
           <option value="4a">Vehicle 4a: Instincts</option>
           <option value="4b">Vehicle 4b: Will</option>
         </select>
-        <button id="add-vehicle-button">Add Vehicle</button>
+        <div style="margin-top: 10px">
+          <button id="add-vehicle-button">Add</button>
+          <button id="remove-vehicle-button">Remove</button>
+          <button class="danger-button" id="remove-all-vehicles-button">Remove All</button>
+        </div>
         <div style="display: none" id="starting-velocity">
           <input type="range" id="velocity-slider" value="250" min="0" max="500" step="1">
           <label id="velocity-label" for="velocity-slider">Starting Velocity: 250</label>

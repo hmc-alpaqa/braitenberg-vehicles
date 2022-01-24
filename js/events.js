@@ -17,6 +17,7 @@ let zoomLabel = document.querySelector("#zoom-label");
 ////////// VEHICLES //////////
 let vehicleSelect = document.querySelector("#vehicle-select");
 let addVehicleButton = document.querySelector("#add-vehicle-button");
+let removeAllVehiclesButton = document.querySelector("#remove-all-vehicles-button");
 let vehicle4aSelect = document.querySelector("#vehicle-4a-select");
 let vehicle4bSelect = document.querySelector("#vehicle-4b-select");
 let startingVelocity = document.querySelector("#starting-velocity");
@@ -113,6 +114,11 @@ addVehicleButton.addEventListener("click", () => {
         removeSourceButton.classList.remove("clicked");
     }
 });
+
+////////// REMOVE ALL VEHICLES BUTTON //////////
+removeAllVehiclesButton.addEventListener("click", () => {
+    u.vehicles = [];
+})
 
 ////////// VELOCITY FUNCTION SELECTS //////////
 vehicle4aSelect.addEventListener("change", () => {
