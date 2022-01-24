@@ -22,6 +22,10 @@ class Vehicle {
         return this.gyro.r.y;
     }
 
+    get θ() {
+        return this.gyro.θ;
+    }
+
     copy() {
         return Vehicle(this.gyro, this.sensors, this.motorControllers, this.motors);
     }

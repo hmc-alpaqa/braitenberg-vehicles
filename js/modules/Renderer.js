@@ -39,9 +39,9 @@ class Renderer {
             vehicleGraphic.image(sensorGraphic, PIXEL_SIZE * (MOTOR_SIZE + VEHICLE_SIZE), PIXEL_SIZE * (sensor.offset.y + 0.5 * (VEHICLE_SIZE - SENSOR_SIZE)));
         }
         translate(vehicle.x * PIXEL_SIZE, vehicle.y * PIXEL_SIZE);
-        rotate(vehicle.gyro.θ);
+        rotate(vehicle.θ);
         image(vehicleGraphic, PIXEL_SIZE * (-MOTOR_SIZE - VEHICLE_SIZE / 2), PIXEL_SIZE * -VEHICLE_SIZE / 2);
-        rotate(-vehicle.gyro.θ);
+        rotate(-vehicle.θ);
         translate(-vehicle.x * PIXEL_SIZE, -vehicle.y * PIXEL_SIZE);
     }
 
