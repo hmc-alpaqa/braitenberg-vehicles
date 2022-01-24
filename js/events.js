@@ -26,6 +26,7 @@ let velocityLabel = document.querySelector("#velocity-label");
 ////////// SOURCES //////////
 let addSourceButton = document.querySelector("#add-source-button");
 let removeSourceButton = document.querySelector("#remove-source-button");
+let removeAllSourcesButton = document.querySelector("#remove-all-sources-button");
 
 /********* EVENT HANDLING *********/
 ////////// FULLSCREEN //////////
@@ -155,6 +156,14 @@ removeSourceButton.addEventListener("click", () => {
         removeSourceButton.classList.add("clicked");
     }
 });
+
+////////// REMOVE ALL SOURCES ///////////
+removeAllSourcesButton.addEventListener("click", () => {
+    u.sources = [];
+    resetCanvas();
+    generateTerrain();
+    renderTerrain();
+})
 
 ////////// START/STOP BUTTON //////////
 let simulationPaused = true;
