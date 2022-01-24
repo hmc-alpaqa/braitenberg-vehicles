@@ -14,6 +14,14 @@ class Vehicle {
         this.speeds = [];
     }
 
+    get x() {
+        return this.gyro.r.x;
+    }
+
+    get y() {
+        return this.gyro.r.y;
+    }
+
     copy() {
         return Vehicle(this.gyro, this.sensors, this.motorControllers, this.motors);
     }
