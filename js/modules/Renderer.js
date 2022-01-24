@@ -38,11 +38,11 @@ class Renderer {
         for (let sensor of vehicle.sensors) {
             vehicleGraphic.image(sensorGraphic, PIXEL_SIZE * (MOTOR_SIZE + VEHICLE_SIZE), PIXEL_SIZE * (sensor.offset.y + 0.5 * (VEHICLE_SIZE - SENSOR_SIZE)));
         }
-        translate(vehicle.gyro.r.x * PIXEL_SIZE, vehicle.gyro.r.y * PIXEL_SIZE);
+        translate(vehicle.x * PIXEL_SIZE, vehicle.y * PIXEL_SIZE);
         rotate(vehicle.gyro.θ);
         image(vehicleGraphic, PIXEL_SIZE * (-MOTOR_SIZE - VEHICLE_SIZE / 2), PIXEL_SIZE * -VEHICLE_SIZE / 2);
         rotate(-vehicle.gyro.θ);
-        translate(-vehicle.gyro.r.x * PIXEL_SIZE, -vehicle.gyro.r.y * PIXEL_SIZE);
+        translate(-vehicle.x * PIXEL_SIZE, -vehicle.y * PIXEL_SIZE);
     }
 
     static renderSource(source) {
@@ -54,8 +54,8 @@ class Renderer {
 
     static renderData(vehicle) {
         textAlign(LEFT);
-        text('x: ' + vehicle.gyro.r.x.toFixed(2), 10, 10)
-        text('y: ' + vehicle.gyro.r.y.toFixed(2), 10, 30)
+        text('x: ' + vehicle.x.toFixed(2), 10, 10)
+        text('y: ' + vehicle.y.toFixed(2), 10, 30)
         text('θ: ' + (vehicle.gyro.θ / 3.14).toFixed(2) + '	π', 10, 50)
         text('vx: ' + vehicle.gyro.v.x.toFixed(2), 80, 10)
         text('vy: ' + vehicle.gyro.v.y.toFixed(2), 80, 30)
