@@ -36,7 +36,7 @@ fullscreenButton.addEventListener("click", () => {
 document.addEventListener("fullscreenchange", () => {
     if (!document.fullscreenElement) {
         document.exitFullscreen().then(fullscreenMessage.style.display = "block");
-    } 
+    }
 });
 
 ////////// MODALS //////////
@@ -93,6 +93,8 @@ zoomSlider.addEventListener("input", () => {
     MAP_RESOLUTION = parseInt(zoomSlider.value);
     PIXEL_SIZE = MAP_LENGTH / MAP_RESOLUTION;
     Renderer.graphicsSetup();
+    resetCanvas();
+    generateTerrain();
     renderTerrain();
 });
 
