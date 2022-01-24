@@ -39,10 +39,6 @@ function draw() {
     }
     for (let vehicle of u.vehicles) {
         Renderer.renderVehicle(vehicle);
-        // Renderer.drawPath(vehicle);
-        if (vehicle.gyro.r.getMagnitude() > 2048) {
-            u.removeVehicle(vehicle);
-        }
     }
 
     for (let source of u.sources) {
@@ -124,9 +120,6 @@ function mouseClicked() {
             if (source) {
                 u.removeSource(source);
                 resetCanvas();
-                Renderer.graphicsSetup();
-                generateTerrain();
-                renderTerrain();
                 Renderer.graphicsSetup();
                 generateTerrain();
                 renderTerrain();
