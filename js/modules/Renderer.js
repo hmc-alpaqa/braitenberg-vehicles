@@ -59,10 +59,8 @@ class Renderer {
         text('θ: ' + (vehicle.gyro.θ / 3.14).toFixed(2) + '	π', 10, 50)
         text('vx: ' + vehicle.gyro.v.x.toFixed(2), 80, 10)
         text('vy: ' + vehicle.gyro.v.y.toFixed(2), 80, 30)
-        text('ω: ' + vehicle.gyro.ω.toFixed(2), 80, 50)
         text('ax: ' + vehicle.gyro.a.x.toFixed(2), 150, 10)
         text('ay: ' + vehicle.gyro.a.y.toFixed(2), 150, 30)
-        text('α: ' + vehicle.gyro.α.toFixed(2), 150, 50)
     }
 
     static drawPath(vehicle) {
