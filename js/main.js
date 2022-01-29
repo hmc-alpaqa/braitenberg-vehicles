@@ -19,6 +19,8 @@ function setup() {
     pg = createGraphics(MAP_LENGTH, MAP_HEIGHT);
     pg.background(120);
     pg.noStroke();
+    colors = ["crimson", "mediumseagreen", "royalblue", "gold", "deepskyblue", "white", "mediumvioletred", "darkgreen", "indigo", "hotpink", "yellowgreen", "lightblue"]
+    colorsIndex = 0;
 
     sensorGraphic = createGraphics(PIXEL_SIZE * SENSOR_SIZE * 2, PIXEL_SIZE * SENSOR_SIZE);
     Renderer.sensorGraphicSetup();
@@ -154,6 +156,7 @@ function mouseClicked() {
                     break;
             }
             u.addVehicle(vehicle);
+            colorsIndex = (colorsIndex + 1) % colors.length;
         }
     }
 }

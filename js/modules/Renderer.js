@@ -18,14 +18,14 @@ class Renderer {
 
     static motorGraphicSetup() {
         motorGraphic.noStroke();
-        motorGraphic.fill(50, 50, 255);
+        motorGraphic.fill(0, 0, 0);
         motorGraphic.square(0, 0, MOTOR_SIZE * PIXEL_SIZE);
     }
 
     static renderVehicle(vehicle) {
         vehicleGraphic.clear();
         vehicleGraphic.noStroke();
-        vehicleGraphic.fill(225);
+        vehicleGraphic.fill(vehicle.color);
         vehicleGraphic.square(MOTOR_SIZE * PIXEL_SIZE, 0, VEHICLE_SIZE * PIXEL_SIZE);
         vehicleGraphic.fill(0);
         vehicleGraphic.textSize(VEHICLE_SIZE * PIXEL_SIZE / 2)

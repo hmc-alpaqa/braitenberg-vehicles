@@ -12,6 +12,7 @@ class Vehicle {
         // used for drawing path of vehicle
         this.path = [];
         this.speeds = [];
+        this.color = colors[colorsIndex];
     }
 
     get x() {
