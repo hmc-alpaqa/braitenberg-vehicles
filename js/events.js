@@ -115,7 +115,7 @@ aboutVehiclesButton.addEventListener("click", () => {
 
 for (aboutVehiclesMenuItem of aboutVehiclesMenuItems) {
     aboutVehiclesMenuItem.addEventListener("click", (e) =>{
-        let i = e.target.name
+        let i = parseInt(e.target.name);
         aboutVehiclesMenu.style.display = "none";
         aboutVehiclesContent.style.display = "block";
         vehicleHeader.name = i;
