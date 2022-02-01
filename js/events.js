@@ -30,7 +30,7 @@ aboutVehicles = [
     },
     {
         header: "Vehicle 4b",
-        text: "Vehicle 4a has two sensors and two motors. Each sensor is connected to the motor on the same side. Like Vehicle 4a, there is a nonlinear mapping from sensor input to motor output. Unlike Vehicle 4a, the mapping of sensor input to motor output is defined by a nondifferentiable function rather than a differentiable one. Vehicle 4b should behave more erratically than Vehicle 4a, but the specific behavior of the vehicle is dependent on the function selected. Braitenberg considers this vehicle to have <b>will</b>."
+        text: "Vehicle 4b has two sensors and two motors. Each sensor is connected to the motor on the same side. Like Vehicle 4a, there is a nonlinear mapping from sensor input to motor output. Unlike Vehicle 4a, the mapping of sensor input to motor output is defined by a nondifferentiable function rather than a differentiable one. Vehicle 4b should behave more erratically than Vehicle 4a, but the specific behavior of the vehicle is dependent on the function selected. Braitenberg considers this vehicle to have <b>will</b>."
     }
 ]
 
@@ -140,7 +140,7 @@ previousVehicle.addEventListener("click", () => {
     let i = (aboutVehicles.length + vehicleHeader.name - 1) % aboutVehicles.length;
     vehicleHeader.name = i;
     vehicleHeader.innerText = aboutVehicles[i].header;
-    vehicleText.innerHTMl = aboutVehicles[i].text;
+    vehicleText.innerHTML = aboutVehicles[i].text;
 });
 
 ////////// ADD VEHICLE INPUT //////////
