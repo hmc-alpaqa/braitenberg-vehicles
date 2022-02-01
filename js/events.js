@@ -1,3 +1,39 @@
+/********* ABOUT VEHICLES INFORMATION *********/
+aboutVehicles = [
+    {
+        header: "Vehicle 1",
+        text: "Vehicle 1 has one sensor and one motor. The speed of the motor is proportional to the input received by the sensor. Braitenberg considers this vehicle to be <b>alive</b>."
+    }, 
+    {
+        header: "Vehicle 2a",
+        text: "Vehicle 2a has two sensors and two motors. Each sensor is connected to the motor on the same side. This vehicle tends to avoid the source unless the source is directly in front of it, in which case it will move in the direction of the source. Braitenberg considers this vehicle to be a <b>coward</b>."
+    },
+    {
+        header: "Vehicle 2b",
+        text: "Vehicle 2b has two sensors and two motors. Each sensor is connected to the motor on the opposite side. This vehicle tends to move towards the source in what could be described as an attacking motion. Braitenberg considers this vehicle <b>aggressive</b>."
+    },
+    {
+        header: "Vehicle 2c",
+        text: "Vehicle 2c has two sensors and two motors. Each sensor is connected to both of the motors. This results in behavior similar to that of Vehicle 1."
+    },
+    {
+        header: "Vehicle 3a",
+        text: "Vehicle 3a has two sensors, two motors, and two inhibitors. Each inhibitor is connected to the motor on the same side. This causes the vehicle to be attracted to the source. Braitenberg considers this vehicle to experience <b>love</b>."
+    },
+    {
+        header: "Vehicle 3b",
+        text: "Vehicle 3b has two sensors, two motors, and two inhibitors. Each inhibitor is connected to the motor on the opposite side. This causes the vehicle to speed up away from the source. Braitenberg considers this vehicle to be an <b>explorer</b>."
+    },
+    {
+        header: "Vehicle 4a",
+        text: "Vehicle 4a has two sensors and two motors. Each sensor is connected to the motor on the same side. Whereas in vehicles 1-3 there was a linear relationship between motor output and sensor input, the motor output of Vehicle 4a is related to the source input by a differentiable nonlinear function. The behavior of the vehicle depends on the selected function. Braitenberg considers this vehicle to have <b>instincts</b>."
+    },
+    {
+        header: "Vehicle 4b",
+        text: "Vehicle 4a has two sensors and two motors. Each sensor is connected to the motor on the same side. Like Vehicle 4a, there is a nonlinear mapping from sensor input to motor output. Unlike Vehicle 4a, the mapping of sensor input to motor output is defined by a nondifferentiable function rather than a differentiable one. Vehicle 4b should behave more erratically than Vehicle 4a, but the specific behavior of the vehicle is dependent on the function selected. Braitenberg considers this vehicle to have <b>will</b>."
+    }
+]
+
 /********* DOM ELEMENTS *********/
 let doc = document.documentElement;
 let fullscreenButton = document.querySelector("#fullscreen-button");
@@ -7,6 +43,18 @@ let aboutModal = document.querySelector("#about-modal");
 let howToButton = document.querySelector("#how-to-button");
 let howToModal = document.querySelector("#how-to-modal");
 let closeModalButtons = document.querySelectorAll(".modal-close");
+
+////////// ABOUT VEHICLES MODAL //////////
+let aboutVehiclesModal = document.querySelector("#about-vehicles-modal");
+let aboutVehiclesButton = document.querySelector("#about-vehicles-button");
+let aboutVehiclesMenu = document.querySelector("#about-vehicles-menu");
+let aboutVehiclesMenuItems = document.querySelectorAll(".about-vehicles-menu-item");
+let aboutVehiclesContent = document.querySelector("#about-vehicles-content");
+let vehicleHeader = document.querySelector("#vehicle-header");
+let vehicleText = document.querySelector("#vehicle-text");
+let aboutVehiclesMenuLink = document.querySelector("#about-vehicles-menu-link");
+let nextVehicle = document.querySelector("#next-vehicle");
+let previousVehicle = document.querySelector("#previous-vehicle");
 
 ////////// CONTROLS //////////
 let startStopButton = document.querySelector("#start-stop-button");
@@ -53,9 +101,47 @@ howToButton.addEventListener("click", () => {
 for (closeModalButton of closeModalButtons) {
     closeModalButton.addEventListener("click", () => {
         aboutModal.style.display = "none";
+        aboutVehiclesModal.style.display = "none";
         howToModal.style.display = "none";
     });
 }
+
+////////// ABOUT VEHICLES MODAL //////////
+aboutVehiclesButton.addEventListener("click", () => {
+    aboutVehiclesModal.style.display = "block";
+    aboutVehiclesMenu.style.display = "block";
+    aboutVehiclesContent.style.display = "none";
+});
+
+for (aboutVehiclesMenuItem of aboutVehiclesMenuItems) {
+    aboutVehiclesMenuItem.addEventListener("click", (e) =>{
+        let i = e.target.name
+        aboutVehiclesMenu.style.display = "none";
+        aboutVehiclesContent.style.display = "block";
+        vehicleHeader.name = i;
+        vehicleHeader.innerText = aboutVehicles[i].header;
+        vehicleText.innerHTML = aboutVehicles[i].text;
+    });
+}
+
+aboutVehiclesMenuLink.addEventListener("click", () => {
+    aboutVehiclesMenu.style.display = "block";
+    aboutVehiclesContent.style.display = "none";
+});
+
+nextVehicle.addEventListener("click", () => {
+    let i = (vehicleHeader.name + 1) % aboutVehicles.length;
+    vehicleHeader.name = i;
+    vehicleHeader.innerText = aboutVehicles[i].header;
+    vehicleText.innerHTML = aboutVehicles[i].text;
+});
+
+previousVehicle.addEventListener("click", () => {
+    let i = (aboutVehicles.length + vehicleHeader.name - 1) % aboutVehicles.length;
+    vehicleHeader.name = i;
+    vehicleHeader.innerText = aboutVehicles[i].header;
+    vehicleText.innerHTMl = aboutVehicles[i].text;
+});
 
 ////////// ADD VEHICLE INPUT //////////
 vehicleSelect.addEventListener("change", () => {

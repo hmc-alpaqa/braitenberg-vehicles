@@ -61,7 +61,7 @@ h1{
 }
 
 .header {
-  width: 40%;
+  width: 60%;
   display: flex;
   justify-content:space-between;
 }
@@ -104,6 +104,11 @@ h1{
   margin-left: auto;
   position: relative;
   border-radius: 10px;
+}
+
+#about-vehicles-footer {
+  display: flex;
+  justify-content: space-between;
 }
 
 #canvas {
