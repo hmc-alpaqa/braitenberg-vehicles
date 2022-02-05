@@ -47,36 +47,20 @@ class Universe {
             if (dist < smallestDist) {smallestDist = dist}
             closestSource = source;
         }
-        return closestSource 
+        return closestSource; 
     }
 
-    getSource(x, y) {
-        let closestSource = null;
-        for (let source of u.sources) {
-            // temp solution, should consider intensity to locate source?
-            // check if source is clicked on
-            if (source.r.x - 10 < x && x < source.r.x + 10) {
-                if (source.r.y - 10 < y && y < source.r.y + 10) {
-                    // check if source is closer than one already found
-                    if (closestSource) {
-                        dist1 = sqrt(pow(closestSource.r.x - x, 2) + pow(closestSource.r.y - y, 2));
-                        dist2 = sqrt(pow(source.r.x - x, 2) + pow(source.r.y - y, 2));
-                        if (dist1 > dist2) {
-                            closestSource = source;
-                        }
-                    } else {
-                        closestSource = source;
-                    }
-                }
+    removeSource(mouseX, mouseY, source) {
+        if ((mouseX <= source.r.x + SOURCE_SIZE / 2) && (mouseX >= source.r.x - SOURCE_SIZE / 2)
+            && (mouseY <= source.r.y + SOURCE_SIZE / 2) && (mouseY >= source.r.y - SOURCE_SIZE / 2)) {
+            let index = this.sources.indexOf(source);
+            if (index > -1) {
+                this.sources.splice(index, 1);
             }
-        }
-        return closestSource;
-    }
-
-    removeSource(source) {
-        let index = this.sources.indexOf(source);
-        if (index > -1) {
-            this.sources.splice(index, 1);
+            resetCanvas();
+            Renderer.graphicsSetup();
+            generateTerrain();
+            renderTerrain();
         }
     }
 

@@ -118,14 +118,8 @@ function mouseClicked() {
             resetCanvas();
             renderTerrain();
         } else if (removingSource) {
-            let source = u.getSource(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-            if (source) {
-                u.removeSource(source);
-                resetCanvas();
-                Renderer.graphicsSetup();
-                generateTerrain();
-                renderTerrain();
-            }
+            let source = u.getNearestSource(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+            u.removeSource(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, source)
         } else {
             switch (addingVehicle) {
                 case Vehicles.NONE:
