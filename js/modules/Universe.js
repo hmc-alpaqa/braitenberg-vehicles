@@ -81,9 +81,13 @@ class Universe {
         return null;
     }
 
+    overSource(mouseX, mouseY, source) {
+        return (mouseX <= source.x + SOURCE_SIZE / 2) && (mouseX >= source.x - SOURCE_SIZE / 2)
+        && (mouseY <= source.y + SOURCE_SIZE / 2) && (mouseY >= source.y - SOURCE_SIZE / 2);
+    }
+
     removeSource(mouseX, mouseY, source) {
-        if ((mouseX <= source.x + SOURCE_SIZE / 2) && (mouseX >= source.x - SOURCE_SIZE / 2)
-            && (mouseY <= source.y + SOURCE_SIZE / 2) && (mouseY >= source.y - SOURCE_SIZE / 2)) {
+        if (this.overSource(mouseX, mouseY, source)) {
             let index = this.sources.indexOf(source);
             if (index > -1) {
                 this.sources.splice(index, 1);

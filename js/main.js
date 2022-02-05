@@ -16,7 +16,9 @@ function setup() {
     removingVehicle = false;
 
     vehicleLocked = false;
+    sourceLocked = false;
     selectedVehicle = null;
+    selectedSource = null;
     xOffset = 0;
     yOffset = 0;
 
@@ -167,18 +169,40 @@ function mouseClicked() {
 
 function mousePressed() {
     if (!addingSource && !removingSource && !removingVehicle && addingVehicle == Vehicles.NONE) {
-        if (u.getNearestVehicle(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE) != null) {
-            let vehicle = u.getNearestVehicle(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-            if (u.overVehicle(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, vehicle)) {
+        let mousePos = new Vector(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE)
+        let nearestSourceDist = 1000000;
+        let nearestVehicleDist = 1000000;
+        if (u.sources.length > 0) {
+            nearestSourceDist = (u.getNearestSource(mousePos.x, mousePos.y).r.subtract(mousePos)).getMagnitude();
+        }
+        if(u.vehicles.length > 0) {
+            nearestVehicleDist = (u.getNearestVehicle(mousePos.x, mousePos.y).r.subtract(mousePos)).getMagnitude();
+        }
+        if ((nearestVehicleDist <= nearestSourceDist) && (u.getNearestVehicle(mousePos.x, mousePos.y != null))) {
+            let vehicle = u.getNearestVehicle(mousePos.x, mousePos.y);
+            if (u.overVehicle(mousePos.x, mousePos.y, vehicle)) {
                 selectedVehicle = vehicle;
                 vehicleLocked = true;
-                xOffset =  mouseX / PIXEL_SIZE - selectedVehicle.x;
-                yOffset = mouseY / PIXEL_SIZE - selectedVehicle.y;
+                sourceLocked = false;
+                xOffset =  mousePos.x - selectedVehicle.x;
+                yOffset = mousePos.y - selectedVehicle.y;
             } else {
                 vehicleLocked = false;
                 selectedVehicle = null;
             }
-        } 
+        } else if (u.getNearestSource(mousePos.x, mousePos.y) != null) {
+            let source = u.getNearestSource(mousePos.x, mousePos.y);
+            if (u.overSource(mousePos.x, mousePos.y, source)) {
+                selectedSource = source;
+                sourceLocked = true;
+                vehicleLocked = false;
+                xOffset =  mousePos.x - selectedSource.x;
+                yOffset = mousePos.y - selectedSource.y;
+            } else {
+                sourceLocked = false;
+                selectedSource = null;
+            }
+        }
     }
 }
 
@@ -186,13 +210,17 @@ function mouseDragged() {
     if (vehicleLocked && selectedVehicle != null) {
         selectedVehicle.setX(mouseX / PIXEL_SIZE - xOffset);
         selectedVehicle.setY(mouseY / PIXEL_SIZE - yOffset);
+    } else if (sourceLocked && selectedSource != null) {
+        selectedSource.setX(mouseX / PIXEL_SIZE - xOffset);
+        selectedSource.setY(mouseY / PIXEL_SIZE - yOffset);
+        rerender();
     }
 }
 
 function mouseReleased() {
     vehicleLocked = false;
     selectedVehicle = null;
-    console.log
+    selectedSource = null;
 }
 
 function generateTerrain() {
@@ -240,6 +268,6 @@ function resetUniverse() {
         }
         u.stimuli.push(row);
     }
-    pg.background(120);
+    pg.background(255, 255, 190);
     pg.noStroke();
 }
