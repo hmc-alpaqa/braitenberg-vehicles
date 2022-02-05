@@ -14,6 +14,12 @@ function setup() {
     addingSource = false;
     removingSource = false;
     removingVehicle = false;
+
+    vehicleLocked = false;
+    selectedVehicle = null;
+    xOffset = 0;
+    yOffset = 0;
+
     vehicle3StartingVelocity = 250;
     sourceIntensity = 100;
 
@@ -110,7 +116,6 @@ function mouseWheel(event) {
 }
 
 function mouseClicked() {
-    let vehicle;
     if (mouseX > 0 && mouseY > 0 && mouseX < MAP_LENGTH && mouseY < MAP_HEIGHT) {
         if (addingSource) {
             u.addSource(new Source(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, sourceIntensity));
@@ -124,7 +129,8 @@ function mouseClicked() {
             if (vehicle != null) {
                 u.removeVehicle(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, vehicle);
             }
-        } else {
+        } else if (addingVehicle != Vehicles.NONE) {
+            let vehicle;
             switch (addingVehicle) {
                 case Vehicles.NONE:
                     return;
@@ -157,6 +163,36 @@ function mouseClicked() {
             colorsIndex = (colorsIndex + 1) % colors.length;
         }
     }
+}
+
+function mousePressed() {
+    if (!addingSource && !removingSource && !removingVehicle && addingVehicle == Vehicles.NONE) {
+        if (u.getNearestVehicle(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE) != null) {
+            let vehicle = u.getNearestVehicle(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+            if (u.overVehicle(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, vehicle)) {
+                selectedVehicle = vehicle;
+                vehicleLocked = true;
+                xOffset =  mouseX / PIXEL_SIZE - selectedVehicle.x;
+                yOffset = mouseY / PIXEL_SIZE - selectedVehicle.y;
+            } else {
+                vehicleLocked = false;
+                selectedVehicle = null;
+            }
+        } 
+    }
+}
+
+function mouseDragged() {
+    if (vehicleLocked && selectedVehicle != null) {
+        selectedVehicle.setX(mouseX / PIXEL_SIZE - xOffset);
+        selectedVehicle.setY(mouseY / PIXEL_SIZE - yOffset);
+    }
+}
+
+function mouseReleased() {
+    vehicleLocked = false;
+    selectedVehicle = null;
+    console.log
 }
 
 function generateTerrain() {

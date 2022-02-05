@@ -33,18 +33,24 @@ class Universe {
             let smallestDist = (this.vehicles[0].r.subtract(mousePos)).getMagnitude() ;
             let closestVehicle = this.vehicles[0]
             for (let vehicle of this.vehicles) {
-                dist = (vehicle.r.subtract(mousePos)).getMagnitude()
-                if (dist < smallestDist) {smallestDist = dist}
-                closestVehicle = vehicle;
+                dist = (vehicle.r.subtract(mousePos)).getMagnitude();
+                if (dist < smallestDist) {
+                    smallestDist = dist
+                    closestVehicle = vehicle;
+                }
             }
             return closestVehicle; 
         }
         return null;
     }
 
+    overVehicle(mouseX, mouseY, vehicle) {
+        return (mouseX <= vehicle.x + VEHICLE_SIZE / 2) && (mouseX >= vehicle.x - VEHICLE_SIZE / 2)
+        && (mouseY <= vehicle.y + VEHICLE_SIZE / 2) && (mouseY >= vehicle.y - VEHICLE_SIZE / 2);
+    }
+
     removeVehicle(mouseX, mouseY, vehicle) {
-        if ((mouseX <= vehicle.x + VEHICLE_SIZE / 2) && (mouseX >= vehicle.x - VEHICLE_SIZE / 2)
-            && (mouseY <= vehicle.y + VEHICLE_SIZE / 2) && (mouseY >= vehicle.y - VEHICLE_SIZE / 2)) {
+        if (this.overVehicle(mouseX, mouseY, vehicle)) {
             let index = this.vehicles.indexOf(vehicle);
             if (index > -1) {
                 this.vehicles.splice(index, 1);
@@ -65,8 +71,10 @@ class Universe {
             let closestSource = this.sources[0]
             for (let source of this.sources) {
                 dist = (source.r.subtract(mousePos)).getMagnitude()
-                if (dist < smallestDist) {smallestDist = dist}
-                closestSource = source;
+                if (dist < smallestDist) {
+                    smallestDist = dist
+                    closestSource = source;
+                }
             }
             return closestSource; 
         } 

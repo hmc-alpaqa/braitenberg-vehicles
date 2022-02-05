@@ -31,6 +31,14 @@ class Vehicle {
         return this.gyro.θ;
     }
 
+    setX(x) {
+        this.gyro.r.x = x;
+    }
+
+    setY(y) {
+        this.gyro.r.y = y;
+    }
+
     copy() {
         return Vehicle(this.gyro, this.sensors, this.motorControllers, this.motors);
     }
