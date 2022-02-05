@@ -13,11 +13,12 @@ function setup() {
     addingVehicle = Vehicles.NONE;
     addingSource = false;
     removingSource = false;
+    removingVehicle = false;
     vehicle3StartingVelocity = 250;
     sourceIntensity = 100;
 
     pg = createGraphics(MAP_LENGTH, MAP_HEIGHT);
-    pg.background(120);
+    pg.background(255, 255, 190);
     pg.noStroke();
     colors = ["crimson", "mediumseagreen", "royalblue", "gold", "deepskyblue", "white", "mediumvioletred", "darkgreen", "indigo", "hotpink", "yellowgreen", "lightblue"]
     colorsIndex = 0;
@@ -113,13 +114,16 @@ function mouseClicked() {
     if (mouseX > 0 && mouseY > 0 && mouseX < MAP_LENGTH && mouseY < MAP_HEIGHT) {
         if (addingSource) {
             u.addSource(new Source(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, sourceIntensity));
-            Renderer.graphicsSetup();
-            generateTerrain();
-            resetCanvas();
-            renderTerrain();
         } else if (removingSource) {
             let source = u.getNearestSource(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
-            u.removeSource(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, source)
+            if (source != null) {
+                u.removeSource(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, source);
+            }
+        } else if (removingVehicle) {
+            let vehicle = u.getNearestVehicle(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+            if (vehicle != null) {
+                u.removeVehicle(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, vehicle);
+            }
         } else {
             switch (addingVehicle) {
                 case Vehicles.NONE:
@@ -169,6 +173,13 @@ function generateTerrain() {
 function resetCanvas() {
     pg.fill(255, 255, 190);
     pg.rect(0, 0, MAP_LENGTH, MAP_HEIGHT);
+}
+
+function rerender() {
+    resetCanvas();
+    Renderer.graphicsSetup();
+    generateTerrain();
+    renderTerrain();
 }
 
 function renderTerrain() {

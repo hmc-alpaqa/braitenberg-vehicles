@@ -15,6 +15,10 @@ class Vehicle {
         this.color = colors[colorsIndex];
     }
 
+    get r() {
+        return this.gyro.r;
+    }
+
     get x() {
         return this.gyro.r.x;
     }

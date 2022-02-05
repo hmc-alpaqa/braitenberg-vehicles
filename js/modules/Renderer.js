@@ -47,9 +47,9 @@ class Renderer {
 
     static renderSource(source) {
         fill(255);
-        circle(source.r.x * PIXEL_SIZE, source.r.y * PIXEL_SIZE, SOURCE_SIZE * PIXEL_SIZE);
+        circle(source.x * PIXEL_SIZE, source.y * PIXEL_SIZE, SOURCE_SIZE * PIXEL_SIZE);
         fill(0);
-        text(source.intensity, source.r.x * PIXEL_SIZE, source.r.y * PIXEL_SIZE);
+        text(source.intensity, source.x * PIXEL_SIZE, source.y * PIXEL_SIZE);
     }
 
     static renderData(vehicle) {

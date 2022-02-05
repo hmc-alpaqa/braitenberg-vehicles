@@ -65,6 +65,7 @@ let zoomLabel = document.querySelector("#zoom-label");
 ////////// VEHICLES //////////
 let vehicleSelect = document.querySelector("#vehicle-select");
 let addVehicleButton = document.querySelector("#add-vehicle-button");
+let removeVehicleButton = document.querySelector("#remove-vehicle-button");
 let removeAllVehiclesButton = document.querySelector("#remove-all-vehicles-button");
 let vehicle4aSelect = document.querySelector("#vehicle-4a-select");
 let vehicle4bSelect = document.querySelector("#vehicle-4b-select");
@@ -195,11 +196,30 @@ addVehicleButton.addEventListener("click", () => {
         addingSource = false;
         removingSource = false;
         addingVehicle = vehicleSelect.value;
+        removingVehicle = false;
         addVehicleButton.classList.add("clicked");
+        removeVehicleButton.classList.remove("clicked");
         addSourceButton.classList.remove("clicked");
         removeSourceButton.classList.remove("clicked");
     }
 });
+
+////////// REMOVE VEHICLE BUTTON //////////
+removeVehicleButton.addEventListener("click", () => {
+    if (removingVehicle) {
+        removingVehicle = false;
+        removeVehicleButton.classList.remove("clicked");
+    } else {
+        addingVehicle = Vehicles.NONE;
+        removingVehicle = true;
+        addingSource = false;
+        removingSource = false;
+        addVehicleButton.classList.remove("clicked");
+        removeVehicleButton.classList.add("clicked");
+        addSourceButton.classList.remove("clicked");
+        removeSourceButton.classList.remove("clicked");
+    }
+})
 
 ////////// REMOVE ALL VEHICLES BUTTON //////////
 removeAllVehiclesButton.addEventListener("click", () => {
@@ -225,7 +245,9 @@ addSourceButton.addEventListener("click", () => {
         addingVehicle = Vehicles.NONE;
         addingSource = true;
         removingSource = false;
+        removingVehicle = false;
         addVehicleButton.classList.remove("clicked");
+        removeVehicleButton.classList.remove("clicked");
         addSourceButton.classList.add("clicked");
         removeSourceButton.classList.remove("clicked");
     } else {
@@ -241,9 +263,11 @@ removeSourceButton.addEventListener("click", () => {
         removeSourceButton.classList.remove("clicked");
     } else {
         addingVehicle = Vehicles.NONE;
+        removingVehicle = false;
         addingSource = false;
         removingSource = true;
         addVehicleButton.classList.remove("clicked");
+        removeVehicleButton.classList.remove("clicked");
         addSourceButton.classList.remove("clicked");
         removeSourceButton.classList.add("clicked");
     }
@@ -277,6 +301,7 @@ resetButton.addEventListener("click", () => {
         addVehicleButton.classList.remove("clicked");
         addSourceButton.classList.remove("clicked");
         removeSourceButton.classList.remove("clicked");
+        removeVehicleButton.classList.remove("clicked");
         startStopButton.classList.remove("clicked");
     }
     zoomLabel.innerHTML = "Zoom: 100";
