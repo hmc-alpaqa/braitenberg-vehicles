@@ -38,6 +38,18 @@ class Universe {
         this.sources.push(source);
     }
 
+    getNearestSource(x, y) {
+        let mousePos = new Vector(x, y);
+        let smallestDist = (this.sources[0].r.subtract(mousePos)).getMagnitude() ;
+        let closestSource = this.sources[0]
+        for (let source of this.sources) {
+            dist = (source.r.subtract(mousePos)).getMagnitude()
+            if (dist < smallestDist) {smallestDist = dist}
+            closestSource = source;
+        }
+        return closestSource 
+    }
+
     getSource(x, y) {
         let closestSource = null;
         for (let source of u.sources) {
