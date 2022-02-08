@@ -26,9 +26,9 @@ function setup() {
     sourceIntensity = 100;
 
     pg = createGraphics(MAP_LENGTH, MAP_HEIGHT);
-    pg.background(255, 255, 190);
+    pg.background(0, 0, 256);
     pg.noStroke();
-    colors = ["crimson", "mediumseagreen", "royalblue", "gold", "deepskyblue", "white", "mediumvioletred", "darkgreen", "indigo", "hotpink", "yellowgreen", "lightblue"]
+    colors = ["crimson", "mediumseagreen", "gold", "deepskyblue", "white", "mediumvioletred", "darkgreen", "indigo", "hotpink", "yellowgreen", "lightblue"]
     colorsIndex = 0;
 
     sensorGraphic = createGraphics(PIXEL_SIZE * SENSOR_SIZE * 2, PIXEL_SIZE * SENSOR_SIZE);
@@ -250,7 +250,18 @@ function rerender() {
 function renderTerrain() {
     for (let y = 0; y < u.stimuli.length; y+= Math.round(Math.sqrt(sourceRenderFactor))) {
         for (let x = 0; x < u.stimuli[y].length; x+= Math.round(Math.sqrt(sourceRenderFactor))) {
-            pg.fill(255 + 256 * u.stimuli[y][x], 255 - 256 * abs(u.stimuli[y][x]), 190 - 256 * u.stimuli[y][x])
+            let intensity = u.stimuli[y][x]
+            let r, g, b;
+            if (intensity <= 0.5) {
+                r = 0;
+                g = (-1024 * intensity) * (intensity-1);
+                b = 256;
+            } else {
+                r = 256;
+                g = (-1024 * intensity) * (intensity-1);
+                b = 0;
+            }
+            pg.fill(r,g,b);
             pg.square(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE * sourceRenderFactor);
         }
     }
