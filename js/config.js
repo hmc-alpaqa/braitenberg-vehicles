@@ -16,6 +16,8 @@ DEFAULT_VEHICLE3_STARTING_VELOCITY = 250
 FPS = 60;
 SECONDS_PATH_VISIBLE = 2
 
+ZOOM_TO_SOURCE_RENDER_FACTOR = 0.04
+
 VELOCITY_FUNCTIONS = {
     "sinusoidal" : x => 100 * (Math.sin(x) + 1),
     "quadratic" : x => Math.pow(x, 2),

@@ -57,6 +57,7 @@ class Renderer {
         text('x: ' + vehicle.x.toFixed(2), 10, 10)
         text('y: ' + vehicle.y.toFixed(2), 10, 30)
         text('θ: ' + (vehicle.gyro.θ / 3.14).toFixed(2) + '	π', 10, 50)
+        text(`FPS: ${frameRate().toFixed(0)}`, 10, 70);
     }
 
     static drawPath(vehicle) {

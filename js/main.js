@@ -37,6 +37,7 @@ function setup() {
     Renderer.motorGraphicSetup();
     vehicleGraphic = createGraphics(PIXEL_SIZE * (VEHICLE_SIZE + (2 * SENSOR_SIZE) + MOTOR_SIZE), PIXEL_SIZE * VEHICLE_SIZE);
     θ = 0;
+    sourceRenderFactor = 4;
 }
 
 function draw() {
@@ -247,10 +248,10 @@ function rerender() {
 }
 
 function renderTerrain() {
-    for (let y = 0; y < u.stimuli.length; y++) {
-        for (let x = 0; x < u.stimuli[y].length; x++) {
+    for (let y = 0; y < u.stimuli.length; y+= Math.round(Math.sqrt(sourceRenderFactor))) {
+        for (let x = 0; x < u.stimuli[y].length; x+= Math.round(Math.sqrt(sourceRenderFactor))) {
             pg.fill(255 + 256 * u.stimuli[y][x], 255 - 256 * abs(u.stimuli[y][x]), 190 - 256 * u.stimuli[y][x])
-            pg.square(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE);
+            pg.square(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE * sourceRenderFactor);
         }
     }
 }

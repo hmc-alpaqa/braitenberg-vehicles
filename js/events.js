@@ -181,6 +181,7 @@ zoomSlider.addEventListener("input", () => {
     zoomLabel.innerHTML = `Zoom: ${zoomSlider.value}`;
     MAP_RESOLUTION = parseInt(zoomSlider.value);
     PIXEL_SIZE = MAP_LENGTH / MAP_RESOLUTION;
+    sourceRenderFactor = ZOOM_TO_SOURCE_RENDER_FACTOR * zoomSlider.value;
     Renderer.graphicsSetup();
     resetCanvas();
     generateTerrain();
