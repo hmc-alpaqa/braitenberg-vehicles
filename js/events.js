@@ -188,6 +188,10 @@ zoomSlider.addEventListener("input", () => {
     renderTerrain();
 });
 
+zoomSlider.addEventListener("mouseup", () => {
+    document.activeElement.blur();
+})
+
 ////////// ADD VEHICLE BUTTON //////////
 addVehicleButton.addEventListener("click", () => {
     if (addingVehicle != Vehicles.NONE) {

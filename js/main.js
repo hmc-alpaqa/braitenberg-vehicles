@@ -100,7 +100,7 @@ function draw() {
         }
     }
 
-    if (keyIsPressed && (keyCode === RIGHT_ARROW) && zoomSlider.value < 200) {
+    if (keyIsPressed && (keyCode === RIGHT_ARROW)) {
         θ += 0.05;
     } else if (keyIsPressed && (keyCode === LEFT_ARROW)) {
         θ -= 0.05;
