@@ -59,7 +59,7 @@ function draw() {
 
     if (!simulationPaused) {
         for (let vehicle of u.vehicles) {
-            vehicle.step(1 / FPS);
+            vehicle.step(SPEED / FPS);
         }
     }
 
