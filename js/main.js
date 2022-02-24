@@ -108,7 +108,7 @@ function draw() {
 }
 
 function mouseWheel(event) {
-    if (parseInt(zoomSlider.value) <= 200 && parseInt(zoomSlider.value) >= 50) {
+    if (parseInt(zoomSlider.value) <= 400 && parseInt(zoomSlider.value) >= 50) {
         zoomSlider.value = parseInt(zoomSlider.value) + event.delta;
         zoomLabel.innerText = `Zoom ${zoomSlider.value}`;
         MAP_RESOLUTION = parseInt(zoomSlider.value);
