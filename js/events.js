@@ -61,6 +61,7 @@ let startStopButton = document.querySelector("#start-stop-button");
 let resetButton = document.querySelector("#reset-button");
 let zoomSlider = document.querySelector("#zoom-slider");
 let zoomLabel = document.querySelector("#zoom-label");
+let speedButtons = document.querySelectorAll(".speed-button");
 
 ////////// VEHICLES //////////
 let vehicleSelect = document.querySelector("#vehicle-select");
@@ -191,6 +192,13 @@ zoomSlider.addEventListener("input", () => {
 zoomSlider.addEventListener("mouseup", () => {
     document.activeElement.blur();
 })
+
+////////// SPEED ADJUSTER //////////
+for (speedButton of speedButtons) {
+    speedButton.addEventListener("change", () => {
+        SPEED = document.querySelector("input[name='speed']:checked").value;
+    })
+}
 
 ////////// ADD VEHICLE BUTTON //////////
 addVehicleButton.addEventListener("click", () => {
