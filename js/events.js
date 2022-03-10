@@ -317,9 +317,9 @@ resetButton.addEventListener("click", () => {
         removeVehicleButton.classList.remove("clicked");
         startStopButton.classList.remove("clicked");
     }
-    zoomLabel.innerHTML = "Zoom: 100";
-    zoomSlider.value = 100;
-    MAP_RESOLUTION = 100;
+    zoomLabel.innerHTML = "Zoom: 400";
+    zoomSlider.value = 400;
+    MAP_RESOLUTION = 400;
     PIXEL_SIZE = MAP_LENGTH / MAP_RESOLUTION;
     Renderer.graphicsSetup();
     resetUniverse();

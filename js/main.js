@@ -239,7 +239,7 @@ function generateTerrain() {
 }
 
 function resetCanvas() {
-    pg.fill(255, 255, 190);
+    pg.fill(0, 0, 256);
     pg.rect(0, 0, MAP_LENGTH, MAP_HEIGHT);
 }
 
@@ -283,6 +283,6 @@ function resetUniverse() {
         }
         u.stimuli.push(row);
     }
-    pg.background(255, 255, 190);
+    pg.background(0, 0, 256);
     pg.noStroke();
 }
