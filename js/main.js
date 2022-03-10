@@ -43,7 +43,10 @@ function setup() {
 function draw() {
     background(220);
     // draw a square for each cell in stimuli
-    image(pg, 0, 0, MAP_LENGTH, MAP_HEIGHT);
+    translate(MAP_LENGTH/2, MAP_HEIGHT/2);
+    image(pg, -MAP_LENGTH/2, -MAP_HEIGHT/2, MAP_LENGTH, MAP_HEIGHT);
+    newMouseX = mouseX-MAP_LENGTH/2;
+    newMouseY = mouseY-MAP_HEIGHT/2;
     if (u.vehicles.length > 0) {
         let mostRecentVehicle = u.vehicles[u.vehicles.length - 1]
         Renderer.renderData(mostRecentVehicle);
@@ -66,35 +69,35 @@ function draw() {
     if (addingVehicle) {
         switch (addingVehicle) {
             case Vehicles.VEHICLE1:
-                vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle1(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE2A:
-                vehicle = Vehicle2a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle2a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE2B:
-                vehicle = Vehicle2b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle2b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE2C:
-                vehicle = Vehicle2c(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle2c(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE3A:
-                vehicle = Vehicle3a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle3a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE3B:
-                vehicle = Vehicle3b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle3b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE4A:
-                vehicle = Vehicle4a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle4a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE4B:
-                vehicle = Vehicle4b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle4b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                 Renderer.renderVehicle(vehicle);
                 break;
         }
@@ -121,16 +124,16 @@ function mouseWheel(event) {
 function mouseClicked() {
     if (mouseX > 0 && mouseY > 0 && mouseX < MAP_LENGTH && mouseY < MAP_HEIGHT) {
         if (addingSource) {
-            u.addSource(new Source(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, sourceIntensity));
+            u.addSource(new Source(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, sourceIntensity));
         } else if (removingSource) {
-            let source = u.getNearestSource(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+            let source = u.getNearestSource(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE);
             if (source != null) {
-                u.removeSource(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, source);
+                u.removeSource(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, source);
             }
         } else if (removingVehicle) {
-            let vehicle = u.getNearestVehicle(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE);
+            let vehicle = u.getNearestVehicle(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE);
             if (vehicle != null) {
-                u.removeVehicle(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, vehicle);
+                u.removeVehicle(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, vehicle);
             }
         } else if (addingVehicle != Vehicles.NONE) {
             let vehicle;
@@ -138,28 +141,28 @@ function mouseClicked() {
                 case Vehicles.NONE:
                     return;
                 case Vehicles.VEHICLE1:
-                    vehicle = Vehicle1(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle1(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                     break;
                 case Vehicles.VEHICLE2A:
-                    vehicle = Vehicle2a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle2a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                     break;
                 case Vehicles.VEHICLE2B:
-                    vehicle = Vehicle2b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle2b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                     break;
                 case Vehicles.VEHICLE2C:
-                    vehicle = Vehicle2c(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle2c(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                     break;
                 case Vehicles.VEHICLE3A:
-                    vehicle = Vehicle3a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle3a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                     break;
                 case Vehicles.VEHICLE3B:
-                    vehicle = Vehicle3b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle3b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                     break;
                 case Vehicles.VEHICLE4A:
-                    vehicle = Vehicle4a(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle4a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                     break;
                 case Vehicles.VEHICLE4B:
-                    vehicle = Vehicle4b(u, mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle4b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
                     break;
             }
             u.addVehicle(vehicle);
@@ -170,7 +173,7 @@ function mouseClicked() {
 
 function mousePressed() {
     if (!addingSource && !removingSource && !removingVehicle && addingVehicle == Vehicles.NONE) {
-        let mousePos = new Vector(mouseX / PIXEL_SIZE, mouseY / PIXEL_SIZE)
+        let mousePos = new Vector(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE)
         let nearestSourceDist = 1000000;
         let nearestVehicleDist = 1000000;
         if (u.sources.length > 0) {
@@ -209,11 +212,11 @@ function mousePressed() {
 
 function mouseDragged() {
     if (vehicleLocked && selectedVehicle != null) {
-        selectedVehicle.setX(mouseX / PIXEL_SIZE - xOffset);
-        selectedVehicle.setY(mouseY / PIXEL_SIZE - yOffset);
+        selectedVehicle.setX(newMouseX / PIXEL_SIZE - xOffset);
+        selectedVehicle.setY(newMouseY / PIXEL_SIZE - yOffset);
     } else if (sourceLocked && selectedSource != null) {
-        selectedSource.setX(mouseX / PIXEL_SIZE - xOffset);
-        selectedSource.setY(mouseY / PIXEL_SIZE - yOffset);
+        selectedSource.setX(newMouseX / PIXEL_SIZE - xOffset);
+        selectedSource.setY(newMouseY / PIXEL_SIZE - yOffset);
         rerender();
     }
 }
@@ -226,9 +229,9 @@ function mouseReleased() {
 
 function generateTerrain() {
     u.stimuli = [];
-    for (let y = 0; y < Math.floor(MAP_HEIGHT / PIXEL_SIZE); y++) {
+    for (let y = -MAP_HEIGHT/2/PIXEL_SIZE; y < Math.floor(MAP_HEIGHT/2/PIXEL_SIZE); y++) {
         let row = [];
-        for (let x = 0; x < Math.floor(MAP_LENGTH / PIXEL_SIZE); x++) {
+        for (let x = -MAP_LENGTH/2/PIXEL_SIZE; x < Math.floor(MAP_LENGTH/2/PIXEL_SIZE); x++) {
             row.push(u.getStimulus(x, y));
         }
         u.stimuli.push(row);

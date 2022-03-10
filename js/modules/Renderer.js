@@ -38,11 +38,11 @@ class Renderer {
         for (let sensor of vehicle.sensors) {
             vehicleGraphic.image(sensorGraphic, PIXEL_SIZE * (MOTOR_SIZE + VEHICLE_SIZE), PIXEL_SIZE * (sensor.offset.y + 0.5 * (VEHICLE_SIZE - SENSOR_SIZE)));
         }
+        push();
         translate(vehicle.x * PIXEL_SIZE, vehicle.y * PIXEL_SIZE);
         rotate(vehicle.θ);
         image(vehicleGraphic, PIXEL_SIZE * (-MOTOR_SIZE - VEHICLE_SIZE / 2), PIXEL_SIZE * -VEHICLE_SIZE / 2);
-        rotate(-vehicle.θ);
-        translate(-vehicle.x * PIXEL_SIZE, -vehicle.y * PIXEL_SIZE);
+        pop();
     }
 
     static renderSource(source) {
@@ -53,11 +53,14 @@ class Renderer {
     }
 
     static renderData(vehicle) {
+        push();
+        translate(-MAP_LENGTH/2, -MAP_HEIGHT/2);
         textAlign(LEFT);
         text('x: ' + vehicle.x.toFixed(2), 10, 10)
         text('y: ' + vehicle.y.toFixed(2), 10, 30)
         text('θ: ' + (vehicle.gyro.θ / 3.14).toFixed(2) + '	π', 10, 50)
         text(`FPS: ${frameRate().toFixed(0)}`, 10, 70);
+        pop();
     }
 
     static drawPath(vehicle) {
