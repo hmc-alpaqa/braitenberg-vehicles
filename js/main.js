@@ -54,6 +54,10 @@ function draw() {
     }
     for (let vehicle of u.vehicles) {
         Renderer.renderVehicle(vehicle);
+        if (Math.abs(vehicle.x) > 0.75*MAP_LENGTH/DEFAULT_PIXEL_SIZE || Math.abs(vehicle.y) > 0.75*MAP_HEIGHT/DEFAULT_PIXEL_SIZE) {
+            u.vehicles.splice(u.vehicles.indexOf(vehicle), 1);
+        }
+        updateVehicleCensus();
     }
 
     for (let source of u.sources) {

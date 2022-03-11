@@ -73,6 +73,7 @@ let vehicle4bSelect = document.querySelector("#vehicle-4b-select");
 let startingVelocity = document.querySelector("#starting-velocity");
 let velocitySlider = document.querySelector("#velocity-slider");
 let velocityLabel = document.querySelector("#velocity-label");
+let totalVehicles = document.querySelector("#total-vehicles")
 
 ////////// SOURCES //////////
 let addSourceButton = document.querySelector("#add-source-button");
@@ -176,6 +177,11 @@ velocitySlider.addEventListener("change", () => {
     velocityLabel.innerHTML = `Starting Velocity: ${velocitySlider.value}`;
     vehicle3StartingVelocity = parseInt(velocitySlider.value);
 })
+
+////////// VEHICLE CENSUS ///////////
+const updateVehicleCensus = () => {
+    totalVehicles.innerText = `Total Vehicles: ${u.vehicles.length}`;
+}
 
 ////////// ZOOM SLIDER //////////
 zoomSlider.addEventListener("input", () => {
