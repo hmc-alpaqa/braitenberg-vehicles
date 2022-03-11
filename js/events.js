@@ -76,6 +76,7 @@ let velocityLabel = document.querySelector("#velocity-label");
 let totalVehicles = document.querySelector("#total-vehicles")
 
 ////////// SOURCES //////////
+let sourceIntensityInput = document.querySelector("#source-intensity-input");
 let addSourceButton = document.querySelector("#add-source-button");
 let removeSourceButton = document.querySelector("#remove-source-button");
 let removeAllSourcesButton = document.querySelector("#remove-all-sources-button");
@@ -254,9 +255,21 @@ vehicle4bSelect.addEventListener("change", () => {
     velocityFunction = VELOCITY_FUNCTIONS[vehicle4bSelect.value];
 })
 
+////////// SOURCE INTENSITY INPUT //////////
+sourceIntensityInput.addEventListener("input", () => {
+    addingVehicle = Vehicles.NONE;
+    addingSource = false;
+    removingSource = false;
+    removingVehicle = false;
+    addVehicleButton.classList.remove("clicked");
+    removeVehicleButton.classList.remove("clicked");
+    addSourceButton.classList.remove("clicked");
+    removeSourceButton.classList.remove("clicked");
+})
+
 ////////// ADD SOURCE BUTTON //////////
 addSourceButton.addEventListener("click", () => {
-    sourceIntensity = document.querySelector("#source-intensity-input").value;
+    sourceIntensity = sourceIntensityInput.value;
     if (addingSource) {
         addingSource = false;
         addSourceButton.classList.remove("clicked");
@@ -270,7 +283,7 @@ addSourceButton.addEventListener("click", () => {
         addSourceButton.classList.add("clicked");
         removeSourceButton.classList.remove("clicked");
     } else {
-        alert("Please enter an intensity above 0 and under 1000.");
+        alert("Please enter an intensity between 0 and 1000");
     }
 
 });
