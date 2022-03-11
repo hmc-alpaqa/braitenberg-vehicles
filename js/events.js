@@ -3,35 +3,37 @@ aboutVehicles = [
     {
         header: "Vehicle 1",
         text: "Vehicle 1 has one sensor and one motor. The speed of the motor is proportional to the input received by the sensor. Braitenberg considers this vehicle to be <b>alive</b>.",
-        image:"../images/vehicle1.png"
+        image: "../images/vehicle1.png",
     }, 
     {
         header: "Vehicle 2a",
-        text: "Vehicle 2a has two sensors and two motors. Each sensor is connected to the motor on the same side. This vehicle tends to avoid the source unless the source is directly in front of it, in which case it will move in the direction of the source. Braitenberg considers this vehicle to be a <b>coward</b>."
+        text: "Vehicle 2a has two sensors and two motors. Each sensor is connected to the motor on the same side. This vehicle tends to avoid the source unless the source is directly in front of it, in which case it will move in the direction of the source. Braitenberg considers this vehicle to be a <b>coward</b>.",
+        image: "../images/vehicle2a.png",
     },
     {
         header: "Vehicle 2b",
-        text: "Vehicle 2b has two sensors and two motors. Each sensor is connected to the motor on the opposite side. This vehicle tends to move towards the source in what could be described as an attacking motion. Braitenberg considers this vehicle <b>aggressive</b>."
+        text: "Vehicle 2b has two sensors and two motors. Each sensor is connected to the motor on the opposite side. This vehicle tends to move towards the source in what could be described as an attacking motion. Braitenberg considers this vehicle <b>aggressive</b>.",
+        image: "../images/vehicle2b.png",
     },
     {
         header: "Vehicle 2c",
-        text: "Vehicle 2c has two sensors and two motors. Each sensor is connected to both of the motors. This results in behavior similar to that of Vehicle 1."
+        text: "Vehicle 2c has two sensors and two motors. Each sensor is connected to both of the motors. This results in behavior similar to that of Vehicle 1.",
     },
     {
         header: "Vehicle 3a",
-        text: "Vehicle 3a has two sensors, two motors, and two inhibitors. Each inhibitor is connected to the motor on the same side. This causes the vehicle to be attracted to the source. Braitenberg considers this vehicle to experience <b>love</b>."
+        text: "Vehicle 3a has two sensors, two motors, and two inhibitors. Each inhibitor is connected to the motor on the same side. This causes the vehicle to be attracted to the source. Braitenberg considers this vehicle to experience <b>love</b>.",
     },
     {
         header: "Vehicle 3b",
-        text: "Vehicle 3b has two sensors, two motors, and two inhibitors. Each inhibitor is connected to the motor on the opposite side. This causes the vehicle to speed up away from the source. Braitenberg considers this vehicle to be an <b>explorer</b>."
+        text: "Vehicle 3b has two sensors, two motors, and two inhibitors. Each inhibitor is connected to the motor on the opposite side. This causes the vehicle to speed up away from the source. Braitenberg considers this vehicle to be an <b>explorer</b>.",
     },
     {
         header: "Vehicle 4a",
-        text: "Vehicle 4a has two sensors and two motors. Each sensor is connected to the motor on the same side. Whereas in vehicles 1-3 there was a linear relationship between motor output and sensor input, the motor output of Vehicle 4a is related to the source input by a differentiable nonlinear function. The behavior of the vehicle depends on the selected function. Braitenberg considers this vehicle to have <b>instincts</b>."
+        text: "Vehicle 4a has two sensors and two motors. Each sensor is connected to the motor on the same side. Whereas in vehicles 1-3 there was a linear relationship between motor output and sensor input, the motor output of Vehicle 4a is related to the source input by a differentiable nonlinear function. The behavior of the vehicle depends on the selected function. Braitenberg considers this vehicle to have <b>instincts</b>.",
     },
     {
         header: "Vehicle 4b",
-        text: "Vehicle 4b has two sensors and two motors. Each sensor is connected to the motor on the same side. Like Vehicle 4a, there is a nonlinear mapping from sensor input to motor output. Unlike Vehicle 4a, the mapping of sensor input to motor output is defined by a nondifferentiable function rather than a differentiable one. Vehicle 4b should behave more decisively than Vehicle 4a, but the specific behavior of the vehicle is dependent on the function selected. Braitenberg considers this vehicle to have <b>will</b>."
+        text: "Vehicle 4b has two sensors and two motors. Each sensor is connected to the motor on the same side. Like Vehicle 4a, there is a nonlinear mapping from sensor input to motor output. Unlike Vehicle 4a, the mapping of sensor input to motor output is defined by a nondifferentiable function rather than a differentiable one. Vehicle 4b should behave more decisively than Vehicle 4a, but the specific behavior of the vehicle is dependent on the function selected. Braitenberg considers this vehicle to have <b>will</b>.",
     }
 ]
 
@@ -127,7 +129,7 @@ for (aboutVehiclesMenuItem of aboutVehiclesMenuItems) {
         vehicleHeader.name = i;
         vehicleHeader.innerText = aboutVehicles[i].header;
         vehicleText.innerHTML = aboutVehicles[i].text;
-        vehicleImage.src = aboutVehicles[0].image;
+        vehicleImage.src = aboutVehicles[i].image;
     });
 }
 
@@ -141,6 +143,7 @@ nextVehicle.addEventListener("click", () => {
     vehicleHeader.name = i;
     vehicleHeader.innerText = aboutVehicles[i].header;
     vehicleText.innerHTML = aboutVehicles[i].text;
+    vehicleImage.src = aboutVehicles[i].image;
 });
 
 previousVehicle.addEventListener("click", () => {
@@ -148,6 +151,7 @@ previousVehicle.addEventListener("click", () => {
     vehicleHeader.name = i;
     vehicleHeader.innerText = aboutVehicles[i].header;
     vehicleText.innerHTML = aboutVehicles[i].text;
+    vehicleImage.src = aboutVehicles[i].image
 });
 
 ////////// ADD VEHICLE INPUT //////////
