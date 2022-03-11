@@ -213,14 +213,9 @@ addVehicleButton.addEventListener("click", () => {
         addingVehicle = Vehicles.NONE;
         addVehicleButton.classList.remove("clicked");
     } else {
-        addingSource = false;
-        removingSource = false;
+        unclickVehicleSourceButtons();
         addingVehicle = vehicleSelect.value;
-        removingVehicle = false;
         addVehicleButton.classList.add("clicked");
-        removeVehicleButton.classList.remove("clicked");
-        addSourceButton.classList.remove("clicked");
-        removeSourceButton.classList.remove("clicked");
     }
 });
 
@@ -230,20 +225,17 @@ removeVehicleButton.addEventListener("click", () => {
         removingVehicle = false;
         removeVehicleButton.classList.remove("clicked");
     } else {
-        addingVehicle = Vehicles.NONE;
+        unclickVehicleSourceButtons();
         removingVehicle = true;
-        addingSource = false;
-        removingSource = false;
-        addVehicleButton.classList.remove("clicked");
         removeVehicleButton.classList.add("clicked");
-        addSourceButton.classList.remove("clicked");
-        removeSourceButton.classList.remove("clicked");
     }
 })
 
 ////////// REMOVE ALL VEHICLES BUTTON //////////
 removeAllVehiclesButton.addEventListener("click", () => {
+    unclickVehicleSourceButtons();
     u.vehicles = [];
+    updateVehicleCensus();
 })
 
 ////////// VELOCITY FUNCTION SELECTS //////////
@@ -257,14 +249,7 @@ vehicle4bSelect.addEventListener("change", () => {
 
 ////////// SOURCE INTENSITY INPUT //////////
 sourceIntensityInput.addEventListener("input", () => {
-    addingVehicle = Vehicles.NONE;
-    addingSource = false;
-    removingSource = false;
-    removingVehicle = false;
-    addVehicleButton.classList.remove("clicked");
-    removeVehicleButton.classList.remove("clicked");
-    addSourceButton.classList.remove("clicked");
-    removeSourceButton.classList.remove("clicked");
+    unclickVehicleSourceButtons();
 })
 
 ////////// ADD SOURCE BUTTON //////////
@@ -274,14 +259,9 @@ addSourceButton.addEventListener("click", () => {
         addingSource = false;
         addSourceButton.classList.remove("clicked");
     } else if (sourceIntensity > 0 && sourceIntensity <= 1000) {
-        addingVehicle = Vehicles.NONE;
+        unclickVehicleSourceButtons();
         addingSource = true;
-        removingSource = false;
-        removingVehicle = false;
-        addVehicleButton.classList.remove("clicked");
-        removeVehicleButton.classList.remove("clicked");
         addSourceButton.classList.add("clicked");
-        removeSourceButton.classList.remove("clicked");
     } else {
         alert("Please enter an intensity between 0 and 1000");
     }
@@ -294,13 +274,8 @@ removeSourceButton.addEventListener("click", () => {
         removingSource = false;
         removeSourceButton.classList.remove("clicked");
     } else {
-        addingVehicle = Vehicles.NONE;
-        removingVehicle = false;
-        addingSource = false;
+        unclickVehicleSourceButtons();
         removingSource = true;
-        addVehicleButton.classList.remove("clicked");
-        removeVehicleButton.classList.remove("clicked");
-        addSourceButton.classList.remove("clicked");
         removeSourceButton.classList.add("clicked");
     }
 });
@@ -308,6 +283,7 @@ removeSourceButton.addEventListener("click", () => {
 ////////// REMOVE ALL SOURCES ///////////
 removeAllSourcesButton.addEventListener("click", () => {
     u.sources = [];
+    unclickVehicleSourceButtons();
     resetCanvas();
     generateTerrain();
     renderTerrain();
@@ -330,12 +306,9 @@ startStopButton.addEventListener("click", () => {
 resetButton.addEventListener("click", () => {
     if (!simulationPaused) {
         startStopButton.innerText = "Start";
-        addVehicleButton.classList.remove("clicked");
-        addSourceButton.classList.remove("clicked");
-        removeSourceButton.classList.remove("clicked");
-        removeVehicleButton.classList.remove("clicked");
         startStopButton.classList.remove("clicked");
     }
+    unclickVehicleSourceButtons();
     zoomLabel.innerHTML = "Zoom: 400";
     zoomSlider.value = 400;
     MAP_RESOLUTION = 400;
@@ -343,3 +316,14 @@ resetButton.addEventListener("click", () => {
     Renderer.graphicsSetup();
     resetUniverse();
 });
+
+const unclickVehicleSourceButtons = () => {
+    addingVehicle = Vehicles.NONE;
+    removingVehicle = false;
+    addingSource = false;
+    removingSource = false;
+    addVehicleButton.classList.remove("clicked");
+    removeVehicleButton.classList.remove("clicked");
+    addSourceButton.classList.remove("clicked");
+    removeSourceButton.classList.remove("clicked");
+}
