@@ -68,7 +68,7 @@
       <h1>How to Use</h1>
       <hr>
       <h2>Adding a Vehicle</h2>
-      <p>To add a vehicle, select a vehicle in the dropdown and click the Add Vehicle button. Then, move your mouse to where you wish to place the vehicle. Use the left and right arrow keys to adjust the angle. You can keep adding vehicles while the Add Vehicle button is pressed. To change the vehicle being added, reselect the vehicle in the dropdown. If you wish to stop adding vehicles, click the Add Vehicle button again. The variables at the top left allow you to keep track of the position of the most recently placed vehicle with respect to the top left of the canvas as well as its angle of rotation with respect to the horizontal. Once added, you can drag and drop to move a vehicle.</p>
+      <p>To add a vehicle, select a vehicle in the dropdown and click the Add Vehicle button. Then, move your mouse to where you wish to place the vehicle. Use the left and right arrow keys to adjust the angle. You can keep adding vehicles while the Add Vehicle button is pressed. To change the vehicle being added, reselect the vehicle in the dropdown. If you wish to stop adding vehicles, click the Add Vehicle button again. The variables at the top left allow you to keep track of the position of the most recently placed vehicle with respect to the top left of the canvas as well as its angle of rotation with respect to the horizontal. Once added, you can drag and drop to move a vehicle. Vehicles still exist after they leave the canvas, however after a certain distance, a vehicle will automatically delete itself. You can keep track of the total vehicles, including the off-canvas vehicles, in the Vehicles tab.</p>
       <h2>Adding a Source</h2>
       <p>First, you should adjust your zoom to the desired level before adding sources. To add a source, enter the desired intensity of the source and click the Add Source button. Then, move your mouse to where you wish to place the source. You can keep adding sources while the Add source button is pressed. To change the intensity of the source being added, enter the new desired intensity in the input box. If you wish to stop adding sources, click the Add Source button again. Once added, you can drag and drop to move sources.</p>
       <h2>Removing a Source</h2>
@@ -145,6 +145,7 @@
             <option value="hyperbola">Hyperbola</option>
           </select>
         </div>
+        <p id="total-vehicles">Total Vehicles: 0</p>
       </div>
       <div class="menu-item" id="sources">
         <h3>Sources</h3>
