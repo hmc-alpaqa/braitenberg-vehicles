@@ -2,7 +2,8 @@
 aboutVehicles = [
     {
         header: "Vehicle 1",
-        text: "Vehicle 1 has one sensor and one motor. The speed of the motor is proportional to the input received by the sensor. Braitenberg considers this vehicle to be <b>alive</b>."
+        text: "Vehicle 1 has one sensor and one motor. The speed of the motor is proportional to the input received by the sensor. Braitenberg considers this vehicle to be <b>alive</b>.",
+        image:"../images/vehicle1.png"
     }, 
     {
         header: "Vehicle 2a",
@@ -52,6 +53,7 @@ let aboutVehiclesMenuItems = document.querySelectorAll(".about-vehicles-menu-ite
 let aboutVehiclesContent = document.querySelector("#about-vehicles-content");
 let vehicleHeader = document.querySelector("#vehicle-header");
 let vehicleText = document.querySelector("#vehicle-text");
+let vehicleImage = document.querySelector("#vehicle-image");
 let aboutVehiclesMenuLink = document.querySelector("#about-vehicles-menu-link");
 let nextVehicle = document.querySelector("#next-vehicle");
 let previousVehicle = document.querySelector("#previous-vehicle");
@@ -125,6 +127,7 @@ for (aboutVehiclesMenuItem of aboutVehiclesMenuItems) {
         vehicleHeader.name = i;
         vehicleHeader.innerText = aboutVehicles[i].header;
         vehicleText.innerHTML = aboutVehicles[i].text;
+        vehicleImage.src = aboutVehicles[0].image;
     });
 }
 
