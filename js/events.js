@@ -320,6 +320,8 @@ resetButton.addEventListener("click", () => {
         startStopButton.innerText = "Start";
         startStopButton.classList.remove("clicked");
     }
+    document.querySelector("#speed-button-1").checked = true;
+    SPEED = document.querySelector("#speed-button-1").value;
     unclickVehicleSourceButtons();
     zoomLabel.innerHTML = "Zoom: 400";
     zoomSlider.value = 400;

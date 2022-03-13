@@ -287,6 +287,7 @@ function resetUniverse() {
         }
         u.stimuli.push(row);
     }
+    updateVehicleCensus();
     pg.background(0, 0, 256);
     pg.noStroke();
 }
