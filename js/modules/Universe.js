@@ -55,6 +55,7 @@ class Universe {
             if (index > -1) {
                 this.vehicles.splice(index, 1);
             }
+            updateVehicleCensus();
             rerender();
         }
     }
