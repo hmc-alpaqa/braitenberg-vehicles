@@ -23,7 +23,7 @@ aboutVehicles = [
     {
         header: "Vehicle 3a",
         text: "Vehicle 3a has two sensors, two motors, and two inhibitors. Each inhibitor is connected to the motor on the same side. This causes the vehicle to be attracted to the source. Braitenberg considers this vehicle to experience <b>love</b>.",
-        image: "../images/vehicle3a.png"
+        image: "./images/vehicle3a.png"
     },
     {
         header: "Vehicle 3b",
