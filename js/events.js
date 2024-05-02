@@ -44,6 +44,7 @@ aboutVehicles = [
 
 /********* DOM ELEMENTS *********/
 let doc = document.documentElement;
+let body = document.querySelector("body");
 let fullscreenButton = document.querySelector("#fullscreen-button");
 let fullscreenMessage = document.querySelector("#fullscreen-message");
 let aboutButton = document.querySelector("#about-button");
@@ -93,12 +94,24 @@ let removeAllSourcesButton = document.querySelector("#remove-all-sources-button"
 /********* EVENT HANDLING *********/
 ////////// FULLSCREEN //////////
 fullscreenButton.addEventListener("click", () => {
-    doc.requestFullscreen().then(fullscreenMessage.style.display = "none");
+    let fullScreenMessage = document.querySelector("#fullscreen-message")
+    doc.requestFullscreen().then(body.removeChild(fullScreenMessage));
 });
 
 document.addEventListener("fullscreenchange", () => {
     if (!document.fullscreenElement) {
-        document.exitFullscreen().then(fullscreenMessage.style.display = "block");
+        let fullscreenMessage = `
+                <div id="fullscreen-message">
+                    <h1 style="margin-top: 20%">To use this app, you must enter fullscreen mode. This is different from making your browser window fullscreen.</h1>
+                    <h1>You can enter fullscreen mode by pressing the button below.</h1>
+                    <button id="fullscreen-button">Fullscreen</button>
+                </div>`
+        body.insertAdjacentHTML("afterbegin", fullscreenMessage);
+        let fullscreenButton = document.querySelector("#fullscreen-button");
+        fullscreenButton.addEventListener("click", () => {
+            let fullScreenMessage = document.querySelector("#fullscreen-message")
+            doc.requestFullscreen().then(body.removeChild(fullScreenMessage));
+        });
     }
 });
 
