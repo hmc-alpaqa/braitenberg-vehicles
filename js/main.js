@@ -50,7 +50,7 @@ function draw() {
     if (u.vehicles.length > 0) {
         let mostRecentVehicle = u.vehicles[u.vehicles.length - 1]
         Renderer.renderData(mostRecentVehicle);
-        Renderer.drawPath(mostRecentVehicle);
+        Renderer.drawTrailingPath(mostRecentVehicle);
     }
     for (let vehicle of u.vehicles) {
         Renderer.renderVehicle(vehicle);
