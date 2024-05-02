@@ -105,10 +105,14 @@ document.addEventListener("fullscreenchange", () => {
 ////////// MODALS //////////
 aboutButton.addEventListener("click", () => {
     aboutModal.style.display = "block";
+    // when clicking a modal, the user should stop adding vehicles and sources
+    unclickVehicleSourceButtons();
 });
 
 howToButton.addEventListener("click", () => {
     howToModal.style.display = "block";
+    // when clicking a modal, the user should stop adding vehicles and sources
+    unclickVehicleSourceButtons();
 });
 
 for (closeModalButton of closeModalButtons) {
@@ -124,6 +128,8 @@ aboutVehiclesButton.addEventListener("click", () => {
     aboutVehiclesModal.style.display = "block";
     aboutVehiclesMenu.style.display = "block";
     aboutVehiclesContent.style.display = "none";
+    // when clicking a modal, the user should stop adding vehicles and sources
+    unclickVehicleSourceButtons();
 });
 
 for (aboutVehiclesMenuItem of aboutVehiclesMenuItems) {
