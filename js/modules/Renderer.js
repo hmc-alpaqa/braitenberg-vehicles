@@ -30,7 +30,7 @@ class Renderer {
         vehicleGraphic.fill(0);
         vehicleGraphic.textSize(VEHICLE_SIZE * PIXEL_SIZE / 2)
         vehicleGraphic.textAlign(CENTER);
-        vehicleGraphic.text(vehicle.gyro.name, PIXEL_SIZE * (MOTOR_SIZE + VEHICLE_SIZE / 2), 0.7 * VEHICLE_SIZE * PIXEL_SIZE);
+        vehicleGraphic.text(vehicle.name, PIXEL_SIZE * (MOTOR_SIZE + VEHICLE_SIZE / 2), 0.7 * VEHICLE_SIZE * PIXEL_SIZE);
         for (let motor of vehicle.motors) {
             vehicleGraphic.image(motorGraphic, 0, PIXEL_SIZE * (motor.offset.y + 0.5 * (VEHICLE_SIZE - MOTOR_SIZE)));
         }
@@ -72,6 +72,20 @@ class Renderer {
                 vehicle.path[i - 1].y * PIXEL_SIZE,
                 vehicle.path[i].x * PIXEL_SIZE,
                 vehicle.path[i].y * PIXEL_SIZE
+            );
+        }
+        strokeWeight(1);
+        stroke(0, 0, 0);
+    }
+
+    static drawPath(path, speeds) {
+        for (let i = 1; i < path.length; i++) {
+            strokeWeight(Math.min(VEHICLE_SIZE * PIXEL_SIZE, Math.max(1, 1000/speeds[i].getMagnitude()))); // stroke weight is proportional to velocity
+            line(
+                path[i - 1].x * PIXEL_SIZE,
+                path[i - 1].y * PIXEL_SIZE,
+                path[i].x * PIXEL_SIZE,
+                path[i].y * PIXEL_SIZE
             );
         }
         strokeWeight(1);

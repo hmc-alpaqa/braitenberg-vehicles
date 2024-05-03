@@ -86,9 +86,11 @@ class Vehicle {
             this.gyro.θ += angleOfRotation;
         }
 
-        if (this.path.length > SECONDS_PATH_VISIBLE * FPS) {
-            this.path.shift();
-            this.speeds.shift();
+        if(!drawMode) {
+            if (this.path.length > SECONDS_PATH_VISIBLE * FPS) {
+                this.path.shift();
+                this.speeds.shift();
+            }
         }
         this.path.push(this.gyro.r.copy());
         this.speeds.push(this.gyro.v.copy());
