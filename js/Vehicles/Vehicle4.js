@@ -1,6 +1,5 @@
 ////////// INSTINCTS //////////
-function Vehicle4a(u, x, y) {
-    let gyro = new Gyro(u, x, y, θ, Vehicles.VEHICLE4A);
+function Vehicle4a(gyro, id) {
     let sensor1 = new Sensor(gyro, new Vector(1, -2));
     let sensor2 = new Sensor(gyro, new Vector(1, 2));
     // wires sensor to same motor
@@ -8,13 +7,12 @@ function Vehicle4a(u, x, y) {
     let motorController2 = new MotorController(gyro, new Vector(-1, -2), [sensor2], velocityFunction);
     let motor1 = new Motor(gyro, new Vector(-1, -2), [motorController1]);
     let motor2 = new Motor(gyro, new Vector(-1, 2), [motorController2]);
-    let vehicle = new Vehicle(gyro, [sensor1, sensor2], [motorController1, motorController2], [motor1, motor2]);
+    let vehicle = new Vehicle(gyro, Vehicles.VEHICLE4A, id, [sensor1, sensor2], [motorController1, motorController2], [motor1, motor2]);
     return vehicle;
 }
 
 ////////// WILL //////////
-function Vehicle4b(u, x, y) {
-    let gyro = new Gyro(u, x, y, θ, Vehicles.VEHICLE4B);
+function Vehicle4b(gyro, id) {
     let sensor1 = new Sensor(gyro, new Vector(1, -2));
     let sensor2 = new Sensor(gyro, new Vector(1, 2));
     // wires sensor to same motor
@@ -22,6 +20,6 @@ function Vehicle4b(u, x, y) {
     let motorController2 = new MotorController(gyro, new Vector(-1, -2), [sensor2], velocityFunction);
     let motor1 = new Motor(gyro, new Vector(-1, -2), [motorController1]);
     let motor2 = new Motor(gyro, new Vector(-1, 2), [motorController2]);
-    let vehicle = new Vehicle(gyro, [sensor1, sensor2], [motorController1, motorController2], [motor1, motor2]);
+    let vehicle = new Vehicle(gyro, Vehicles.VEHICLE4B, id, [sensor1, sensor2], [motorController1, motorController2], [motor1, motor2]);
     return vehicle;
 }

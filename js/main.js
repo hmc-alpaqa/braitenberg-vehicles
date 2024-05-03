@@ -10,6 +10,7 @@ function setup() {
     // Vehicle object contains gyro, sensors, controllers, motors
     u = new Universe();
     velocityFunction = x => 100 * (Math.sin(x) + 1);
+    vehicleId = 0;
     addingVehicle = Vehicles.NONE;
     addingSource = false;
     removingSource = false;
@@ -24,6 +25,11 @@ function setup() {
 
     vehicle3StartingVelocity = 250;
     sourceIntensity = 100;
+
+    // draw mode
+    drawMode = true;
+    paths = [];
+    speeds = [];
 
     pg = createGraphics(MAP_LENGTH, MAP_HEIGHT);
     pg.background(0, 0, 256);
@@ -71,37 +77,38 @@ function draw() {
     }
 
     if (addingVehicle) {
+        let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
         switch (addingVehicle) {
             case Vehicles.VEHICLE1:
-                vehicle = Vehicle1(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle1(gyro, id=vehicleId);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE2A:
-                vehicle = Vehicle2a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle2a(gyro, id=vehicleId);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE2B:
-                vehicle = Vehicle2b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle2b(gyro, id=vehicleId);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE2C:
-                vehicle = Vehicle2c(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle2c(gyro, id=vehicleId);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE3A:
-                vehicle = Vehicle3a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle3a(gyro, id=vehicleId);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE3B:
-                vehicle = Vehicle3b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle3b(gyro, id=vehicleId);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE4A:
-                vehicle = Vehicle4a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle4a(gyro, id=vehicleId);
                 Renderer.renderVehicle(vehicle);
                 break;
             case Vehicles.VEHICLE4B:
-                vehicle = Vehicle4b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                vehicle = Vehicle4b(gyro, id=vehicleId);
                 Renderer.renderVehicle(vehicle);
                 break;
         }
@@ -141,35 +148,37 @@ function mouseClicked() {
             }
         } else if (addingVehicle != Vehicles.NONE) {
             let vehicle;
+            let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
             switch (addingVehicle) {
                 case Vehicles.NONE:
                     return;
                 case Vehicles.VEHICLE1:
-                    vehicle = Vehicle1(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle1(gyro, id=vehicleId);
                     break;
                 case Vehicles.VEHICLE2A:
-                    vehicle = Vehicle2a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle2a(gyro, id=vehicleId);
                     break;
                 case Vehicles.VEHICLE2B:
-                    vehicle = Vehicle2b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle2b(gyro, id=vehicleId);
                     break;
                 case Vehicles.VEHICLE2C:
-                    vehicle = Vehicle2c(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle2c(gyro, id=vehicleId);
                     break;
                 case Vehicles.VEHICLE3A:
-                    vehicle = Vehicle3a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle3a(gyro, id=vehicleId);
                     break;
                 case Vehicles.VEHICLE3B:
-                    vehicle = Vehicle3b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle3b(gyro, id=vehicleId);
                     break;
                 case Vehicles.VEHICLE4A:
-                    vehicle = Vehicle4a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle4a(gyro, id=vehicleId);
                     break;
                 case Vehicles.VEHICLE4B:
-                    vehicle = Vehicle4b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
+                    vehicle = Vehicle4b(gyro, id=vehicleId);
                     break;
             }
             u.addVehicle(vehicle);
+            vehicleId++;
             colorsIndex = (colorsIndex + 1) % colors.length;
         }
     }

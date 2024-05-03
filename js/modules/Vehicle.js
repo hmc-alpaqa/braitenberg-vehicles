@@ -3,8 +3,10 @@
  * by adding a specific configuration of components to this blueprint.
  */
 class Vehicle {
-    constructor(gyro, sensors = [], motorControllers = [], motors = []) {
+    constructor(gyro, name, id, sensors = [], motorControllers = [], motors = []) {
         this.gyro = gyro;
+        this.name = name;
+        this.id = id;
         this.sensors = sensors;
         this.motorControllers = motorControllers;
         this.motors = motors;
@@ -13,6 +15,7 @@ class Vehicle {
         this.path = [];
         this.speeds = [];
         this.color = colors[colorsIndex];
+        this.id = id;
     }
 
     get r() {
