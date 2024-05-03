@@ -27,9 +27,7 @@ function setup() {
     sourceIntensity = 100;
 
     // draw mode
-    drawMode = true;
-    paths = new Map();
-    speeds = new Map();
+    drawMode = false;
 
     pg = createGraphics(MAP_LENGTH, MAP_HEIGHT);
     pg.background(0, 0, 256);
@@ -60,11 +58,13 @@ function draw() {
             Renderer.drawTrailingPath(mostRecentVehicle);
         }
     }
+    
+    for (vehicle of u.vehicles) {
+        u.paths.set(vehicle.id, vehicle.path);
+        u.speeds.set(vehicle.id, vehicle.speeds);
+    }
+
     if (drawMode) {
-        for (vehicle of u.vehicles) {
-            paths.set(vehicle.id, vehicle.path);
-            speeds.set(vehicle.id, vehicle.speeds);
-        }
         renderPaths();
     }
     for (let vehicle of u.vehicles) {
@@ -266,9 +266,8 @@ function resetCanvas() {
 }
 
 function renderPaths() {
-    console.log(paths)
-    for (let i = 0; i < paths.size; i++) {
-        Renderer.drawPath(paths.get(i), speeds.get(i));
+    for (let i = 0; i < u.paths.size; i++) {
+        Renderer.drawPath(u.paths.get(i), u.speeds.get(i));
     }
 }
 
@@ -303,6 +302,8 @@ function renderTerrain() {
 function resetUniverse() {
     u.vehicles = [];
     u.sources = [];
+    u.paths = [];
+    u.speeds = [];
     renderers = [];
     simulationPaused = true;
     u.stimuli = [];

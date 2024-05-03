@@ -91,6 +91,10 @@ let addSourceButton = document.querySelector("#add-source-button");
 let removeSourceButton = document.querySelector("#remove-source-button");
 let removeAllSourcesButton = document.querySelector("#remove-all-sources-button");
 
+////////// MODES //////////
+let sandboxModeButton = document.querySelector("#sandbox-mode-button");
+let drawModeButton = document.querySelector("#draw-mode-button");
+
 /********* EVENT HANDLING *********/
 ////////// FULLSCREEN //////////
 fullscreenButton.addEventListener("click", () => {
@@ -318,6 +322,20 @@ removeAllSourcesButton.addEventListener("click", () => {
     resetCanvas();
     generateTerrain();
     renderTerrain();
+})
+
+////////// SANDBOX MODE BUTTON //////////
+sandboxModeButton.addEventListener("click", () => {
+    drawModeButton.classList.remove("clicked");
+    sandboxModeButton.classList.add("clicked");
+    drawMode = false;
+})
+
+////////// DRAW MODE BUTTON //////////
+drawModeButton.addEventListener("click", () => {
+    sandboxModeButton.classList.remove("clicked");
+    drawModeButton.classList.add("clicked");
+    drawMode = true;
 })
 
 ////////// START/STOP BUTTON //////////

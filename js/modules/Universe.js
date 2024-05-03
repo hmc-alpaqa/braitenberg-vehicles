@@ -4,6 +4,8 @@ class Universe {
         this.sources = [];
         this.vehicles = [];
         this.stimuli = [];
+        this.paths = new Map();
+        this.speeds = new Map();
         for (let i = 0; i < MAP_RESOLUTION; i++) {
             let row = []
             for (let j = 0; j < Math.round(MAP_RESOLUTION / ASPECT_RATIO); j++) {

@@ -149,3 +149,7 @@ h1{
 #vehicle-select {
   display: inline;
 }
+
+#modes {
+    background-color: #E57200;
+}
