@@ -391,6 +391,18 @@ startStopButton.addEventListener("click", () => {
     simulationPaused = !simulationPaused;
 });
 
+const pauseSimulation = () => {
+    simulationPaused = true;
+    startStopButton.classList.remove("clicked");
+    startStopButton.innerText = "Start";
+}
+
+const unpauseSimulation = () => {
+    simulationPaused = false;
+    startStopButton.classList.add("clicked");
+    startStopButton.innerText = "Stop";
+}
+
 ////////// RESET BUTTON //////////
 resetButton.addEventListener("click", () => {
     if (!simulationPaused) {
