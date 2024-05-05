@@ -15,7 +15,7 @@ async function run() {
         vehicles.push(new Vehicle2b(new Gyro(u, 50 * Math.cos(6.28 * i / 12), 50 * Math.sin(6.28 * i / 12), 6.28 * i / 12 + 3.14), id));
         id++;
     }
-    u.vehicles.addVehicles(vehicles);
+    u.addVehicles(vehicles);
     for (vehicle of vehicles) {
         vehicle.setCurrentColor("red");
     }
@@ -44,7 +44,7 @@ async function run() {
         vehicles2.push(new Vehicle3b(new Gyro(u, 50 * Math.cos(6.28 * i / 12), 50 * Math.sin(6.28 * i / 12), 6.28 * i / 12 + 3.14), id));
         id++;
     }
-    u.vehicles.addVehicles(vehicles2);
+    u.addVehicles(vehicles2);
     await delay(2000);
     for (vehicle of vehicles) {
         vehicle.setCurrentColor("green");
@@ -59,7 +59,7 @@ async function run() {
         vehicles3.push(new Vehicle2a(new Gyro(u, 100 * Math.cos(6.28 * i / 4), 100 * Math.sin(6.28 * i / 4), 6.28 * i / 4 + 3.14), id));
         id++;
     }
-    u.vehicles.addVehicles(vehicles3);
+    u.addVehicles(vehicles3);
 
     for (vehicle of vehicles3) {
         vehicle.setCurrentColor("white");

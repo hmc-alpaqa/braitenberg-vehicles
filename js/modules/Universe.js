@@ -47,7 +47,7 @@ class Universe {
     }
 
     addVehicles(vehicles) {
-        this.vehicles.concat(vehicles);
+        this.vehicles = this.vehicles.concat(vehicles);
     }
 
     getNearestVehicle(x, y) {
