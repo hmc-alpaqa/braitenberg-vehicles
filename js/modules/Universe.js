@@ -46,6 +46,10 @@ class Universe {
         this.vehicles.push(vehicle);
     }
 
+    addVehicles(vehicles) {
+        this.vehicles.concat(vehicles);
+    }
+
     getNearestVehicle(x, y) {
         if (this.vehicles.length > 0) {
             let mousePos = new Vector(x, y);
