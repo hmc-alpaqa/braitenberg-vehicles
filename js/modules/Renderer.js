@@ -78,9 +78,10 @@ class Renderer {
         stroke(0, 0, 0);
     }
 
-    static drawPath(path, speeds) {
+    static drawPath(path, speeds, colors) {
         for (let i = 1; i < path.length; i++) {
             strokeWeight(Math.min(VEHICLE_SIZE * PIXEL_SIZE, Math.max(1, 1000/speeds[i].getMagnitude()))); // stroke weight is proportional to velocity
+            stroke(colors[i]);
             line(
                 path[i - 1].x * PIXEL_SIZE,
                 path[i - 1].y * PIXEL_SIZE,

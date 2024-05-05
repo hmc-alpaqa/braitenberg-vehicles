@@ -15,6 +15,8 @@ class Vehicle {
         this.path = [];
         this.speeds = [];
         this.color = colors[colorsIndex];
+        this.currentColor = "#000000";
+        this.colors = [];
         this.id = id;
     }
 
@@ -40,6 +42,10 @@ class Vehicle {
 
     setY(y) {
         this.gyro.r.y = y;
+    }
+
+    setCurrentColor(color) {
+        this.currentColor = color;
     }
 
     copy() {
@@ -94,6 +100,7 @@ class Vehicle {
         }
         this.path.push(this.gyro.r.copy());
         this.speeds.push(this.gyro.v.copy());
+        this.colors.push(this.currentColor);
     }
 
 

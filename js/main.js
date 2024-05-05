@@ -63,6 +63,7 @@ function draw() {
     for (vehicle of u.vehicles) {
         u.paths.set(vehicle.id, vehicle.path);
         u.speeds.set(vehicle.id, vehicle.speeds);
+        u.colors.set(vehicle.id, vehicle.colors);
     }
 
     if (drawMode) {
