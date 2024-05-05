@@ -274,7 +274,7 @@ function resetCanvas() {
 
 function renderPaths() {
     for (let i = 0; i < u.paths.size; i++) {
-        Renderer.drawPath(u.paths.get(i), u.speeds.get(i));
+        Renderer.drawPath(u.paths.get(i), u.speeds.get(i), u.colors.get(i));
     }
 }
 
@@ -307,20 +307,10 @@ function renderTerrain() {
 }
 
 function resetUniverse() {
-    u.vehicles = [];
-    u.sources = [];
-    u.paths = [];
-    u.speeds = [];
+    u.reset();
+    vehicleId = 0;
     renderers = [];
     simulationPaused = true;
-    u.stimuli = [];
-    for (let i = 0; i < MAP_RESOLUTION; i++) {
-        let row = []
-        for (let j = 0; j < MAP_RESOLUTION; j++) {
-            row.push(0);
-        }
-        u.stimuli.push(row);
-    }
     updateVehicleCensus();
     resetVehicleTracker();
     pg.background(0, 0, 256);
