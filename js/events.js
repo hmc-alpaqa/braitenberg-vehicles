@@ -86,6 +86,7 @@ let velocityLabel = document.querySelector("#velocity-label");
 let totalVehicles = document.querySelector("#total-vehicles");
 let vehicleTracker = document.querySelector("#vehicle-tracker");
 let vehicleTrackerToggle = document.querySelector("#vehicle-tracker-toggle");
+let vehicleColorPicker = document.querySelector("#vehicle-color-picker");
 
 ////////// SOURCES //////////
 let sourceIntensityInput = document.querySelector("#source-intensity-input");
@@ -239,13 +240,23 @@ const updateVehicleTracker = () => {
 
 ////////// VEHICLE TRACKER TOGGLE //////////
 vehicleTrackerToggle.addEventListener("change", () => {
-        if (this.checked) {
-            updateVehicleTracker();
-        } else {
-            resetVehicleTracker();
-        }
-        showingVehicleTracker = !showingVehicleTracker;
-    })
+    if (this.checked) {
+        updateVehicleTracker();
+    } else {
+        resetVehicleTracker();
+    }
+    showingVehicleTracker = !showingVehicleTracker;
+});
+
+////////// VEHICLE COLOR PICKER //////////
+vehicleColorPicker.addEventListener("change", (e) => {
+    selectedVehicle.setCurrentColor(e.target.value);
+})
+
+vehicleColorPicker.addEventListener("blur", () => {
+    console.log("test");
+    vehicleColorPicker.style.visibility = "hidden";
+})
 
 ////////// ZOOM SLIDER //////////
 zoomSlider.addEventListener("input", () => {

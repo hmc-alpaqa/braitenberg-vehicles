@@ -150,6 +150,11 @@ h3 {
   background-color: #007FA3;
 }
 
+#vehicle-color-picker {
+    position: absolute;
+    visibility: hidden;
+}
+
 #vehicles {
   background-color: #B7BF10;
 }

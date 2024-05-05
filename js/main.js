@@ -16,6 +16,7 @@ function setup() {
     removingSource = false;
     removingVehicle = false;
     showingVehicleTracker = false;
+    vehicleColorPickerDisplay = select("#vehicle-color-picker");
 
     vehicleLocked = false;
     sourceLocked = false;
@@ -197,6 +198,15 @@ function mouseClicked() {
             }
             vehicleId++;
             colorsIndex = (colorsIndex + 1) % colors.length;
+        } else if(drawMode) {
+            let mousePos = new Vector(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE)
+            let vehicle = u.getNearestVehicle(mousePos.x, mousePos.y);
+            if (u.overVehicle(mousePos.x, mousePos.y, vehicle)) {
+                vehicleColorPickerDisplay.position(mouseX, mouseY);
+                vehicleColorPickerDisplay.value(vehicle.currentColor);
+                vehicleColorPickerDisplay.style("visibility", "visible");
+                selectedVehicle = vehicle;
+            }
         }
     }
 }
@@ -212,29 +222,31 @@ function mousePressed() {
         if(u.vehicles.length > 0) {
             nearestVehicleDist = (u.getNearestVehicle(mousePos.x, mousePos.y).r.subtract(mousePos)).getMagnitude();
         }
-        if ((nearestVehicleDist <= nearestSourceDist) && (u.getNearestVehicle(mousePos.x, mousePos.y != null))) {
-            let vehicle = u.getNearestVehicle(mousePos.x, mousePos.y);
-            if (u.overVehicle(mousePos.x, mousePos.y, vehicle)) {
-                selectedVehicle = vehicle;
-                vehicleLocked = true;
-                sourceLocked = false;
-                xOffset =  mousePos.x - selectedVehicle.x;
-                yOffset = mousePos.y - selectedVehicle.y;
-            } else {
-                vehicleLocked = false;
-                selectedVehicle = null;
-            }
-        } else if (u.getNearestSource(mousePos.x, mousePos.y) != null) {
-            let source = u.getNearestSource(mousePos.x, mousePos.y);
-            if (u.overSource(mousePos.x, mousePos.y, source)) {
-                selectedSource = source;
-                sourceLocked = true;
-                vehicleLocked = false;
-                xOffset =  mousePos.x - selectedSource.x;
-                yOffset = mousePos.y - selectedSource.y;
-            } else {
-                sourceLocked = false;
-                selectedSource = null;
+        if (!drawMode) {
+            if ((nearestVehicleDist <= nearestSourceDist) && (u.getNearestVehicle(mousePos.x, mousePos.y != null))) {
+                let vehicle = u.getNearestVehicle(mousePos.x, mousePos.y);
+                if (u.overVehicle(mousePos.x, mousePos.y, vehicle)) {
+                    selectedVehicle = vehicle;
+                    vehicleLocked = true;
+                    sourceLocked = false;
+                    xOffset =  mousePos.x - selectedVehicle.x;
+                    yOffset = mousePos.y - selectedVehicle.y;
+                } else {
+                    vehicleLocked = false;
+                    selectedVehicle = null;
+                }
+            } else if (u.getNearestSource(mousePos.x, mousePos.y) != null) {
+                let source = u.getNearestSource(mousePos.x, mousePos.y);
+                if (u.overSource(mousePos.x, mousePos.y, source)) {
+                    selectedSource = source;
+                    sourceLocked = true;
+                    vehicleLocked = false;
+                    xOffset =  mousePos.x - selectedSource.x;
+                    yOffset = mousePos.y - selectedSource.y;
+                } else {
+                    sourceLocked = false;
+                    selectedSource = null;
+                }
             }
         }
     }
@@ -252,9 +264,11 @@ function mouseDragged() {
 }
 
 function mouseReleased() {
-    vehicleLocked = false;
-    selectedVehicle = null;
-    selectedSource = null;
+    if (!drawMode) {
+        vehicleLocked = false;
+        selectedVehicle = null;
+        selectedSource = null;
+    }
 }
 
 function generateTerrain() {
