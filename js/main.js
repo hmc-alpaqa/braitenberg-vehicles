@@ -15,6 +15,7 @@ function setup() {
     addingSource = false;
     removingSource = false;
     removingVehicle = false;
+    showingVehicleTracker = false;
 
     vehicleLocked = false;
     sourceLocked = false;
@@ -73,6 +74,9 @@ function draw() {
             u.vehicles.splice(u.vehicles.indexOf(vehicle), 1);
         }
         updateVehicleCensus();
+        if (showingVehicleTracker) {
+            updateVehicleTracker();
+        }
     }
 
     for (let source of u.sources) {
@@ -187,6 +191,9 @@ function mouseClicked() {
                     break;
             }
             u.addVehicle(vehicle);
+            if (showingVehicleTracker) {
+                updateVehicleTracker();
+            }
             vehicleId++;
             colorsIndex = (colorsIndex + 1) % colors.length;
         }
@@ -315,6 +322,7 @@ function resetUniverse() {
         u.stimuli.push(row);
     }
     updateVehicleCensus();
+    resetVehicleTracker();
     pg.background(0, 0, 256);
     pg.noStroke();
 }

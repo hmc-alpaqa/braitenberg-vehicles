@@ -83,7 +83,9 @@ let vehicle4bSelect = document.querySelector("#vehicle-4b-select");
 let startingVelocity = document.querySelector("#starting-velocity");
 let velocitySlider = document.querySelector("#velocity-slider");
 let velocityLabel = document.querySelector("#velocity-label");
-let totalVehicles = document.querySelector("#total-vehicles")
+let totalVehicles = document.querySelector("#total-vehicles");
+let vehicleTracker = document.querySelector("#vehicle-tracker");
+let vehicleTrackerToggle = document.querySelector("#vehicle-tracker-toggle");
 
 ////////// SOURCES //////////
 let sourceIntensityInput = document.querySelector("#source-intensity-input");
@@ -219,6 +221,32 @@ const updateVehicleCensus = () => {
     totalVehicles.innerText = `Total Vehicles: ${u.vehicles.length}`;
 }
 
+////////// VEHICLE TRACKER //////////
+const resetVehicleTracker = () => {
+    vehicleTracker.innerHTML = "";
+}
+
+const updateVehicleTracker = () => {
+    resetVehicleTracker();
+    for (vehicle of u.vehicles) {
+        vehicleTracker.insertAdjacentHTML("beforeend", `
+            <div>
+                <p><b>id:</b> ${vehicle.id} <b>type:</b> ${vehicle.name} <b>x:</b> ${vehicle.x.toFixed(0)} <b>y:</b> ${vehicle.y.toFixed(0)} <b>θ:</b> ${vehicle.θ.toFixed(2)}
+            </div>
+        `);
+    }
+}
+
+////////// VEHICLE TRACKER TOGGLE //////////
+vehicleTrackerToggle.addEventListener("change", () => {
+        if (this.checked) {
+            updateVehicleTracker();
+        } else {
+            resetVehicleTracker();
+        }
+        showingVehicleTracker = !showingVehicleTracker;
+    })
+
 ////////// ZOOM SLIDER //////////
 zoomSlider.addEventListener("input", () => {
     zoomLabel.innerHTML = `Zoom: ${zoomSlider.value}`;
@@ -271,6 +299,7 @@ removeAllVehiclesButton.addEventListener("click", () => {
     unclickVehicleSourceButtons();
     u.vehicles = [];
     updateVehicleCensus();
+    resetVehicleTracker();
 })
 
 ////////// VELOCITY FUNCTION SELECTS //////////
