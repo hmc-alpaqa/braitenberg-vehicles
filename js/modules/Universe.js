@@ -50,6 +50,10 @@ class Universe {
         this.vehicles = this.vehicles.concat(vehicles);
     }
 
+    killVehicles(vehicles) {
+        this.vehicles = this.vehicles.filter(e => !vehicles.includes(e)); 
+    }
+
     getNearestVehicle(x, y) {
         if (this.vehicles.length > 0) {
             let mousePos = new Vector(x, y);
