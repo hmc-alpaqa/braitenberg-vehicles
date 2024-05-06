@@ -1,6 +1,7 @@
 // do this every time
 let id = 0;
 unpauseSimulation();
+let vehicle;
 
 async function run() {
     // something to do with generating a source with the tag "sources"
@@ -12,11 +13,13 @@ async function run() {
     // something to do with generating a bunch of vehicles with the tag "vehicles"
     let vehicles = []
     for (let i = 0; i < 12; i ++) {
-        vehicles.push(new Vehicle2b(new Gyro(u, 50 * Math.cos(6.28 * i / 12), 50 * Math.sin(6.28 * i / 12), 6.28 * i / 12 + 3.14), id));
+        vehicle = new Vehicle2b(new Gyro(u, 50 * Math.cos(6.28 * i / 12), 50 * Math.sin(6.28 * i / 12), 6.28 * i / 12 + 3.14), id)
+        vehicles.push(vehicle);
         id++;
+        u.addVehicle(vehicle);
     }
-    u.addVehicles(vehicles);
-    for (vehicle of vehicles) {
+
+    for (let vehicle of vehicles) {
         vehicle.setCurrentColor("red");
     }
 
@@ -32,46 +35,52 @@ async function run() {
         // new sources, etc.
     // }
     await delay(2000);
-    for (vehicle of vehicles) {
+    for (let vehicle of vehicles) {
         vehicle.setCurrentColor("orange");
     }
     await delay(2000);
-    for (vehicle of vehicles) {
+    for (let vehicle of vehicles) {
         vehicle.setCurrentColor("yellow");
     }
     let vehicles2 = []
     for (let i = 0; i < 12; i++) {
-        vehicles2.push(new Vehicle3b(new Gyro(u, 50 * Math.cos(6.28 * i / 12), 50 * Math.sin(6.28 * i / 12), 6.28 * i / 12 + 3.14), id));
+        vehicle = new Vehicle3b(new Gyro(u, 50 * Math.cos(6.28 * i / 12), 50 * Math.sin(6.28 * i / 12), 6.28 * i / 12 + 3.14), id)
+        vehicles2.push(vehicle);
         id++;
+        u.addVehicle(vehicle);
     }
     u.addVehicles(vehicles2);
     await delay(2000);
-    for (vehicle of vehicles) {
+    for (let vehicle of vehicles) {
         vehicle.setCurrentColor("green");
     }
     await delay(2000);
-    for (vehicle of vehicles) {
+    for (let vehicle of vehicles) {
         vehicle.setCurrentColor("aqua");
     }
 
     let vehicles3 = []
     for (let i = 0; i < 4; i++) {
-        vehicles3.push(new Vehicle2a(new Gyro(u, 100 * Math.cos(6.28 * i / 4), 100 * Math.sin(6.28 * i / 4), 6.28 * i / 4 + 3.14), id));
+        vehicle = new Vehicle2a(new Gyro(u, 100 * Math.cos(6.28 * i / 4), 100 * Math.sin(6.28 * i / 4), 6.28 * i / 4 + 3.14), id)
+        vehicles3.push(vehicle);
         id++;
+        u.addVehicle(vehicle);
     }
     u.addVehicles(vehicles3);
 
-    for (vehicle of vehicles3) {
+    for (let vehicle of vehicles3) {
         vehicle.setCurrentColor("white");
     }
 
     await delay(2000);
-    for (vehicle of vehicles) {
+    for (let vehicle of vehicles) {
         vehicle.setCurrentColor("purple");
     }
     await delay(2000);
-    for (vehicle of vehicles) {
+    for (let vehicle of vehicles) {
         vehicle.setCurrentColor("pink");
     }
+    // kill vehicles with tag "vehicles2"
+    u.killVehicles(vehicles2);
 }
 run();
