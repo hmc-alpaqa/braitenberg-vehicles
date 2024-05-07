@@ -40,7 +40,7 @@ class Renderer {
         }
         push();
         translate(vehicle.x * PIXEL_SIZE, vehicle.y * PIXEL_SIZE);
-        rotate(vehicle.θ);
+        rotate(vehicle.angle);
         image(vehicleGraphic, PIXEL_SIZE * (-MOTOR_SIZE - VEHICLE_SIZE / 2), PIXEL_SIZE * -VEHICLE_SIZE / 2);
         pop();
     }
@@ -58,7 +58,7 @@ class Renderer {
         textAlign(LEFT);
         text('x: ' + vehicle.x.toFixed(2), 10, 10)
         text('y: ' + vehicle.y.toFixed(2), 10, 30)
-        text('θ: ' + (vehicle.gyro.θ / 3.14).toFixed(2) + '	π', 10, 50)
+        text('θ: ' + (vehicle.gyro.angle/ 3.14).toFixed(2) + '	π', 10, 50)
         text(`FPS: ${frameRate().toFixed(0)}`, 10, 70);
         pop();
     }

@@ -10,14 +10,14 @@ class Component {
 
     getR() {
         let r = this.offset.getMagnitude();
-        let θ = this.offset.getTheta();
+        let angle = this.offset.getTheta();
 
-        let rotateBy = this.gyro.θ
+        let rotateBy = this.gyro.angle
 
-        let θEffective = θ + rotateBy
+        let angleEffective = angle + rotateBy
 
-        let xEffective = r * Math.cos(θEffective)
-        let yEffective = r * Math.sin(θEffective)
+        let xEffective = r * Math.cos(angleEffective)
+        let yEffective = r * Math.sin(angleEffective)
 
         return new Vector(
             this.gyro.r.x + xEffective,
