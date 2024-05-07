@@ -91,10 +91,10 @@ function draw() {
         }
     }
 
-    if (addingVehicle) {
+    if (addingVehicle != Vehicles.NONE) {
         let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-        eval(`Vehicle${addingVehicle}(gyro, id=vehicleId);`);
-        Renderer.renderVehicle();
+        eval(`vehicle = Vehicle${addingVehicle}(gyro, id=vehicleId);`);
+        Renderer.renderVehicle(vehicle);
     }
 
     if (keyIsPressed && (keyCode === RIGHT_ARROW)) {
@@ -121,34 +121,7 @@ function mouseClicked() {
         } else if (addingVehicle != Vehicles.NONE) {
             let vehicle;
             let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-            switch (addingVehicle) {
-                case Vehicles.NONE:
-                    return;
-                case Vehicles.VEHICLE1:
-                    vehicle = Vehicle1(gyro, id=vehicleId);
-                    break;
-                case Vehicles.VEHICLE2A:
-                    vehicle = Vehicle2a(gyro, id=vehicleId);
-                    break;
-                case Vehicles.VEHICLE2B:
-                    vehicle = Vehicle2b(gyro, id=vehicleId);
-                    break;
-                case Vehicles.VEHICLE2C:
-                    vehicle = Vehicle2c(gyro, id=vehicleId);
-                    break;
-                case Vehicles.VEHICLE3A:
-                    vehicle = Vehicle3a(gyro, id=vehicleId);
-                    break;
-                case Vehicles.VEHICLE3B:
-                    vehicle = Vehicle3b(gyro, id=vehicleId);
-                    break;
-                case Vehicles.VEHICLE4A:
-                    vehicle = Vehicle4a(gyro, id=vehicleId);
-                    break;
-                case Vehicles.VEHICLE4B:
-                    vehicle = Vehicle4b(gyro, id=vehicleId);
-                    break;
-            }
+            eval(`vehicle = Vehicle${addingVehicle}(gyro, id=vehicleId);`);
             u.addVehicle(vehicle);
             if (showingVehicleTracker) {
                 updateVehicleTracker();
