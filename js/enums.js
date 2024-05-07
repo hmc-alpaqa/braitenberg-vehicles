@@ -9,10 +9,3 @@ const Vehicles = {
     VEHICLE4A: "4a",
     VEHICLE4B: "4b",
 }
-
-const VelocityFunctions = {
-    SINUSOIDAL: "sinusoidal",
-    QUADRATIC: "quadratic",
-    SQRT: "sqrt",
-    LOG: "log",
-}

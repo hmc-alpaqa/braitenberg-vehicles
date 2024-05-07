@@ -136,17 +136,6 @@ function draw() {
     }
 }
 
-// function mouseWheel(event) {
-//     if (parseInt(zoomSlider.value) <= 400 && parseInt(zoomSlider.value) >= 50) {
-//         zoomSlider.value = parseInt(zoomSlider.value) + event.delta;
-//         zoomLabel.innerText = `Zoom ${zoomSlider.value}`;
-//         MAP_RESOLUTION = parseInt(zoomSlider.value);
-//         PIXEL_SIZE = MAP_LENGTH / MAP_RESOLUTION;
-//         Renderer.graphicsSetup();
-//         renderTerrain();
-//     }
-// }
-
 function mouseClicked() {
     if (mouseX > 0 && mouseY > 0 && mouseX < MAP_LENGTH && mouseY < MAP_HEIGHT) {
         if (addingSource) {

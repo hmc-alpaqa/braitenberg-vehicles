@@ -36,7 +36,7 @@ class Renderer {
         }
 
         for (let sensor of vehicle.sensors) {
-            vehicleGraphic.image(sensorGraphic, PIXEL_SIZE * (MOTOR_SIZE + VEHICLE_SIZE), PIXEL_SIZE * (sensor.offset.y + 0.5 * (VEHICLE_SIZE - SENSOR_SIZE)));
+            vehicleGraphic.image(sensorGraphic, PIXEL_SIZE * (MOTOR_SIZE + VEHICLE_SIZE), PIXEL_SIZE * (sensor.offset.x + 0.5 * (VEHICLE_SIZE - SENSOR_SIZE)));
         }
         push();
         translate(vehicle.x * PIXEL_SIZE, vehicle.y * PIXEL_SIZE);
