@@ -93,7 +93,7 @@ function draw() {
 
     if (addingVehicle != Vehicles.NONE) {
         let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, angle);
-        eval(`vehicle = Vehicle${addingVehicle}(gyro, id=vehicleId);`);
+        eval(`vehicle = new Vehicle${addingVehicle}(gyro, id=vehicleId);`);
         Renderer.renderVehicle(vehicle);
     }
 
@@ -121,7 +121,7 @@ function mouseClicked() {
         } else if (addingVehicle != Vehicles.NONE) {
             let vehicle;
             let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, angle);
-            eval(`vehicle = Vehicle${addingVehicle}(gyro, id=vehicleId);`);
+            eval(`vehicle = new Vehicle${addingVehicle}(gyro, id=vehicleId);`);
             u.addVehicle(vehicle);
             if (showingVehicleTracker) {
                 updateVehicleTracker();
