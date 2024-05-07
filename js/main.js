@@ -1,49 +1,53 @@
+const u = new Universe();
+
+let pg;
+const colors = ["crimson", "mediumseagreen", "gold", "deepskyblue", "white", "mediumvioletred", "darkgreen", "indigo", "hotpink", "yellowgreen", "lightblue"];
+const sourceRenderFactor = 4;
+let colorsIndex = 0;
+
+let velocityFunction = VELOCITY_FUNCTIONS["sinusoidal"];
+let vehicleId = 0;
+let addingVehicle = Vehicles.NONE;
+let addingSource = false;
+let removingSource = false;
+let removingVehicle = false;
+let showingVehicleTracker = false;
+let vehicleLocked = false;
+let sourceLocked = false;
+let selectedVehicle = null;
+let selectedSource = null;
+let xOffset = 0;
+let yOffset = 0;
+let theta = 0;
+
+let vehicle3StartingVelocity = 250;
+let sourceIntensity = 100;
+
+let drawMode = false;
+
+let vehicleColorPickerDisplay;
+let sensorGraphic;
+let motorGraphic;
+let vehicleGraphic;
+
 function setup() {
-    canvas = createCanvas(MAP_LENGTH, MAP_HEIGHT);
+    const canvas = createCanvas(MAP_LENGTH, MAP_HEIGHT);
     canvas.parent("canvas");
     frameRate(FPS);
     ellipseMode(CENTER);
     rectMode(CENTER);
     angleMode(RADIANS);
-    // gyro object contains x, y location and orientation
-    // each sensor, controller, motor takes the gyro as a parameter to construct
-    // Vehicle object contains gyro, sensors, controllers, motors
-    u = new Universe();
-    velocityFunction = x => 100 * (Math.sin(x) + 1);
-    vehicleId = 0;
-    addingVehicle = Vehicles.NONE;
-    addingSource = false;
-    removingSource = false;
-    removingVehicle = false;
-    showingVehicleTracker = false;
     vehicleColorPickerDisplay = select("#vehicle-color-picker");
-
-    vehicleLocked = false;
-    sourceLocked = false;
-    selectedVehicle = null;
-    selectedSource = null;
-    xOffset = 0;
-    yOffset = 0;
-
-    vehicle3StartingVelocity = 250;
-    sourceIntensity = 100;
-
-    // draw mode
-    drawMode = false;
 
     pg = createGraphics(MAP_LENGTH, MAP_HEIGHT);
     pg.background(0, 0, 256);
     pg.noStroke();
-    colors = ["crimson", "mediumseagreen", "gold", "deepskyblue", "white", "mediumvioletred", "darkgreen", "indigo", "hotpink", "yellowgreen", "lightblue"]
-    colorsIndex = 0;
 
     sensorGraphic = createGraphics(PIXEL_SIZE * SENSOR_SIZE * 2, PIXEL_SIZE * SENSOR_SIZE);
     Renderer.sensorGraphicSetup();
     motorGraphic = createGraphics(PIXEL_SIZE * MOTOR_SIZE, PIXEL_SIZE * MOTOR_SIZE);
     Renderer.motorGraphicSetup();
     vehicleGraphic = createGraphics(PIXEL_SIZE * (VEHICLE_SIZE + (2 * SENSOR_SIZE) + MOTOR_SIZE), PIXEL_SIZE * VEHICLE_SIZE);
-    theta = 0;
-    sourceRenderFactor = 4;
 }
 
 function draw() {
