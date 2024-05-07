@@ -18,7 +18,7 @@ class Vehicle2b extends Vehicle {
         // wires sensor to same motor
         let motor1 = new Motor(gyro, new Vector(-1, -2), [sensor1]);
         let motor2 = new Motor(gyro, new Vector(-1, 2), [sensor2]);
-        super(gyro, Vehicles.Vehicle2B, id, [sensor1, sensor2], [motor1, motor2]);
+        super(gyro, Vehicles.VEHICLE2B, id, [sensor1, sensor2], [motor1, motor2]);
     }
 }
 
@@ -30,6 +30,6 @@ class Vehicle2c extends Vehicle {
         // wires sensors to both motors
         let motor1 = new Motor(gyro, new Vector(-1, -2), [sensor1, sensor2]);
         let motor2 = new Motor(gyro, new Vector(-1, 2), [sensor1, sensor2]);
-        super(gyro, Vehicles.Vehicle2C, id, [sensor1, sensor2], [motor1, motor2]);
+        super(gyro, Vehicles.VEHICLE2C, id, [sensor1, sensor2], [motor1, motor2]);
     }
 }
