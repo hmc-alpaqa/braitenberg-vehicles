@@ -93,40 +93,8 @@ function draw() {
 
     if (addingVehicle) {
         let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-        switch (addingVehicle) {
-            case Vehicles.VEHICLE1:
-                vehicle = Vehicle1(gyro, id=vehicleId);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE2A:
-                vehicle = Vehicle2a(gyro, id=vehicleId);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE2B:
-                vehicle = Vehicle2b(gyro, id=vehicleId);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE2C:
-                vehicle = Vehicle2c(gyro, id=vehicleId);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE3A:
-                vehicle = Vehicle3a(gyro, id=vehicleId);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE3B:
-                vehicle = Vehicle3b(gyro, id=vehicleId);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE4A:
-                vehicle = Vehicle4a(gyro, id=vehicleId);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE4B:
-                vehicle = Vehicle4b(gyro, id=vehicleId);
-                Renderer.renderVehicle(vehicle);
-                break;
-        }
+        eval(`Vehicle${addingVehicle}(gyro, id=vehicleId);`);
+        Renderer.renderVehicle();
     }
 
     if (keyIsPressed && (keyCode === RIGHT_ARROW)) {
