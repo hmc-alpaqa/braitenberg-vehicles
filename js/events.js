@@ -232,7 +232,7 @@ const updateVehicleTracker = () => {
     for (vehicle of u.vehicles) {
         vehicleTracker.insertAdjacentHTML("beforeend", `
             <div>
-                <p><b>id:</b> ${vehicle.id} <b>type:</b> ${vehicle.name} <b>x:</b> ${vehicle.x.toFixed(0)} <b>y:</b> ${vehicle.y.toFixed(0)} <b>θ:</b> ${vehicle.θ.toFixed(2)}
+                <p><b>id:</b> ${vehicle.id} <b>type:</b> ${vehicle.name} <b>x:</b> ${vehicle.x.toFixed(0)} <b>y:</b> ${vehicle.y.toFixed(0)} <b>θ:</b> ${vehicle.theta.toFixed(2)}
             </div>
         `);
     }

@@ -42,7 +42,7 @@ function setup() {
     motorGraphic = createGraphics(PIXEL_SIZE * MOTOR_SIZE, PIXEL_SIZE * MOTOR_SIZE);
     Renderer.motorGraphicSetup();
     vehicleGraphic = createGraphics(PIXEL_SIZE * (VEHICLE_SIZE + (2 * SENSOR_SIZE) + MOTOR_SIZE), PIXEL_SIZE * VEHICLE_SIZE);
-    angle = 0;
+    theta = 0;
     sourceRenderFactor = 4;
 }
 
@@ -92,15 +92,15 @@ function draw() {
     }
 
     if (addingVehicle != Vehicles.NONE) {
-        let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, angle);
+        let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, theta);
         eval(`vehicle = new Vehicle${addingVehicle}(gyro, id=vehicleId);`);
         Renderer.renderVehicle(vehicle);
     }
 
     if (keyIsPressed && (keyCode === RIGHT_ARROW)) {
-        angle += 0.05;
+        theta += 0.05;
     } else if (keyIsPressed && (keyCode === LEFT_ARROW)) {
-        angle -= 0.05;
+        theta -= 0.05;
     }
 }
 
@@ -120,7 +120,7 @@ function mouseClicked() {
             }
         } else if (addingVehicle != Vehicles.NONE) {
             let vehicle;
-            let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, angle);
+            let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, theta);
             eval(`vehicle = new Vehicle${addingVehicle}(gyro, id=vehicleId);`);
             u.addVehicle(vehicle);
             if (showingVehicleTracker) {
