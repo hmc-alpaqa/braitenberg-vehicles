@@ -42,6 +42,10 @@ class Universe {
         }
     }
 
+    addSource(source) {
+        this.sources.push(source);
+    }
+
     addVehicle(vehicle) {
         this.vehicles.push(vehicle);
     }
@@ -52,6 +56,11 @@ class Universe {
 
     killVehicles(vehicles) {
         this.vehicles = this.vehicles.filter(e => !vehicles.includes(e)); 
+    }
+
+    killSources(sources) {
+        this.sources = this.sources.filter(e => !sources.includes(e));
+        rerender();
     }
 
     getNearestVehicle(x, y) {

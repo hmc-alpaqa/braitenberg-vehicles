@@ -2,12 +2,14 @@
 let id = 0;
 unpauseSimulation();
 let vehicle;
+let source;
 
 async function run() {
     // something to do with generating a source with the tag "sources"
     let sources = []
-    sources.push(new Source(0, 0, 800));
-    u.sources = u.sources.concat(sources);
+    source = new Source(0, 0, 800);
+    sources.push(source);
+    u.addSource(source);
     rerender();
 
     // something to do with generating a bunch of vehicles with the tag "vehicles"
