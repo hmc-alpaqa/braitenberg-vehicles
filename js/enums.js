@@ -9,3 +9,11 @@ const Vehicles = {
     VEHICLE4A: "4a",
     VEHICLE4B: "4b",
 }
+
+const Actions = {
+    NONE: "none",
+    ADDING_SOURCE: "addingSource",
+    REMOVING_SOURCE: "removingSource",
+    ADDING_VEHICLE: "addingVehicle",
+    REMOVING_VEHICLE: "removingVehicle"
+}

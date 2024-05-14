@@ -44,6 +44,7 @@ class Universe {
 
     addSource(source) {
         this.sources.push(source);
+        rerender();
     }
 
     addVehicle(vehicle) {
@@ -94,11 +95,6 @@ class Universe {
             updateVehicleCensus();
             rerender();
         }
-    }
-
-    addSource(source) {
-        this.sources.push(source);
-        rerender();
     }
 
     getNearestSource(x, y) {

@@ -2,15 +2,14 @@ const u = new Universe();
 
 let pg;
 const colors = ["crimson", "mediumseagreen", "gold", "deepskyblue", "white", "mediumvioletred", "darkgreen", "indigo", "hotpink", "yellowgreen", "lightblue"];
-const sourceRenderFactor = 4;
+let sourceRenderFactor = 4;
 let colorsIndex = 0;
 
 let velocityFunction = VELOCITY_FUNCTIONS["sinusoidal"];
 let vehicleId = 0;
+let currentAction = Actions.NONE;
 let addingVehicle = Vehicles.NONE;
-let addingSource = false;
-let removingSource = false;
-let removingVehicle = false;
+
 let showingVehicleTracker = false;
 let vehicleLocked = false;
 let sourceLocked = false;
@@ -114,33 +113,43 @@ function draw() {
 
 function mouseClicked() {
     if (mouseX > 0 && mouseY > 0 && mouseX < MAP_LENGTH && mouseY < MAP_HEIGHT) {
-        if (addingSource) {
-            u.addSource(new Source(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, sourceIntensity));
-        } else if (removingSource) {
-            let source = u.getNearestSource(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE);
-            if (source != null) {
-                u.removeSource(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, source);
+        let source;
+        switch (currentAction) {
+            case Actions.ADDING_SOURCE:
+                u.addSource(new Source(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, sourceIntensity));
+                break;
+            case Actions.REMOVING_SOURCE:
+                source = u.getNearestSource(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE);
+                if (source != null) {
+                    u.removeSource(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, source);
+                }
+                break;
+            case Actions.ADDING_VEHICLE:
+                if (addingVehicle != Vehicles.NONE) {
+                    let vehicle;
+                    let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, theta);
+                    if (addingVehicle != Vehicles.VEHICLE4A && addingVehicle != Vehicles.VEHICLE4B) {
+                        eval(`vehicle = new Vehicle${addingVehicle}(gyro, id=vehicleId);`);
+                    } else {
+                        eval(`vehicle = new Vehicle${addingVehicle}(gyro, id=vehicleId, velocityFunction);`);
+                    }
+                    u.addVehicle(vehicle);
+                    if (showingVehicleTracker) {
+                        updateVehicleTracker();
+                    }
+                    vehicleId++;
+                    colorsIndex = (colorsIndex + 1) % colors.length;
+                }
+                break;
+            case Actions.REMOVING_VEHICLE: {
+                let vehicle = u.getNearestVehicle(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE);
+                if (vehicle != null) {
+                    u.removeVehicle(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, vehicle);
+                }
+                break;
             }
-        } else if (removingVehicle) {
-            let vehicle = u.getNearestVehicle(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE);
-            if (vehicle != null) {
-                u.removeVehicle(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, vehicle);
-            }
-        } else if (addingVehicle != Vehicles.NONE) {
-            let vehicle;
-            let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, theta);
-            if (addingVehicle != Vehicles.VEHICLE4A && addingVehicle != Vehicles.VEHICLE4B) {
-                eval(`vehicle = new Vehicle${addingVehicle}(gyro, id=vehicleId);`);
-            } else {
-                eval(`vehicle = new Vehicle${addingVehicle}(gyro, id=vehicleId, velocityFunction);`);
-            }
-            u.addVehicle(vehicle);
-            if (showingVehicleTracker) {
-                updateVehicleTracker();
-            }
-            vehicleId++;
-            colorsIndex = (colorsIndex + 1) % colors.length;
-        } else if(drawMode) {
+        }
+        if (drawMode) {
             let mousePos = new Vector(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE)
             let vehicle = u.getNearestVehicle(mousePos.x, mousePos.y);
             if (u.overVehicle(mousePos.x, mousePos.y, vehicle)) {
@@ -154,7 +163,7 @@ function mouseClicked() {
 }
 
 function mousePressed() {
-    if (!addingSource && !removingSource && !removingVehicle && addingVehicle == Vehicles.NONE) {
+    if (currentAction == Actions.NONE) {
         let mousePos = new Vector(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE)
         let nearestSourceDist = 1000000;
         let nearestVehicleDist = 1000000;
