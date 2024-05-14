@@ -1,5 +1,5 @@
 MAP_LENGTH = screen.width * 0.7;
-MAP_HEIGHT = screen.height * 0.9;
+MAP_HEIGHT = screen.height * 0.85;
 ASPECT_RATIO = MAP_HEIGHT / MAP_LENGTH
 MAP_RESOLUTION = 400;
 
