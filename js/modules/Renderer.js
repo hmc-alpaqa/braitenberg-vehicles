@@ -49,7 +49,10 @@ class Renderer {
         fill(255);
         circle(source.x * PIXEL_SIZE, source.y * PIXEL_SIZE, SOURCE_SIZE * PIXEL_SIZE);
         fill(0);
+        textAlign(CENTER, CENTER);
+        textSize(4 * PIXEL_SIZE);
         text(source.intensity, source.x * PIXEL_SIZE, source.y * PIXEL_SIZE);
+        textAlign(LEFT, BASELINE);
     }
 
     static renderData(vehicle) {
