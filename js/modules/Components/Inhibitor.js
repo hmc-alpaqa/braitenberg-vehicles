@@ -16,7 +16,11 @@ class Inhibitor extends Component {
         this.multiplier = multiplier;
         this.startingVelocity = startingVelocity;
     }
-
+    
+    /**
+     * Returns the output of the inhibitor
+     * @returns {Number} the output of the inhibitor
+     */
     getOutput() {
         let sum = 0
         for (let input of this.inputs) {
