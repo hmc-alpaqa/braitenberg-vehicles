@@ -4,6 +4,7 @@
  */
 class Inhibitor extends Component {
     /**
+     * Create an inhibitor.
      * @param {Gyro} gyro gyro belonging to the vehicle the inhibitor is on
      * @param {Vector} offset position of the inhibitor relative to the center of the vehicle
      * @param {Component[]} inputs inputs to the inhibitor
@@ -18,8 +19,8 @@ class Inhibitor extends Component {
     }
     
     /**
-     * Returns the output of the inhibitor
-     * @returns {Number} the output of the inhibitor
+     * Returns the inhibitor output
+     * @returns {Number} inhibitor output
      */
     getOutput() {
         let sum = 0
