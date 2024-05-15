@@ -17,6 +17,7 @@ class Component {
         let thetaEffective = theta + rotateBy
 
         let xEffective = r * Math.cos(thetaEffective)
+        // must negate due to p5js coordinates
         let yEffective = r * Math.sin(thetaEffective)
 
         return new Vector(

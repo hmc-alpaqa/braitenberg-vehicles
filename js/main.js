@@ -128,6 +128,7 @@ function mouseClicked() {
                 if (addingVehicle != Vehicles.NONE) {
                     let vehicle;
                     let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, theta);
+                    console.log(gyro.theta);
                     if (addingVehicle != Vehicles.VEHICLE4A && addingVehicle != Vehicles.VEHICLE4B) {
                         eval(`vehicle = new Vehicle${addingVehicle}(gyro, id=vehicleId);`);
                     } else {

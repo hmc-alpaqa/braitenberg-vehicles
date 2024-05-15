@@ -15,7 +15,7 @@ class Vector {
 
     initFromPolar(magnitude, theta) {
         this.x = Math.cos(theta) * magnitude;
-        this.y = Math.sin(theta) * magnitude;
+        this.y = -Math.sin(theta) * magnitude;
         return this;
     }
 
@@ -32,11 +32,12 @@ class Vector {
      * @returns {Number} the angle of elevation of this vector in radians
      */
     getTheta() {
-        if (Math.sign(this.x) == Math.sign(this.y)) {
-            return Math.atan2(this.x, this.y)
-        } else {
-            return Math.PI + Math.atan2(this.x, this.y)
-        }
+        return Math.atan(this.y, this.x);
+        // if (Math.sign(this.x) == Math.sign(-this.y) || this.y == 0 || this.x == 0) {
+        //     return Math.atan2(-this.y, this.x)
+        // } else {
+        //     return Math.PI + Math.atan2(-this.y, this.x)
+        // }
     }
 
     /**

@@ -11,11 +11,11 @@ async function run() {
     rerender();
 
     let sides = []
-    vehicle = new Vehicle1(new Gyro(u, 0, 50, -2*Math.PI/3), id);
+    vehicle = new Vehicle1(new Gyro(u, 0, 50, 2*Math.PI/3), id);
     sides.push(vehicle);
     u.addVehicle(vehicle);
     id++;
-    vehicle = new Vehicle1(new Gyro(u, 0, 50, -Math.PI/3), id);
+    vehicle = new Vehicle1(new Gyro(u, 0, 50, Math.PI/3), id);
     sides.push(vehicle);
     u.addVehicle(vehicle);
     id++;
