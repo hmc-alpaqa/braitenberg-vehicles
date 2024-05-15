@@ -5,11 +5,6 @@ class MotorController extends Component {
         this.f = f;
     }
 
-    addSensor(sensor) {
-        this.sensors.push(sensor);
-        return this
-    }
-
     getOutput() {
         let sum = 0
         for (let input of this.inputs) {

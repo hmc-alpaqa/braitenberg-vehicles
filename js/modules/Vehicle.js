@@ -102,17 +102,4 @@ class Vehicle {
         this.speeds.push(this.gyro.v.copy());
         this.colors.push(this.currentColor);
     }
-
-
-    addSensor(sensor) {
-        this.sensors.push(sensor);
-    }
-
-    addMotorController(motorController) {
-        this.motorControllers.push(motorController);
-    }
-
-    addMotor(motor) {
-        this.motors.push(motor);
-    }
 }

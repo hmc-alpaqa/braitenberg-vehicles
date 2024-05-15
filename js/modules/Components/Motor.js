@@ -1,3 +1,8 @@
+/**
+ * Drives the motion of the vehicle.
+ * @class Motor
+ * 
+*/
 class Motor extends Component {
     constructor(gyro, offset, inputs = []) {
         super(gyro, offset);

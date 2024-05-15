@@ -1,14 +1,20 @@
+/**
+ * Class representing an inhibitor. Multiplies the input by a constant, typically -1.
+ * @extends Component
+ */
 class Inhibitor extends Component {
+    /**
+     * @param {Gyro} gyro gyro belonging to the vehicle the inhibitor is on
+     * @param {Vector} offset position of the inhibitor relative to the center of the vehicle
+     * @param {Component[]} inputs inputs to the inhibitor
+     * @param {Number} multiplier constant to multiply the source input by
+     * @param {Number} startingVelocity starting velocity of the vehicle
+     */
     constructor(gyro, offset, inputs = [], multiplier, startingVelocity) {
         super(gyro, offset);
         this.inputs = inputs;
         this.multiplier = multiplier;
         this.startingVelocity = startingVelocity;
-    }
-
-    addSensor(sensor) {
-        this.sensors.push(sensor);
-        return this
     }
 
     getOutput() {
