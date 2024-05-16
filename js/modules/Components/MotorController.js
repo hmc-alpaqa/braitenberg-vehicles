@@ -4,7 +4,7 @@
  */
 class MotorController extends Component {
     /**
-     * Creates a motor controller
+     * Creates a motor controller.
      * @param {Gyro} gyro gyro belonging to the vehicle the inhibitor is on
      * @param {Vector} offset position of the motor controller relative to the center of the vehicle
      * @param {Component[]} inputs inputs to the motor controller
@@ -17,7 +17,7 @@ class MotorController extends Component {
     }
 
     /**
-     * Returns the motor controller output
+     * Returns the motor controller output.
      * @returns {Number} motor controller output
      */
     getOutput() {

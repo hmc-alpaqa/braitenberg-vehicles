@@ -1,0 +1,11 @@
+{
+    "source": {
+      "include": ["js"],
+      "exclude": ["libraries", "images"]
+    },
+    "opts": {
+      "destination": "./docs",
+      "recurse": true
+    }
+  }
+  

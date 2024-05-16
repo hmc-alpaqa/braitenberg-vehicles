@@ -1,4 +1,10 @@
+/**
+ * Helper class for rendering p5js objects.
+ */
 class Renderer {
+    /**
+     * Initializes the
+     */
     static graphicsSetup() {
         sensorGraphic = createGraphics(PIXEL_SIZE * SENSOR_SIZE * 2, PIXEL_SIZE * SENSOR_SIZE);
         Renderer.sensorGraphicSetup();

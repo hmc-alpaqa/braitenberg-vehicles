@@ -4,7 +4,7 @@
  */
 class Sensor extends Component {
     /**
-     * Creates a sensor
+     * Creates a sensor.
      * @param {Gyro} gyro gyro belonging to the vehicle the sensor is on
      * @param {Number} offset position of the sensor relative to the center of the vehicle
      */
@@ -13,7 +13,7 @@ class Sensor extends Component {
     }
 
     /**
-     * Returns the stimulus sensed at the sensor
+     * Returns the stimulus sensed at the sensor.
      * @returns {Number} sensor output
      */
     getOutput() { 
