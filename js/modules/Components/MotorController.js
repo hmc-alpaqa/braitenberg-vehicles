@@ -1,5 +1,6 @@
 /**
  * Class representing a motor controller. Modifies the input by some function.
+ * @extends Component
  */
 class MotorController extends Component {
     /**

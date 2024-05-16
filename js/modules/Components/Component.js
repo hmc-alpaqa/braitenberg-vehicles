@@ -1,13 +1,29 @@
+/**
+ * Abstract class representing a vehicle component.
+ */
 class Component {
+    /**
+     * 
+     * @param {Gyro} gyro gyro belonging to the vehicle the inhibitor is on
+     * @param {Vector} offset position of the inhibitor relative to the center of the vehicle
+     */
     constructor(gyro, offset) {
+        if (this.constructor == Component) {
+            throw new TypeError("Cannot construct Component instances directly");
+        }
+
         this.gyro = gyro;
         this.offset = offset;
     }
 
     getOutput() {
-        throw new Error('The getOutput() method must be implemented by any children of the Component class');
+        throw new Error("method 'getOutput()' must be implemented");
     }
 
+    /**
+     * Returns the position of the component
+     * @returns {Vector} the position of the component
+     */
     getR() {
         let r = this.offset.getMagnitude();
         let theta = this.offset.getTheta();
@@ -17,7 +33,6 @@ class Component {
         let thetaEffective = theta + rotateBy
 
         let xEffective = r * Math.cos(thetaEffective)
-        // must negate due to p5js coordinates
         let yEffective = r * Math.sin(thetaEffective)
 
         return new Vector(

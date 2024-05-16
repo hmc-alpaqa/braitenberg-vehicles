@@ -4,7 +4,7 @@
  */
 class Inhibitor extends Component {
     /**
-     * Create an inhibitor.
+     * Creates an inhibitor
      * @param {Gyro} gyro gyro belonging to the vehicle the inhibitor is on
      * @param {Vector} offset position of the inhibitor relative to the center of the vehicle
      * @param {Component[]} inputs inputs to the inhibitor
