@@ -49,7 +49,7 @@ class Renderer {
         vehicleGraphic.fill(0);
         vehicleGraphic.textSize(VEHICLE_SIZE * PIXEL_SIZE / 2)
         vehicleGraphic.textAlign(CENTER);
-        vehicleGraphic.text(vehicle.name, PIXEL_SIZE * (MOTOR_SIZE + VEHICLE_SIZE / 2), 0.7 * VEHICLE_SIZE * PIXEL_SIZE);
+        vehicleGraphic.text(vehicle.type, PIXEL_SIZE * (MOTOR_SIZE + VEHICLE_SIZE / 2), 0.7 * VEHICLE_SIZE * PIXEL_SIZE);
         // vehicle motors
         for (let motor of vehicle.motors) {
             vehicleGraphic.image(motorGraphic, 0, PIXEL_SIZE * (motor.offset.y + 0.5 * (VEHICLE_SIZE - MOTOR_SIZE)));

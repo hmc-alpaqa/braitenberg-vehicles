@@ -1,11 +1,22 @@
 /**
- * The blueprint class for all vehicles. Specific vehicles can be designed
- * by adding a specific configuration of components to this blueprint.
+ * Abstract class representing a vehicle.
  */
 class Vehicle {
-    constructor(gyro, name, id, sensors = [], motors = [], motorControllers = [],) {
+    /**
+     * 
+     * @param {Gyro} gyro gyro belonging to the vehicle the sensor is on
+     * @param {*} name 
+     * @param {*} id 
+     * @param {*} sensors 
+     * @param {*} motors 
+     * @param {*} motorControllers 
+     */
+    constructor(gyro, type, id, sensors = [], motors = [], motorControllers = [],) {
+        if (this.constructor == Vehicle) {
+            throw new TypeError("Cannot construct Vehicle instances directly");
+        }
         this.gyro = gyro;
-        this.name = name;
+        this.type = type;
         this.id = id;
         this.sensors = sensors;
         this.motorControllers = motorControllers;
