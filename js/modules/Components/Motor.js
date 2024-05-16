@@ -5,7 +5,7 @@
 */
 class Motor extends Component {
     /**
-     * Create a motor.
+     * Creates a motor
      * @param {Gyro} gyro gyro belonging to the vehicle the inhibitor is on
      * @param {Vector} offset position of the motor relative to the center of the vehicle
      * @param {Component[]} inputs inputs to the motor
