@@ -1,5 +1,7 @@
 /**
  * Abstract class representing a vehicle component.
+ * @prop {Gyro} gyro gyro belonging to the vehicle the inhibitor is on
+ * @prop {Vector} offset position of the inhibitor relative to the center of the vehicle
  */
 class Component {
     /**
@@ -16,6 +18,9 @@ class Component {
         this.offset = offset;
     }
 
+    /**
+     * Returns the output of the component. Must be implemented by child classes.
+     */
     getOutput() {
         throw new Error("method 'getOutput()' must be implemented");
     }
