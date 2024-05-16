@@ -3,7 +3,7 @@
  */
 class Gyro {
     /**
-     * Creates a gyro
+     * Creates a gyro.
      * @param {Universe} universe the universe of the vehicle
      * @param {Number} x the x-position of the vehicle
      * @param {Number} y the y-position of the vehicle

@@ -28,7 +28,7 @@ class Source {
 
     /**
      * Moves the source to the specified x-position.
-     * @param {Number} x the new x-position
+     * @param {Number} x tnew x-position
      */
     setX(x) {
         this.x = x;
@@ -37,7 +37,7 @@ class Source {
 
     /**
      * Moves the source to the specified y-position.
-     * @param {Number} y the new y-position
+     * @param {Number} y new y-position
      */
     setY(y) {
         this.y = y;

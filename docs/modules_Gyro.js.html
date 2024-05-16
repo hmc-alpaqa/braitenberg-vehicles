@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: modules/Gyro.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,36 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: modules/Gyro.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Class representing the gyro of a veheicle. The gyro contains vehicle data such as position, angle of rotation, velocity, and acceleration.
+ */
+class Gyro {
+    /**
+     * Creates a gyro.
+     * @param {Universe} universe the universe of the vehicle
+     * @param {Number} x the x-position of the vehicle
+     * @param {Number} y the y-position of the vehicle
+     * @param {Number} theta the angle the vehicle is rotated from the x-axis, in radians
+     */
+    constructor(universe, x, y, theta) {
+        this.universe = universe;
+        this.r = new Vector(x, y);
+        this.theta = theta; 
+        this.v = new Vector(0, 0);
+        this.a = new Vector(0, 0);
+    }
+}</code></pre>
+        </article>
+    </section>
 
 
 

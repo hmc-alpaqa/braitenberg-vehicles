@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: modules/Components/Sensor.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,42 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: modules/Components/Sensor.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Class representing a sensor. Detects stimuli from the sources.
+ * @extends Component
+ */
+class Sensor extends Component {
+    /**
+     * Creates a sensor.
+     * @param {Gyro} gyro gyro belonging to the vehicle the sensor is on
+     * @param {Number} offset position of the sensor relative to the center of the vehicle
+     */
+    constructor(gyro, offset) {
+        super(gyro, offset);
+    }
 
+    /**
+     * Returns the stimulus sensed at the sensor.
+     * @returns {Number} sensor output
+     */
+    getOutput() { 
+        let y = Math.round(this.getR().y);
+        let x = Math.round(this.getR().x);
+        return 100 * this.gyro.universe.getStimulus(x, y);
+    }
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+}</code></pre>
+        </article>
+    </section>
 
 
 

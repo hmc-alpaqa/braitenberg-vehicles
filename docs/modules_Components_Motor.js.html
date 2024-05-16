@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: modules/Components/Motor.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,47 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: modules/Components/Motor.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Class representing a motor. Drives the motion of the vehicle.
+ * @extends Component
+ * 
+*/
+class Motor extends Component {
+    /**
+     * Creates a motor.
+     * @param {Gyro} gyro gyro belonging to the vehicle the inhibitor is on
+     * @param {Vector} offset position of the motor relative to the center of the vehicle
+     * @param {Component[]} inputs inputs to the motor
+     */
+    constructor(gyro, offset, inputs = []) {
+        super(gyro, offset);
+        this.inputs = inputs;
+    }
 
+    /**
+     * Returns the motor output.
+     * @returns {Number} motor output
+     */
+    getOutput() {
+        let sum = 0
+        for (let i = 0; i &lt; this.inputs.length; i++) {
+            sum += this.inputs[i].getOutput();
+        }
+        return Math.min(Math.max(0, sum), 300); // caps min speed at 0 and max at 300
+    }
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+}</code></pre>
+        </article>
+    </section>
 
 
 
