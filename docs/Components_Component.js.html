@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Components/MotorController.js</title>
+    <title>JSDoc: Source: Components/Component.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Components/MotorController.js</h1>
+    <h1 class="page-title">Source: Components/Component.js</h1>
 
     
 
@@ -27,33 +27,46 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Class representing a motor controller. Modifies the input by some function.
- * @extends Component
+ * Abstract class representing a vehicle component.
  */
-class MotorController extends Component {
+class Component {
     /**
-     * Creates a motor controller.
+     * 
      * @param {Gyro} gyro gyro belonging to the vehicle the inhibitor is on
-     * @param {Vector} offset position of the motor controller relative to the center of the vehicle
-     * @param {Component[]} inputs inputs to the motor controller
-     * @param {*} f function that modifies the motor controller input
+     * @param {Vector} offset position of the inhibitor relative to the center of the vehicle
      */
-    constructor(gyro, offset, inputs = [], f) {
-        super(gyro, offset);
-        this.inputs = inputs;
-        this.f = f;
+    constructor(gyro, offset) {
+        if (this.constructor == Component) {
+            throw new TypeError("Cannot construct Component instances directly");
+        }
+
+        this.gyro = gyro;
+        this.offset = offset;
+    }
+
+    getOutput() {
+        throw new Error("method 'getOutput()' must be implemented");
     }
 
     /**
-     * Returns the motor controller output.
-     * @returns {Number} motor controller output
+     * Returns the position of the component
+     * @returns {Vector} the position of the component
      */
-    getOutput() {
-        let sum = 0
-        for (let input of this.inputs) {
-            sum += input.getOutput();
-        }
-        return this.f(sum); // the motors should never produce negative force
+    getR() {
+        let r = this.offset.getMagnitude();
+        let theta = this.offset.getTheta();
+
+        let rotateBy = this.gyro.theta
+
+        let thetaEffective = theta + rotateBy
+
+        let xEffective = r * Math.cos(thetaEffective)
+        let yEffective = r * Math.sin(thetaEffective)
+
+        return new Vector(
+            this.gyro.r.x + xEffective,
+            this.gyro.r.y + yEffective,
+        )
     }
 }</code></pre>
         </article>

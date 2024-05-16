@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Components/MotorController.js</title>
+    <title>JSDoc: Source: Source.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Components/MotorController.js</h1>
+    <h1 class="page-title">Source: Source.js</h1>
 
     
 
@@ -27,33 +27,49 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Class representing a motor controller. Modifies the input by some function.
- * @extends Component
+ * Class representing a source.
  */
-class MotorController extends Component {
+class Source {
     /**
-     * Creates a motor controller.
-     * @param {Gyro} gyro gyro belonging to the vehicle the inhibitor is on
-     * @param {Vector} offset position of the motor controller relative to the center of the vehicle
-     * @param {Component[]} inputs inputs to the motor controller
-     * @param {*} f function that modifies the motor controller input
+     * Creates a source.
+     * @param {Number} x the x-position of the source
+     * @param {Number} y the y-position of the source
+     * @param {Number} intensity the intensity of the source
      */
-    constructor(gyro, offset, inputs = [], f) {
-        super(gyro, offset);
-        this.inputs = inputs;
-        this.f = f;
+    constructor(x, y, intensity = 100) {
+        this.r = new Vector(x, y); // position
+        this.x = x;
+        this.y = y;
+        this.intensity = intensity;
     }
 
     /**
-     * Returns the motor controller output.
-     * @returns {Number} motor controller output
+     * Returns the intensity of the source at at certain coordinate point.
+     * @param {Number} x the x-position of the coordinate
+     * @param {Number} y the y-position of the coordinate
+     * @returns {Number} the intensity of the source at the coordinate
      */
-    getOutput() {
-        let sum = 0
-        for (let input of this.inputs) {
-            sum += input.getOutput();
-        }
-        return this.f(sum); // the motors should never produce negative force
+    getIntensity(x, y) {
+        let dist = (new Vector(this.r.x - x, this.r.y - y)).getMagnitude();
+        return this.intensity / Math.pow(dist, 2);
+    }
+
+    /**
+     * Moves the source to the specified x-position.
+     * @param {Number} x the new x-position
+     */
+    setX(x) {
+        this.x = x;
+        this.r.x = x;
+    }
+
+    /**
+     * Moves the source to the specified y-position.
+     * @param {Number} y the new y-position
+     */
+    setY(y) {
+        this.y = y;
+        this.r.y = y;
     }
 }</code></pre>
         </article>

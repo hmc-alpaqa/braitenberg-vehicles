@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Universe.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Universe.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Container class for storing information about vehicles, sources, and stimuli.
  */
 class Universe {
@@ -7,9 +35,9 @@ class Universe {
      * @prop {Sources[]} sources sources in the universe
      * @prop {Vehicles[]} vehicles vehicles in the universe
      * @prop {Number[][]} stimuli 2D grid that acts as a map for source stimuli
-     * @prop {Object.<number, Vector[]>} paths map from vehicle id to vehicle position time series
-     * @prop {Object.<number, Vector[]>} speeds map from vehicle id to vehicle velocity time series
-     * @prop {Object.<number, String[]>} colors map from vehicle id to vehicle color time series
+     * @prop {Object.&lt;number, Vector[]>} paths map from vehicle id to vehicle position time series
+     * @prop {Object.&lt;number, Vector[]>} speeds map from vehicle id to vehicle velocity time series
+     * @prop {Object.&lt;number, String[]>} colors map from vehicle id to vehicle color time series
      */
     constructor() {
         this.sources = [];
@@ -18,9 +46,9 @@ class Universe {
         this.paths = new Map();
         this.speeds = new Map();
         this.colors = new Map();
-        for (let i = 0; i < MAP_RESOLUTION; i++) {
+        for (let i = 0; i &lt; MAP_RESOLUTION; i++) {
             let row = []
-            for (let j = 0; j < Math.round(MAP_RESOLUTION / ASPECT_RATIO); j++) {
+            for (let j = 0; j &lt; Math.round(MAP_RESOLUTION / ASPECT_RATIO); j++) {
                 row.push(0);
             }
             this.stimuli.push(row);
@@ -37,9 +65,9 @@ class Universe {
         this.paths.clear();
         this.speeds.clear();
         this.colors.clear();
-        for (let i = 0; i < MAP_RESOLUTION; i++) {
+        for (let i = 0; i &lt; MAP_RESOLUTION; i++) {
             let row = []
-            for (let j = 0; j < MAP_RESOLUTION; j++) {
+            for (let j = 0; j &lt; MAP_RESOLUTION; j++) {
                 row.push(0);
             }
             u.stimuli.push(row);
@@ -52,8 +80,8 @@ class Universe {
     draw() {
         let pixelSize = MAP_RESOLUTION / (MAP_LENGTH * MAP_HEIGHT);
         // draw a square for each cell in stimuli
-        for (i = 0; i < this.stimuli; i++) {
-            for (j = 0; j < this.stimuli[i]; j++) {
+        for (i = 0; i &lt; this.stimuli; i++) {
+            for (j = 0; j &lt; this.stimuli[i]; j++) {
                 square(i * pixelSize, j * pixelSize, pixelSize);
             }
         }
@@ -114,7 +142,7 @@ class Universe {
             let closestVehicle = this.vehicles[0]
             for (let vehicle of this.vehicles) {
                 dist = (vehicle.r.subtract(mousePos)).getMagnitude();
-                if (dist < smallestDist) {
+                if (dist &lt; smallestDist) {
                     smallestDist = dist
                     closestVehicle = vehicle;
                 }
@@ -132,8 +160,8 @@ class Universe {
      * @returns {Boolean} whether or not the mouse is over the vehicle
      */
     overVehicle(mouseX, mouseY, vehicle) {
-        return (mouseX <= vehicle.x + VEHICLE_SIZE / 2) && (mouseX >= vehicle.x - VEHICLE_SIZE / 2)
-        && (mouseY <= vehicle.y + VEHICLE_SIZE / 2) && (mouseY >= vehicle.y - VEHICLE_SIZE / 2);
+        return (mouseX &lt;= vehicle.x + VEHICLE_SIZE / 2) &amp;&amp; (mouseX >= vehicle.x - VEHICLE_SIZE / 2)
+        &amp;&amp; (mouseY &lt;= vehicle.y + VEHICLE_SIZE / 2) &amp;&amp; (mouseY >= vehicle.y - VEHICLE_SIZE / 2);
     }
 
     /**
@@ -166,7 +194,7 @@ class Universe {
             let closestSource = this.sources[0]
             for (let source of this.sources) {
                 dist = (source.r.subtract(mousePos)).getMagnitude()
-                if (dist < smallestDist) {
+                if (dist &lt; smallestDist) {
                     smallestDist = dist
                     closestSource = source;
                 }
@@ -184,8 +212,8 @@ class Universe {
      * @returns {Boolean} whether or not the mouse is over the source
      */
     overSource(mouseX, mouseY, source) {
-        return (mouseX <= source.x + SOURCE_SIZE / 2) && (mouseX >= source.x - SOURCE_SIZE / 2)
-        && (mouseY <= source.y + SOURCE_SIZE / 2) && (mouseY >= source.y - SOURCE_SIZE / 2);
+        return (mouseX &lt;= source.x + SOURCE_SIZE / 2) &amp;&amp; (mouseX >= source.x - SOURCE_SIZE / 2)
+        &amp;&amp; (mouseY &lt;= source.y + SOURCE_SIZE / 2) &amp;&amp; (mouseY >= source.y - SOURCE_SIZE / 2);
     }
 
     /**
@@ -217,4 +245,26 @@ class Universe {
         }
         return sum;
     }
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Component.html">Component</a></li><li><a href="Gyro.html">Gyro</a></li><li><a href="Inhibitor.html">Inhibitor</a></li><li><a href="Motor.html">Motor</a></li><li><a href="MotorController.html">MotorController</a></li><li><a href="Renderer.html">Renderer</a></li><li><a href="Sensor.html">Sensor</a></li><li><a href="Source.html">Source</a></li><li><a href="Universe.html">Universe</a></li><li><a href="Vector.html">Vector</a></li><li><a href="Vehicle.html">Vehicle</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed May 15 2024 21:33:06 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
