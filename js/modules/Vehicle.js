@@ -116,7 +116,7 @@ class Vehicle {
      */
     move(dt) {
         if (this.motors.length === 1) {
-            this.gyro.v = new Vector(0, 0).initFromPolar(this.motors[0].getOutput(), this.gyro.theta);
+            this.gyro.v = new Vector(0, 0).initFromPolar(this.motors[0].getOutput(), -this.gyro.theta);
             let step = this.gyro.v.multiply(dt);
             this.gyro.r = this.gyro.r.add(step);
         } else if (this.motors.length === 2) {
