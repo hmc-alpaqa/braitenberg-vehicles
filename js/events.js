@@ -306,6 +306,7 @@ removeVehicleButton.addEventListener("click", () => {
 
 ////////// REMOVE ALL VEHICLES BUTTON //////////
 removeAllVehiclesButton.addEventListener("click", () => {
+    vehicleColorPicker.style.visibility = "hidden";
     unclickVehicleSourceButtons();
     u.vehicles = [];
     updateVehicleCensus();
@@ -368,6 +369,7 @@ sandboxModeButton.addEventListener("click", () => {
     drawModeButton.classList.remove("clicked");
     sandboxModeButton.classList.add("clicked");
     drawMode = false;
+    vehicleColorPicker.style.visibility = "hidden";
 })
 
 ////////// DRAW MODE BUTTON //////////
@@ -408,6 +410,7 @@ resetButton.addEventListener("click", () => {
         startStopButton.innerText = "Start";
         startStopButton.classList.remove("clicked");
     }
+    vehicleColorPicker.style.visibility = "hidden";
     document.querySelector("#speed-button-1").checked = true;
     SPEED = document.querySelector("#speed-button-1").value;
     unclickVehicleSourceButtons();
