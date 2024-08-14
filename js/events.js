@@ -294,7 +294,7 @@ addVehicleButton.addEventListener("click", () => {
 
 ////////// REMOVE VEHICLE BUTTON //////////
 removeVehicleButton.addEventListener("click", () => {
-    if (currentAction = Actions.REMOVING_VEHICLE) {
+    if (currentAction == Actions.REMOVING_VEHICLE) {
         currentAction = Actions.NONE;
         removeVehicleButton.classList.remove("clicked");
     } else {

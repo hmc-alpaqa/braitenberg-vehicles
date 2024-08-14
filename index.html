@@ -29,6 +29,9 @@
       <p>
         To request a feature, fill out <a href="https://forms.gle/kEHMDuVuQ9kuQo6YA" target="_blank">this</a> form. To report a bug, fill out <a href="https://forms.gle/zEg78qYWrdCviKSF7" target="_blank">this</a> form.
       </p>
+      <p>
+        This website is currently actively maintained by <a href="https://v-tao.github.io/">Devon Tao</a>. If you have any questions, feel free to contact them at <a href="mailto:vtao@g.hmc.edu">vtao@g.hmc.edu</a>.
+      </p>
     </div>
   </div>
   <div id="about-vehicles-modal" class="modal">
@@ -114,6 +117,16 @@
           <label for="speed-button-2">4x</label>
         </div>
       </div>
+      <div class="menu-item" id="sources">
+        <h3>Sources</h3>
+        <label for="source-intensity-input">Intensity:</label>
+        <input id="source-intensity-input" type="number" value="50" min="0" max="1000">
+        <div style="margin-top: 10px">
+          <button id="add-source-button">Add</button>
+          <button class="danger-button" id="remove-source-button">Remove</button>
+          <button class="danger-button" id="remove-all-sources-button">Remove All</button>
+        </div>
+      </div>
       <div class="menu-item" id="vehicles">
         <h3>Vehicles</h3>
         <select id="vehicle-select">
@@ -156,16 +169,6 @@
         <label for="vehicle-tracker-toggle">Show Vehicle Tracker</label>
         <input type="checkbox" id="vehicle-tracker-toggle" name="vehicle-tracker-toggle">
         <div id="vehicle-tracker">
-        </div>
-      </div>
-      <div class="menu-item" id="sources">
-        <h3>Sources</h3>
-        <label for="source-intensity-input">Intensity:</label>
-        <input id="source-intensity-input" type="number" value="50" min="0" max="1000">
-        <div style="margin-top: 10px">
-          <button id="add-source-button">Add</button>
-          <button class="danger-button" id="remove-source-button">Remove</button>
-          <button class="danger-button" id="remove-all-sources-button">Remove All</button>
         </div>
       </div>
     </div>
