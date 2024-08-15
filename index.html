@@ -58,7 +58,7 @@
         <div style="display: flex; justify-content: center; margin-bottom: 15px;">
           <img id="vehicle-image" src="#" height="100px">
         </div>
-        <div id="about-vehicles-footer">
+        <div class="modal-footer">
           <a id="previous-vehicle" href="#">Previous</a>
           <a id="about-vehicles-menu-link" href="#">Menu</a>
           <a id="next-vehicle" href="#">Next</a>
@@ -67,7 +67,40 @@
     </div>
 
   </div>
-  <div id="how-to-modal" class="modal">
+
+  <div id="tutorial-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">x</span>
+      <div id="tutorial-menu">
+        <h1>Tutorials</h1>
+        <hr>
+        <ul>
+          <li><a class="tutorial-menu-item" name=0 href="#">Adding Sources</a></li>
+          <li><a class="tutorial-menu-item" name=1 href="#">Removing Sources</a></li>
+          <li><a class="tutorial-menu-item" name=2 href="#">Adding Vehicles</a></li>
+          <li><a class="tutorial-menu-item" name=3 href="#">Removing Vehicles</a></li>
+          <li><a class="tutorial-menu-item" name=4 href="#">Controls</a></li>
+        </ul>
+      </div>
+      <div id="tutorial-content">
+        <h1 id="tutorial-header"></h1>
+        <hr>
+        <div style="display: flex; justify-content: center; margin-bottom: 15px;">
+          <video id="tutorial-video" src="#" width="80%" controls autoplay >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="modal-footer">
+          <a id="previous-tutorial" href="#">Previous</a>
+          <a id="tutorial-menu-link" href="#">Menu</a>
+          <a id="next-tutorial" href="#">Next</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- <div id="how-to-modal" class="modal">
     <div class="modal-content">
       <span class="modal-close">x</span>
       <h1>How to Use</h1>
@@ -79,12 +112,12 @@
       <h2>Removing a Source</h2>
       <p>To remove a source, click the Remove Source button. Then, click on the source you wish to remove. You can keep removing sources while the Remove Source button is pressed. If you wish to stop removing sources, click the Remove Source button again.</p>
     </div>
-  </div>
+  </div> -->
   <div class="header">
     <h1>Braitenberg Vehicles</h1>
     <button id="about-button">About</button>
     <button id="about-vehicles-button">About Vehicles</button>
-    <button id="how-to-button">How to Use</button>
+    <button id="tutorial-button">Tutorials</button>
   </div>
   <div class="container" style="margin-top: 0.5rem">
     <div id="canvas">

@@ -42,6 +42,33 @@ aboutVehicles = [
     }
 ]
 
+/********* TUTORIAL INFORMATION *********/
+
+/********* ABOUT VEHICLES INFORMATION *********/
+tutorials = [
+    {
+        header: "Adding Sources",
+        video: "./videos/adding_sources.mp4",
+    }, 
+    {
+        header: "Removing Sources",
+        video: "./videos/removing_sources.mp4",
+    }, 
+    {
+        header: "Adding Vehicles",
+        video: "./videos/adding_vehicles.mp4",
+    }, 
+    {
+        header: "Removing Vehicles",
+        video: "./videos/removing_vehicles.mp4",
+    }, 
+    {
+        header: "Controls",
+        video: "./videos/controls.mp4",
+    }, 
+]
+
+
 /********* DOM ELEMENTS *********/
 let doc = document.documentElement;
 let body = document.querySelector("body");
@@ -49,8 +76,6 @@ let fullscreenButton = document.querySelector("#fullscreen-button");
 let fullscreenMessage = document.querySelector("#fullscreen-message");
 let aboutButton = document.querySelector("#about-button");
 let aboutModal = document.querySelector("#about-modal");
-let howToButton = document.querySelector("#how-to-button");
-let howToModal = document.querySelector("#how-to-modal");
 let closeModalButtons = document.querySelectorAll(".modal-close");
 
 ////////// ABOUT VEHICLES MODAL //////////
@@ -65,6 +90,18 @@ let vehicleImage = document.querySelector("#vehicle-image");
 let aboutVehiclesMenuLink = document.querySelector("#about-vehicles-menu-link");
 let nextVehicle = document.querySelector("#next-vehicle");
 let previousVehicle = document.querySelector("#previous-vehicle");
+
+////////// TUTORIAL MODAL //////////
+let tutorialModal = document.querySelector("#tutorial-modal");
+let tutorialButton = document.querySelector("#tutorial-button");
+let tutorialMenu = document.querySelector("#tutorial-menu");
+let tutorialMenuItems = document.querySelectorAll(".tutorial-menu-item");
+let tutorialContent = document.querySelector("#tutorial-content");
+let tutorialHeader = document.querySelector("#tutorial-header");
+let tutorialVideo = document.querySelector("#tutorial-video")
+let tutorialMenuLink = document.querySelector("#tutorial-menu-link");
+let nextTutorial = document.querySelector("#next-tutorial");
+let previousTutorial = document.querySelector("#previous-tutorial");
 
 ////////// CONTROLS //////////
 let startStopButton = document.querySelector("#start-stop-button");
@@ -129,17 +166,11 @@ aboutButton.addEventListener("click", () => {
     unclickVehicleSourceButtons();
 });
 
-howToButton.addEventListener("click", () => {
-    howToModal.style.display = "block";
-    // when clicking a modal, the user should stop adding vehicles and sources
-    unclickVehicleSourceButtons();
-});
-
 for (closeModalButton of closeModalButtons) {
     closeModalButton.addEventListener("click", () => {
         aboutModal.style.display = "none";
         aboutVehiclesModal.style.display = "none";
-        howToModal.style.display = "none";
+        tutorialModal.style.display = "none";
     });
 }
 
@@ -183,6 +214,46 @@ previousVehicle.addEventListener("click", () => {
     vehicleHeader.innerText = aboutVehicles[i].header;
     vehicleText.innerHTML = aboutVehicles[i].text;
     vehicleImage.src = aboutVehicles[i].image
+});
+
+////////// TUTORIALS MODAL //////////
+
+tutorialButton.addEventListener("click", () => {
+    tutorialModal.style.display = "block";
+    tutorialMenu.style.display = "block";
+    tutorialContent.style.display = "none";
+    // when clicking a modal, the user should stop adding vehicles and sources
+    unclickVehicleSourceButtons();
+});
+
+for (tutorialMenuItem of tutorialMenuItems) {
+    tutorialMenuItem.addEventListener("click", (e) =>{
+        let i = parseInt(e.target.name);
+        tutorialMenu.style.display = "none";
+        tutorialContent.style.display = "block";
+        tutorialHeader.name = i;
+        tutorialHeader.innerText = tutorials[i].header;
+        tutorialVideo.src = tutorials[i].video;
+    });
+}
+
+tutorialMenuLink.addEventListener("click", () => {
+    tutorialMenu.style.display = "block";
+    tutorialContent.style.display = "none";
+});
+
+nextTutorial.addEventListener("click", () => {
+    let i = (tutorialHeader.name + 1) % tutorials.length;
+    tutorialHeader.name = i;
+    tutorialHeader.innerText = tutorials[i].header;
+    tutorialVideo.src = tutorials[i].video;
+});
+
+previousTutorial.addEventListener("click", () => {
+    let i = (tutorials.length + tutorialHeader.name - 1) % tutorials.length;
+    tutorialHeader.name = i;
+    tutorialHeader.innerText = tutorials[i].header;
+    tutorialVideo.src = tutorials[i].video;
 });
 
 ////////// ADD VEHICLE INPUT //////////

@@ -110,10 +110,10 @@ h3 {
   border-radius: 10px;
 }
 
-#about-vehicles-footer {
-  display: flex;
-  justify-content: space-between;
-}
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+  }
 
 #canvas {
   grid-column: 1/2;
