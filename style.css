@@ -2,6 +2,7 @@ html, body {
   margin: 0;
   padding: 1rem 1rem 0 1rem;
   font-family: "Helvetica Neue";
+  overflow-y: hidden;
 }
 
 input:focus, select:focus {
@@ -164,6 +165,6 @@ h3 {
 }
 
 #vehicle-tracker{
-    max-height: 20vh;
+    max-height: 17.5vh;
     overflow-y: auto;
 }
