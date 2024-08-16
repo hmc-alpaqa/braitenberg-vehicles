@@ -34,6 +34,23 @@
       </p>
     </div>
   </div>
+  <!-- <div>
+    <select style="display: none" id="vehicle-4a-select">
+      <option value="sinusoidal">Sinusoidal</option>
+      <option value="quadratic">Quadratic</option>
+      <option value="sqrt">Square Root</option>
+      <option value="log">Log</option>
+      <option value="semicircle">Semicircle</option>
+      <option value="flipped semicircle">Flipped Semicircle</option>
+    </select>
+    <select style="display: none" id="vehicle-4b-select">
+      <option value="repeating linear">Repeating Linear</option>
+      <option value="ascending linear">Ascending Linear</option>
+      <option value="repeating steps">Repeating Steps</option>
+      <option value="ascending steps">Ascending Steps</option>
+      <option value="hyperbola">Hyperbola</option>
+    </select>
+  </div> -->
   <div id="about-vehicles-modal" class="modal">
     <div class="modal-content">
       <span class="modal-close">x</span>
@@ -47,8 +64,25 @@
           <li><a class="about-vehicles-menu-item" name=3 href="#">Vehicle 2c</a></li>
           <li><a class="about-vehicles-menu-item" name=4 href="#">Vehicle 3a</a></li>
           <li><a class="about-vehicles-menu-item" name=5 href="#">Vehicle 3b</a></li>
-          <li><a class="about-vehicles-menu-item" name=6 href="#">Vehicle 4a</a></li>
-          <li><a class="about-vehicles-menu-item" name=7 href="#">Vehicle 4b</a></li>
+          <li><a class="about-vehicles-menu-item" name=6 href="#">Vehicle 4a</a>
+            <ul>
+                <li><a class="about-vehicles-menu-item" name="7" href="#">Sinusoidal</a></li>
+                <li><a class="about-vehicles-menu-item" name="8" href="#">Quadratic</a></li>
+                <li><a class="about-vehicles-menu-item" name="9" href="#">Square Root</a></li>
+                <li><a class="about-vehicles-menu-item" name="10" href="#">Log</a></li>
+                <li><a class="about-vehicles-menu-item" name="11" href="#">Semicircle</a></li>
+                <li><a class="about-vehicles-menu-item" name="12" href="#">Flipped Semicircle</a></li>
+            </ul>
+          </li>
+          <li><a class="about-vehicles-menu-item" name="13" href="#">Vehicle 4b</a>
+            <ul>
+                <li><a class="about-vehicles-menu-item" name="14" href="#">Repeating Linear</a></li>
+                <li><a class="about-vehicles-menu-item" name="15" href="#">Ascending Linear</a></li>
+                <li><a class="about-vehicles-menu-item" name="16" href="#">Repeating Steps</a></li>
+                <li><a class="about-vehicles-menu-item" name="17" href="#">Ascending Steps</a></li>
+                <li><a class="about-vehicles-menu-item" name="18" href="#">Hyperbola</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
       <div id="about-vehicles-content">
@@ -56,7 +90,7 @@
         <hr>
         <p id="vehicle-text"></p>
         <div style="display: flex; justify-content: center; margin-bottom: 15px;">
-          <img id="vehicle-image" src="#" height="100px">
+          <img id="vehicle-image" src="#">
         </div>
         <div class="modal-footer">
           <a id="previous-vehicle" href="#">Previous</a>
@@ -82,6 +116,7 @@
           <li><a class="tutorial-menu-item" name=4 href="#">Controls</a></li>
         </ul>
         <p><i>Note: Draw mode is currently in beta. Tutorials will be added when development is finished.</i></p>
+        <p></p>
       </div>
       <div id="tutorial-content">
         <h1 id="tutorial-header"></h1>
@@ -100,20 +135,6 @@
     </div>
 
   </div>
-
-  <!-- <div id="how-to-modal" class="modal">
-    <div class="modal-content">
-      <span class="modal-close">x</span>
-      <h1>How to Use</h1>
-      <hr>
-      <h2>Adding a Vehicle</h2>
-      <p>To add a vehicle, select a vehicle in the dropdown and click the Add Vehicle button. Then, move your mouse to where you wish to place the vehicle. Use the left and right arrow keys to adjust the angle. You can keep adding vehicles while the Add Vehicle button is pressed. To change the vehicle being added, reselect the vehicle in the dropdown. If you wish to stop adding vehicles, click the Add Vehicle button again. The variables at the top left allow you to keep track of the position of the most recently placed vehicle with respect to the top left of the canvas as well as its angle of rotation with respect to the horizontal. Once added, you can drag and drop to move a vehicle. Vehicles still exist after they leave the canvas, however after a certain distance, a vehicle will automatically delete itself. You can keep track of the total vehicles, including the off-canvas vehicles, in the Vehicles tab.</p>
-      <h2>Adding a Source</h2>
-      <p>First, you should adjust your zoom to the desired level before adding sources. To add a source, enter the desired intensity of the source and click the Add Source button. Then, move your mouse to where you wish to place the source. You can keep adding sources while the Add source button is pressed. To change the intensity of the source being added, enter the new desired intensity in the input box. If you wish to stop adding sources, click the Add Source button again. Once added, you can drag and drop to move sources.</p>
-      <h2>Removing a Source</h2>
-      <p>To remove a source, click the Remove Source button. Then, click on the source you wish to remove. You can keep removing sources while the Remove Source button is pressed. If you wish to stop removing sources, click the Remove Source button again.</p>
-    </div>
-  </div> -->
   <div class="header">
     <h1>Braitenberg Vehicles</h1>
     <button id="about-button">About</button>

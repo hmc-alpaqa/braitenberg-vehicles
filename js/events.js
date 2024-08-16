@@ -4,47 +4,138 @@ aboutVehicles = [
         header: "Vehicle 1",
         text: "Vehicle 1 has one sensor and one motor. The speed of the motor is proportional to the input received by the sensor. Braitenberg considers this vehicle to be <b>alive</b>.",
         image: "./images/vehicles/vehicle1.png",
+        height: "100px",
+        width: "auto",
     }, 
     {
         header: "Vehicle 2a",
         text: "Vehicle 2a has two sensors and two motors. Each sensor is connected to the motor on the same side. This vehicle tends to avoid the source unless the source is directly in front of it, in which case it will move in the direction of the source. Braitenberg considers this vehicle to be a <b>coward</b>.",
         image: "./images/vehicles/vehicle2a.png",
+        height: "100px",
+        width: "auto",
     },
     {
         header: "Vehicle 2b",
         text: "Vehicle 2b has two sensors and two motors. Each sensor is connected to the motor on the opposite side. This vehicle tends to move towards the source in what could be described as an attacking motion. Braitenberg considers this vehicle <b>aggressive</b>.",
         image: "./images/vehicles/vehicle2b.png",
+        height: "100px",
+        width: "auto",
     },
     {
         header: "Vehicle 2c",
         text: "Vehicle 2c has two sensors and two motors. Each sensor is connected to both of the motors. This results in behavior similar to that of Vehicle 1.",
-        image: "./images/vehicles/vehicle2c.png"
+        image: "./images/vehicles/vehicle2c.png",
+        height: "100px",
+        width: "auto",
     },
     {
         header: "Vehicle 3a",
         text: "Vehicle 3a has two sensors, two motors, and two inhibitors. Each inhibitor is connected to the motor on the same side. This causes the vehicle to be attracted to the source. Braitenberg considers this vehicle to experience <b>love</b>.",
-        image: "./images/vehicles/vehicle3a.png"
+        image: "./images/vehicles/vehicle3a.png",
+        height: "100px",
+        width: "auto",
     },
     {
         header: "Vehicle 3b",
         text: "Vehicle 3b has two sensors, two motors, and two inhibitors. Each inhibitor is connected to the motor on the opposite side. This causes the vehicle to speed up away from the source. Braitenberg considers this vehicle to be an <b>explorer</b>.",
-        image: "./images/vehicles/vehicle3b.png"
+        image: "./images/vehicles/vehicle3b.png",
+        height: "100px",
+        width: "auto",
     },
     {
         header: "Vehicle 4a",
-        text: "Vehicle 4a has two sensors and two motors. Each sensor is connected to the motor on the same side. Whereas in vehicles 1-3 there was a linear relationship between motor output and sensor input, the motor output of Vehicle 4a is related to the source input by a differentiable nonlinear function. The behavior of the vehicle depends on the selected function. Braitenberg considers this vehicle to have <b>instincts</b>.",
-        image: "./images/vehicles/vehicle4.png"
+        text: "Vehicle 4a has two sensors and two motors. Each sensor is connected to the motor on the same side. Whereas in vehicles 1-3 there was a linear relationship between motor output and sensor input, the motor output of Vehicle 4a is related to the source input by a differentiable nonlinear function. The behavior of the vehicle depends on the selected function. Braitenberg considers this vehicle to have <b>instincts</b>. The following slides will detail the functions for Vehicle 4a in this simulator.",
+        image: "./images/vehicles/vehicle4.png",
+        height: "100px",
+        width: "auto",
+    },
+    {
+        header: "Vehicle 4a: Sinusoidal",
+        text: "",
+        image: "./images/functions/sinusoidal.png",
+        height: "auto",
+        width: "70%",
+    },
+    {
+        header: "Vehicle 4a: Quadratic",
+        text: "",
+        image: "./images/functions/quadratic.png",
+        height: "auto",
+        width: "70%",
+    },
+    {
+        header: "Vehicle 4a: Square Root",
+        text: "",
+        image: "./images/functions/sqrt.png",
+        height: "auto",
+        width: "70%",
+    },
+    {
+        header: "Vehicle 4a: Log",
+        text: "",
+        image: "./images/functions/log.png",
+        height: "auto",
+        width: "70%",
+    },
+    {
+        header: "Vehicle 4a: Semicircle",
+        text: "",
+        image: "./images/functions/semicircle.png",
+        height: "auto",
+        width: "70%",
+    },
+    {
+        header: "Vehicle 4a: Flipped Semicircle",
+        text: "",
+        image: "./images/functions/flipped_semicircle.png",
+        height: "auto",
+        width: "70%",
     },
     {
         header: "Vehicle 4b",
-        text: "Vehicle 4b has two sensors and two motors. Each sensor is connected to the motor on the same side. Like Vehicle 4a, there is a nonlinear mapping from sensor input to motor output. Unlike Vehicle 4a, the mapping of sensor input to motor output is defined by a nondifferentiable function rather than a differentiable one. Vehicle 4b should behave more decisively than Vehicle 4a, but the specific behavior of the vehicle is dependent on the function selected. Braitenberg considers this vehicle to have <b>will</b>.",
-        image: "./images/vehicles/vehicle4.png"
-    }
+        text: "Vehicle 4b has two sensors and two motors. Each sensor is connected to the motor on the same side. Like Vehicle 4a, there is a nonlinear mapping from sensor input to motor output. Unlike Vehicle 4a, the mapping of sensor input to motor output is defined by a nondifferentiable function rather than a differentiable one. Vehicle 4b should behave more decisively than Vehicle 4a, but the specific behavior of the vehicle is dependent on the function selected. Braitenberg considers this vehicle to have <b>will</b>. The following slides will detail the functions for Vehicle 4b in this simulator.",
+        image: "./images/vehicles/vehicle4.png",
+        height: "100px",
+        width: "auto",
+    },
+    {
+        header: "Vehicle 4b: Repeating Linear",
+        text: "",
+        image: "./images/functions/repeating_linear.png",
+        height: "auto",
+        width: "70%",
+    },
+    {
+        header: "Vehicle 4b: Ascending Linear",
+        text: "",
+        image: "./images/functions/ascending_linear.png",
+        height: "auto",
+        width: "70%",
+    },
+    {
+        header: "Vehicle 4b: Repeating Steps",
+        text: "",
+        image: "./images/functions/repeating_steps.png",
+        height: "auto",
+        width: "70%",
+    },
+    {
+        header: "Vehicle 4b: Ascending Steps",
+        text: "",
+        image: "./images/functions/ascending_steps.png",
+        height: "auto",
+        width: "70%",
+    },
+    {
+        header: "Vehicle 4b: Hyperbola",
+        text: "",
+        image: "./images/functions/hyperbola.png",
+        height: "auto",
+        width: "70%",
+    },
 ]
 
 /********* TUTORIAL INFORMATION *********/
-
-/********* ABOUT VEHICLES INFORMATION *********/
 tutorials = [
     {
         header: "Adding Sources",
@@ -192,6 +283,8 @@ for (aboutVehiclesMenuItem of aboutVehiclesMenuItems) {
         vehicleHeader.innerText = aboutVehicles[i].header;
         vehicleText.innerHTML = aboutVehicles[i].text;
         vehicleImage.src = aboutVehicles[i].image;
+        vehicleImage.style.height = aboutVehicles[i].height;
+        vehicleImage.style.width = aboutVehicles[i].width;
     });
 }
 
@@ -206,6 +299,8 @@ nextVehicle.addEventListener("click", () => {
     vehicleHeader.innerText = aboutVehicles[i].header;
     vehicleText.innerHTML = aboutVehicles[i].text;
     vehicleImage.src = aboutVehicles[i].image;
+    vehicleImage.style.height = aboutVehicles[i].height;
+    vehicleImage.style.width = aboutVehicles[i].width;
 });
 
 previousVehicle.addEventListener("click", () => {
@@ -213,7 +308,9 @@ previousVehicle.addEventListener("click", () => {
     vehicleHeader.name = i;
     vehicleHeader.innerText = aboutVehicles[i].header;
     vehicleText.innerHTML = aboutVehicles[i].text;
-    vehicleImage.src = aboutVehicles[i].image
+    vehicleImage.src = aboutVehicles[i].image;
+    vehicleImage.style.height = aboutVehicles[i].height;
+    vehicleImage.style.width = aboutVehicles[i].width;
 });
 
 ////////// TUTORIALS MODAL //////////
