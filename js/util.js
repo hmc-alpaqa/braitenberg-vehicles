@@ -21,8 +21,8 @@ function intersection(V1, V2, W1, W2) {
 function angle(V1, V2, W1, W2) {
     var v = V2.subtract(V1);
     var w = W2.subtract(W1);
-    var angle = Math.atan2(v.y, v.x) - Math.atan2(w.y, w.x);
-    return angle;
+    var theta = Math.atan2(v.y, v.x) - Math.atan2(w.y, w.x);
+    return theta;
 }
 
 // given a line defined by two points and a point on the line, find the equation of a perpendicular line that passes through the point

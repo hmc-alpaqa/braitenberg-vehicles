@@ -1,3 +1,6 @@
+/**
+ * @enum {string}
+ */
 const Vehicles = {
     NONE: "none",
     VEHICLE1: "1",
@@ -10,9 +13,13 @@ const Vehicles = {
     VEHICLE4B: "4b",
 }
 
-const VelocityFunctions = {
-    SINUSOIDAL: "sinusoidal",
-    QUADRATIC: "quadratic",
-    SQRT: "sqrt",
-    LOG: "log",
+/**
+ * @enum {string}
+ */
+const Actions = {
+    NONE: "none",
+    ADDING_SOURCE: "addingSource",
+    REMOVING_SOURCE: "removingSource",
+    ADDING_VEHICLE: "addingVehicle",
+    REMOVING_VEHICLE: "removingVehicle"
 }

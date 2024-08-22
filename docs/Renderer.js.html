@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Renderer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Renderer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Helper class for rendering p5js objects.
+ */
+class Renderer {
+    /**
+     * Initializes the sensor, motor, and vehicle graphics.
+     */
+    static graphicsSetup() {
+        sensorGraphic = createGraphics(PIXEL_SIZE * SENSOR_SIZE * 2, PIXEL_SIZE * SENSOR_SIZE);
+        Renderer.sensorGraphicSetup();
+        motorGraphic = createGraphics(PIXEL_SIZE * MOTOR_SIZE, PIXEL_SIZE * MOTOR_SIZE);
+        Renderer.motorGraphicSetup();
+        vehicleGraphic = createGraphics(PIXEL_SIZE * (VEHICLE_SIZE + (2 * SENSOR_SIZE) + MOTOR_SIZE), PIXEL_SIZE * VEHICLE_SIZE);
+    }
+
+    /**
+     * Draws a sensor.
+     */
+    static sensorGraphicSetup() {
+        // sensor "stick"
+        sensorGraphic.line(0, PIXEL_SIZE * SENSOR_SIZE / 2,
+            PIXEL_SIZE * SENSOR_SIZE, PIXEL_SIZE * SENSOR_SIZE / 2);
+        // sensor "claw"
+        sensorGraphic.noFill();
+        sensorGraphic.arc(PIXEL_SIZE * SENSOR_SIZE * 1.5, PIXEL_SIZE * SENSOR_SIZE / 2, 
+                    PIXEL_SIZE * SENSOR_SIZE, 0.5 * PIXEL_SIZE * SENSOR_SIZE,
+                    PI / 6, -PI / 6);
+    }
+
+    /**
+     * Draws a motor.
+     */
+    static motorGraphicSetup() {
+        motorGraphic.noStroke();
+        motorGraphic.fill(0, 0, 0);
+        motorGraphic.square(0, 0, MOTOR_SIZE * PIXEL_SIZE);
+    }
+
+    /**
+     * Draws a vehicle.
+     * @param {Vehicle} vehicle the vehicle to be rendered
+     */
+    static renderVehicle(vehicle) {
+        // vehicle body
+        vehicleGraphic.clear();
+        vehicleGraphic.noStroke();
+        vehicleGraphic.fill(vehicle.color);
+        vehicleGraphic.square(MOTOR_SIZE * PIXEL_SIZE, 0, VEHICLE_SIZE * PIXEL_SIZE);
+        vehicleGraphic.fill(0);
+        vehicleGraphic.textSize(VEHICLE_SIZE * PIXEL_SIZE / 2)
+        vehicleGraphic.textAlign(CENTER);
+        vehicleGraphic.text(vehicle.type, PIXEL_SIZE * (MOTOR_SIZE + VEHICLE_SIZE / 2), 0.7 * VEHICLE_SIZE * PIXEL_SIZE);
+        // vehicle motors
+        for (let motor of vehicle.motors) {
+            vehicleGraphic.image(motorGraphic, 0, PIXEL_SIZE * (motor.offset.y + 0.5 * (VEHICLE_SIZE - MOTOR_SIZE)));
+        }
+        // vehicle sensors
+        for (let sensor of vehicle.sensors) {
+            vehicleGraphic.image(sensorGraphic, PIXEL_SIZE * (MOTOR_SIZE + VEHICLE_SIZE), PIXEL_SIZE * (sensor.offset.y + 0.5 * (VEHICLE_SIZE - SENSOR_SIZE)));
+        }
+        // position vehicle on screen to match current zoom level
+        push();
+        translate(vehicle.x * PIXEL_SIZE, vehicle.y * PIXEL_SIZE);
+        // rotate vehicle to match vehicle angle
+        rotate(vehicle.theta);
+        image(vehicleGraphic, PIXEL_SIZE * (-MOTOR_SIZE - VEHICLE_SIZE / 2), PIXEL_SIZE * -VEHICLE_SIZE / 2);
+        pop();
+    }
+
+    /**
+     * Draws a source body.
+     * @param {Source} source source to be rendereds
+     */
+    static renderSource(source) {
+        fill(255);
+        circle(source.x * PIXEL_SIZE, source.y * PIXEL_SIZE, SOURCE_SIZE * PIXEL_SIZE);
+        fill(0);
+        textAlign(CENTER, CENTER);
+        textSize(4 * PIXEL_SIZE);
+        text(source.intensity, source.x * PIXEL_SIZE, source.y * PIXEL_SIZE);
+        textAlign(LEFT, BASELINE);
+    }
+
+    /**
+     * Draws data of a vehicle.
+     * @param {Vehicle} vehicle vehicle whose data is to be rendered
+     */
+    static renderData(vehicle) {
+        push();
+        translate(-MAP_LENGTH/2, -MAP_HEIGHT/2);
+        textAlign(LEFT);
+        text('x: ' + vehicle.x.toFixed(2), 10, 10)
+        text('y: ' + vehicle.y.toFixed(2), 10, 30)
+        text('θ: ' + (vehicle.gyro.theta/ 3.14).toFixed(2) + '	π', 10, 50)
+        text(`FPS: ${frameRate().toFixed(0)}`, 10, 70);
+        pop();
+    }
+
+    /**
+     * Draws a trailing path of a vehicle.
+     * @param {Vehicle} vehicle vehicle whose trailing path is to be drawn
+     */
+    static drawTrailingPath(vehicle) {
+        for (let i = 1; i &lt; vehicle.path.length; i++) {
+            // stroke weight is proportional to velocity
+            // i.e. slower velocity means thicker trail, faster velocity means thinner trail
+            strokeWeight(Math.min(VEHICLE_SIZE * PIXEL_SIZE, Math.max(1, 1000/vehicle.speeds[i].getMagnitude())));
+            // dilute the path over time
+            stroke(0, 0, 0, 255 * (SECONDS_PATH_VISIBLE * FPS + i - vehicle.path.length) / (SECONDS_PATH_VISIBLE * FPS));
+            line(
+                vehicle.path[i - 1].x * PIXEL_SIZE,
+                vehicle.path[i - 1].y * PIXEL_SIZE,
+                vehicle.path[i].x * PIXEL_SIZE,
+                vehicle.path[i].y * PIXEL_SIZE
+            );
+        }
+        strokeWeight(1);
+        stroke(0, 0, 0);
+    }
+
+    /**
+     * Draws a non-trailing path of a vehicle, independent of the vehicle itself so the path can retain when the vehicle dies.
+     * @param {Vector[]} path time series of vehicle location
+     * @param {Vector[]} speeds time series of vehicle velocities
+     * @param {String[]} colors time series of vehicle color
+     */
+    static drawPath(path, speeds, colors) {
+        for (let i = 1; i &lt; path.length; i++) {
+            // stroke weight is proportional to velocity
+            // i.e. slower velocity means thicker trail, faster velocity means thinner trail
+            strokeWeight(Math.min(VEHICLE_SIZE * PIXEL_SIZE, Math.max(1, 1000/speeds[i].getMagnitude())));
+            // change the color depending on time
+            stroke(colors[i]);
+            line(
+                path[i - 1].x * PIXEL_SIZE,
+                path[i - 1].y * PIXEL_SIZE,
+                path[i].x * PIXEL_SIZE,
+                path[i].y * PIXEL_SIZE
+            );
+        }
+        strokeWeight(1);
+        stroke(0, 0, 0);
+    }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Component.html">Component</a></li><li><a href="Gyro.html">Gyro</a></li><li><a href="Inhibitor.html">Inhibitor</a></li><li><a href="Motor.html">Motor</a></li><li><a href="MotorController.html">MotorController</a></li><li><a href="Renderer.html">Renderer</a></li><li><a href="Sensor.html">Sensor</a></li><li><a href="Source.html">Source</a></li><li><a href="Universe.html">Universe</a></li><li><a href="Vector.html">Vector</a></li><li><a href="Vehicle.html">Vehicle</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu May 16 2024 10:21:44 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

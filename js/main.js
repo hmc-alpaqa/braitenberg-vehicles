@@ -1,43 +1,52 @@
+const u = new Universe();
+
+let pg;
+const colors = ["crimson", "mediumseagreen", "gold", "deepskyblue", "white", "mediumvioletred", "darkgreen", "indigo", "hotpink", "yellowgreen", "lightblue"];
+let sourceRenderFactor = 4;
+let colorsIndex = 0;
+
+let velocityFunction = VELOCITY_FUNCTIONS["sinusoidal"];
+let vehicleId = 0;
+let currentAction = Actions.NONE;
+let addingVehicle = Vehicles.NONE;
+
+let showingVehicleTracker = false;
+let vehicleLocked = false;
+let sourceLocked = false;
+let selectedVehicle = null;
+let selectedSource = null;
+let xOffset = 0;
+let yOffset = 0;
+let theta = 0;
+
+let vehicle3StartingVelocity = 250;
+let sourceIntensity = 100;
+
+let drawMode = false;
+
+let vehicleColorPickerDisplay;
+let sensorGraphic;
+let motorGraphic;
+let vehicleGraphic;
+
 function setup() {
-    canvas = createCanvas(MAP_LENGTH, MAP_HEIGHT);
+    const canvas = createCanvas(MAP_LENGTH, MAP_HEIGHT);
     canvas.parent("canvas");
     frameRate(FPS);
     ellipseMode(CENTER);
     rectMode(CENTER);
     angleMode(RADIANS);
-    // gyro object contains x, y location and orientation
-    // each sensor, controller, motor takes the gyro as a parameter to construct
-    // Vehicle object contains gyro, sensors, controllers, motors
-    u = new Universe();
-    velocityFunction = x => 100 * (Math.sin(x) + 1);
-    addingVehicle = Vehicles.NONE;
-    addingSource = false;
-    removingSource = false;
-    removingVehicle = false;
-
-    vehicleLocked = false;
-    sourceLocked = false;
-    selectedVehicle = null;
-    selectedSource = null;
-    xOffset = 0;
-    yOffset = 0;
-
-    vehicle3StartingVelocity = 250;
-    sourceIntensity = 100;
+    vehicleColorPickerDisplay = select("#vehicle-color-picker");
 
     pg = createGraphics(MAP_LENGTH, MAP_HEIGHT);
     pg.background(0, 0, 256);
     pg.noStroke();
-    colors = ["crimson", "mediumseagreen", "gold", "deepskyblue", "white", "mediumvioletred", "darkgreen", "indigo", "hotpink", "yellowgreen", "lightblue"]
-    colorsIndex = 0;
 
     sensorGraphic = createGraphics(PIXEL_SIZE * SENSOR_SIZE * 2, PIXEL_SIZE * SENSOR_SIZE);
     Renderer.sensorGraphicSetup();
     motorGraphic = createGraphics(PIXEL_SIZE * MOTOR_SIZE, PIXEL_SIZE * MOTOR_SIZE);
     Renderer.motorGraphicSetup();
     vehicleGraphic = createGraphics(PIXEL_SIZE * (VEHICLE_SIZE + (2 * SENSOR_SIZE) + MOTOR_SIZE), PIXEL_SIZE * VEHICLE_SIZE);
-    θ = 0;
-    sourceRenderFactor = 4;
 }
 
 function draw() {
@@ -50,7 +59,19 @@ function draw() {
     if (u.vehicles.length > 0) {
         let mostRecentVehicle = u.vehicles[u.vehicles.length - 1]
         Renderer.renderData(mostRecentVehicle);
-        Renderer.drawPath(mostRecentVehicle);
+        if (!drawMode) {
+            Renderer.drawTrailingPath(mostRecentVehicle);
+        }
+    }
+    
+    for (vehicle of u.vehicles) {
+        u.paths.set(vehicle.id, vehicle.path);
+        u.speeds.set(vehicle.id, vehicle.speeds);
+        u.colors.set(vehicle.id, vehicle.colors);
+    }
+
+    if (drawMode) {
+        renderPaths();
     }
     for (let vehicle of u.vehicles) {
         Renderer.renderVehicle(vehicle);
@@ -58,6 +79,9 @@ function draw() {
             u.vehicles.splice(u.vehicles.indexOf(vehicle), 1);
         }
         updateVehicleCensus();
+        if (showingVehicleTracker) {
+            updateVehicleTracker();
+        }
     }
 
     for (let source of u.sources) {
@@ -70,113 +94,77 @@ function draw() {
         }
     }
 
-    if (addingVehicle) {
-        switch (addingVehicle) {
-            case Vehicles.VEHICLE1:
-                vehicle = Vehicle1(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE2A:
-                vehicle = Vehicle2a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE2B:
-                vehicle = Vehicle2b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE2C:
-                vehicle = Vehicle2c(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE3A:
-                vehicle = Vehicle3a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE3B:
-                vehicle = Vehicle3b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE4A:
-                vehicle = Vehicle4a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                Renderer.renderVehicle(vehicle);
-                break;
-            case Vehicles.VEHICLE4B:
-                vehicle = Vehicle4b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                Renderer.renderVehicle(vehicle);
-                break;
+    if (addingVehicle != Vehicles.NONE) {
+        let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, theta);
+        if (addingVehicle != Vehicles.VEHICLE4A && addingVehicle != Vehicles.VEHICLE4B) {
+            eval(`vehicle = new Vehicle${addingVehicle}(gyro, id=vehicleId);`);
+        } else {
+            eval(`vehicle = new Vehicle${addingVehicle}(gyro, id=vehicleId, velocityFunction);`)
         }
+        Renderer.renderVehicle(vehicle);
     }
 
     if (keyIsPressed && (keyCode === RIGHT_ARROW)) {
-        θ += 0.05;
+        theta += 0.05;
     } else if (keyIsPressed && (keyCode === LEFT_ARROW)) {
-        θ -= 0.05;
-    }
-}
-
-function mouseWheel(event) {
-    if (parseInt(zoomSlider.value) <= 400 && parseInt(zoomSlider.value) >= 50) {
-        zoomSlider.value = parseInt(zoomSlider.value) + event.delta;
-        zoomLabel.innerText = `Zoom ${zoomSlider.value}`;
-        MAP_RESOLUTION = parseInt(zoomSlider.value);
-        PIXEL_SIZE = MAP_LENGTH / MAP_RESOLUTION;
-        Renderer.graphicsSetup();
-        renderTerrain();
+        theta -= 0.05;
     }
 }
 
 function mouseClicked() {
     if (mouseX > 0 && mouseY > 0 && mouseX < MAP_LENGTH && mouseY < MAP_HEIGHT) {
-        if (addingSource) {
-            u.addSource(new Source(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, sourceIntensity));
-        } else if (removingSource) {
-            let source = u.getNearestSource(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE);
-            if (source != null) {
-                u.removeSource(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, source);
+        let source;
+        switch (currentAction) {
+            case Actions.ADDING_SOURCE:
+                u.addSource(new Source(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, sourceIntensity));
+                break;
+            case Actions.REMOVING_SOURCE:
+                source = u.getNearestSource(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE);
+                if (source != null) {
+                    u.removeSource(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, source);
+                }
+                break;
+            case Actions.ADDING_VEHICLE:
+                if (addingVehicle != Vehicles.NONE) {
+                    let vehicle;
+                    let gyro = new Gyro(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, theta);
+                    console.log(gyro.theta);
+                    if (addingVehicle != Vehicles.VEHICLE4A && addingVehicle != Vehicles.VEHICLE4B) {
+                        eval(`vehicle = new Vehicle${addingVehicle}(gyro, id=vehicleId);`);
+                    } else {
+                        eval(`vehicle = new Vehicle${addingVehicle}(gyro, id=vehicleId, velocityFunction);`);
+                    }
+                    u.addVehicle(vehicle);
+                    if (showingVehicleTracker) {
+                        updateVehicleTracker();
+                    }
+                    vehicleId++;
+                    colorsIndex = (colorsIndex + 1) % colors.length;
+                }
+                break;
+            case Actions.REMOVING_VEHICLE: {
+                let vehicle = u.getNearestVehicle(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE);
+                if (vehicle != null) {
+                    u.removeVehicle(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, vehicle);
+                }
+                break;
             }
-        } else if (removingVehicle) {
-            let vehicle = u.getNearestVehicle(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE);
-            if (vehicle != null) {
-                u.removeVehicle(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, vehicle);
+        }
+        if (drawMode) {
+            let mousePos = new Vector(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE)
+            let vehicle = u.getNearestVehicle(mousePos.x, mousePos.y);
+            if (u.overVehicle(mousePos.x, mousePos.y, vehicle)) {
+                vehicleColorPickerDisplay.position(mouseX, mouseY);
+                vehicleColorPickerDisplay.value(vehicle.currentColor);
+                vehicleColorPickerDisplay.style("visibility", "visible");
+                selectedVehicle = vehicle;
             }
-        } else if (addingVehicle != Vehicles.NONE) {
-            let vehicle;
-            switch (addingVehicle) {
-                case Vehicles.NONE:
-                    return;
-                case Vehicles.VEHICLE1:
-                    vehicle = Vehicle1(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                    break;
-                case Vehicles.VEHICLE2A:
-                    vehicle = Vehicle2a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                    break;
-                case Vehicles.VEHICLE2B:
-                    vehicle = Vehicle2b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                    break;
-                case Vehicles.VEHICLE2C:
-                    vehicle = Vehicle2c(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                    break;
-                case Vehicles.VEHICLE3A:
-                    vehicle = Vehicle3a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                    break;
-                case Vehicles.VEHICLE3B:
-                    vehicle = Vehicle3b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                    break;
-                case Vehicles.VEHICLE4A:
-                    vehicle = Vehicle4a(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                    break;
-                case Vehicles.VEHICLE4B:
-                    vehicle = Vehicle4b(u, newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE, θ);
-                    break;
-            }
-            u.addVehicle(vehicle);
-            colorsIndex = (colorsIndex + 1) % colors.length;
         }
     }
 }
 
 function mousePressed() {
-    if (!addingSource && !removingSource && !removingVehicle && addingVehicle == Vehicles.NONE) {
+    if (currentAction == Actions.NONE) {
         let mousePos = new Vector(newMouseX / PIXEL_SIZE, newMouseY / PIXEL_SIZE)
         let nearestSourceDist = 1000000;
         let nearestVehicleDist = 1000000;
@@ -186,29 +174,31 @@ function mousePressed() {
         if(u.vehicles.length > 0) {
             nearestVehicleDist = (u.getNearestVehicle(mousePos.x, mousePos.y).r.subtract(mousePos)).getMagnitude();
         }
-        if ((nearestVehicleDist <= nearestSourceDist) && (u.getNearestVehicle(mousePos.x, mousePos.y != null))) {
-            let vehicle = u.getNearestVehicle(mousePos.x, mousePos.y);
-            if (u.overVehicle(mousePos.x, mousePos.y, vehicle)) {
-                selectedVehicle = vehicle;
-                vehicleLocked = true;
-                sourceLocked = false;
-                xOffset =  mousePos.x - selectedVehicle.x;
-                yOffset = mousePos.y - selectedVehicle.y;
-            } else {
-                vehicleLocked = false;
-                selectedVehicle = null;
-            }
-        } else if (u.getNearestSource(mousePos.x, mousePos.y) != null) {
-            let source = u.getNearestSource(mousePos.x, mousePos.y);
-            if (u.overSource(mousePos.x, mousePos.y, source)) {
-                selectedSource = source;
-                sourceLocked = true;
-                vehicleLocked = false;
-                xOffset =  mousePos.x - selectedSource.x;
-                yOffset = mousePos.y - selectedSource.y;
-            } else {
-                sourceLocked = false;
-                selectedSource = null;
+        if (!drawMode) {
+            if ((nearestVehicleDist <= nearestSourceDist) && (u.getNearestVehicle(mousePos.x, mousePos.y != null))) {
+                let vehicle = u.getNearestVehicle(mousePos.x, mousePos.y);
+                if (u.overVehicle(mousePos.x, mousePos.y, vehicle)) {
+                    selectedVehicle = vehicle;
+                    vehicleLocked = true;
+                    sourceLocked = false;
+                    xOffset =  mousePos.x - selectedVehicle.x;
+                    yOffset = mousePos.y - selectedVehicle.y;
+                } else {
+                    vehicleLocked = false;
+                    selectedVehicle = null;
+                }
+            } else if (u.getNearestSource(mousePos.x, mousePos.y) != null) {
+                let source = u.getNearestSource(mousePos.x, mousePos.y);
+                if (u.overSource(mousePos.x, mousePos.y, source)) {
+                    selectedSource = source;
+                    sourceLocked = true;
+                    vehicleLocked = false;
+                    xOffset =  mousePos.x - selectedSource.x;
+                    yOffset = mousePos.y - selectedSource.y;
+                } else {
+                    sourceLocked = false;
+                    selectedSource = null;
+                }
             }
         }
     }
@@ -226,9 +216,11 @@ function mouseDragged() {
 }
 
 function mouseReleased() {
-    vehicleLocked = false;
-    selectedVehicle = null;
-    selectedSource = null;
+    if (!drawMode) {
+        vehicleLocked = false;
+        selectedVehicle = null;
+        selectedSource = null;
+    }
 }
 
 function generateTerrain() {
@@ -247,11 +239,18 @@ function resetCanvas() {
     pg.rect(0, 0, MAP_LENGTH, MAP_HEIGHT);
 }
 
+function renderPaths() {
+    for (let i = 0; i < u.paths.size; i++) {
+        Renderer.drawPath(u.paths.get(i), u.speeds.get(i), u.colors.get(i));
+    }
+}
+
 function rerender() {
     resetCanvas();
     Renderer.graphicsSetup();
     generateTerrain();
     renderTerrain();
+    renderPaths();
 }
 
 function renderTerrain() {
@@ -274,20 +273,18 @@ function renderTerrain() {
     }
 }
 
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
 function resetUniverse() {
-    u.vehicles = [];
-    u.sources = [];
+    u.reset();
+    vehicleId = 0;
     renderers = [];
     simulationPaused = true;
-    u.stimuli = [];
-    for (let i = 0; i < MAP_RESOLUTION; i++) {
-        let row = []
-        for (let j = 0; j < MAP_RESOLUTION; j++) {
-            row.push(0);
-        }
-        u.stimuli.push(row);
-    }
     updateVehicleCensus();
+    resetVehicleTracker();
     pg.background(0, 0, 256);
     pg.noStroke();
 }

@@ -2,6 +2,8 @@ html, body {
   margin: 0;
   padding: 1rem 1rem 0 1rem;
   font-family: "Helvetica Neue";
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 input:focus, select:focus {
@@ -46,8 +48,12 @@ select {
   transition: 0.3s;
 }
 
-h1{
+h1 {
   margin: auto 0;
+}
+
+h3 {
+    margin: 0.5rem auto;
 }
 
 .clicked {
@@ -71,7 +77,7 @@ h1{
   border-radius: 1rem;
   box-sizing: border-box;
   margin: 0 1rem 1rem 1rem;
-  padding: 1rem;
+  padding: 0.8rem;
   width: 100%;
 }
 
@@ -106,10 +112,10 @@ h1{
   border-radius: 10px;
 }
 
-#about-vehicles-footer {
-  display: flex;
-  justify-content: space-between;
-}
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+  }
 
 #canvas {
   grid-column: 1/2;
@@ -138,14 +144,29 @@ h1{
   margin-bottom: 2rem;
 }
 
+#modes {
+    background-color: #E57200;
+}
+
 #sources {
-  background-color: #007FA3;
+  background-color: #B7BF10;
+}
+
+#vehicle-color-picker {
+    position: absolute;
+    visibility: hidden;
 }
 
 #vehicles {
-  background-color: #B7BF10;
+  background-color: #007FA3;
 }
 
 #vehicle-select {
   display: inline;
+}
+
+#vehicle-tracker{
+    max-height: 17.5vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

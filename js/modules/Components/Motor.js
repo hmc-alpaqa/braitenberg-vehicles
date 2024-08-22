@@ -1,14 +1,24 @@
+/**
+ * Class representing a motor. Drives the motion of the vehicle.
+ * @extends Component
+ * 
+*/
 class Motor extends Component {
+    /**
+     * Creates a motor.
+     * @param {Gyro} gyro gyro belonging to the vehicle the inhibitor is on
+     * @param {Vector} offset position of the motor relative to the center of the vehicle
+     * @param {Component[]} inputs inputs to the motor
+     */
     constructor(gyro, offset, inputs = []) {
         super(gyro, offset);
         this.inputs = inputs;
     }
 
-    addInput(input) {
-        this.inputs.push(input);
-        return this;
-    }
-
+    /**
+     * Returns the motor output.
+     * @returns {Number} motor output
+     */
     getOutput() {
         let sum = 0
         for (let i = 0; i < this.inputs.length; i++) {

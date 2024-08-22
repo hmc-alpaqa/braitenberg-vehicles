@@ -1,24 +1,25 @@
+/**
+ * Class representing a sensor. Detects stimuli from the sources.
+ * @extends Component
+ */
 class Sensor extends Component {
+    /**
+     * Creates a sensor.
+     * @param {Gyro} gyro gyro belonging to the vehicle the sensor is on
+     * @param {Number} offset position of the sensor relative to the center of the vehicle
+     */
     constructor(gyro, offset) {
         super(gyro, offset);
-        this.theta = 0; // orientation of sensor
     }
 
-    getOutput() {
-        // for (let r = 0; r < this.width; r++) {
-        //     for (let c = 0; c < this.length; c++) {
-        //         u[i][j] = 0;
-        //     }
-        // }    
+    /**
+     * Returns the stimulus sensed at the sensor.
+     * @returns {Number} sensor output
+     */
+    getOutput() { 
         let y = Math.round(this.getR().y);
         let x = Math.round(this.getR().x);
-        let grid = this.gyro.universe.stimuli;
-        // if (y >= 0 && y < grid.length && x >= 0 && x < grid[y].length) {
         return 100 * this.gyro.universe.getStimulus(x, y);
-        // } else {
-        //     // if the location is outside the grid, return 0    
-        //     return 0;
-        // }
     }
 
 }
